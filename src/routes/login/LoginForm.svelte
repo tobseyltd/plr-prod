@@ -10,7 +10,6 @@
 		validators: zodClient(loginSchema),
 		resetForm: true,
 		onResult: ({ result }) => {
-			console.log(result);
 			switch (result.type) {
 				case 'redirect':
 					toast.success('Eingeloggt!');
@@ -63,7 +62,7 @@
 		flex-direction: column;
 		text-align: center;
 		gap: 1rem;
-		height: 100%;
+		height: 100vh;
 
 		& form {
 			width: 100%;
