@@ -10,6 +10,8 @@
 	let { session, prices, interval, tier, paymentStatus } = data;
 	$: ({ prices, interval } = data);
 
+	console.log(prices);
+
 	const buttons = [
 		{ label: 'Monatlich', path: '/mitglied-werden', type: 'first' },
 		{ label: 'Jährlich', path: '/mitglied-werden?interval=year', type: 'second' }
