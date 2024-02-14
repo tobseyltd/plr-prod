@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import pg from 'pg';
 import { ENV } from '$lib/server/env';
 import type { z } from 'zod';
-import registerUserSchema from '../src/routes/registrieren/ZodSchema';
+import { registerUserSchema } from '../src/routes/registrieren/ZodSchemas';
 import { supabaseAdmin } from '$lib/server/supabase-admin';
 import { faker } from '@faker-js/faker';
 import { upsertProductRecord } from '$lib/server/products';
