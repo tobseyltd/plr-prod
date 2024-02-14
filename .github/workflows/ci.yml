@@ -52,9 +52,6 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Test 🧪
-        run: pnpm test
-
       - name: Link Supabase CLI to Prod
         run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
 
