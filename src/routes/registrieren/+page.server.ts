@@ -21,7 +21,7 @@ export const actions: Actions = {
 		}
 
 		if (form.data.password !== form.data.passwordConfirm) {
-			return setError(form, 'passwordConfirm', 'Passwords do not match');
+			return setError(form, 'passwordConfirm', 'Passwörter stimmen nicht überein!');
 		}
 
 		const { error: authError } = await event.locals.supabase.auth.signUp({

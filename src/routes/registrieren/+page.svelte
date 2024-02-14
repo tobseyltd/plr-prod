@@ -2,9 +2,9 @@
 	import './registrieren-page.css';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { superForm } from 'sveltekit-superforms';
-	import registerUserSchema from './ZodSchema';
 	import toast from 'svelte-french-toast';
 	import type { PageData } from './$types';
+	import registerUserSchema from './ZodSchema';
 
 	export let data: PageData;
 
