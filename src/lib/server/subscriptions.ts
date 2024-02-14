@@ -4,7 +4,7 @@ import { supabaseAdmin } from './supabase-admin';
 
 export async function insertSubscriptionRecord(stripeSubscription: Stripe.Subscription) {
 	const subscription = stripeSubscriptionSchema.parse(stripeSubscription);
-	console.log(subscription);
+
 	const { data: customer, error: customerError } = await supabaseAdmin
 		.from('billing_customers')
 		.select('user_id')

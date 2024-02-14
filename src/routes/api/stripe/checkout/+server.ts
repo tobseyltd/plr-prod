@@ -56,8 +56,8 @@ export const GET: RequestHandler = async (event) => {
 			throw new Error('Error creating checkout session');
 		}
 		checkoutUrl = checkoutSession.url;
-	} catch (e) {
-		console.log(e);
+	} catch (ERROR) {
+		console.log(ERROR);
 		throw error(500, 'An error occurred while creating the checkout session.');
 	}
 

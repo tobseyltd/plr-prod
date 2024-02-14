@@ -7,7 +7,6 @@
 
 	export let data: PageData;
 
-	console.log(data.tier, data.paymentStatus);
 
 	const { form, errors, enhance } = superForm(data.loginForm, {
 		validators: zodClient(loginSchema),
