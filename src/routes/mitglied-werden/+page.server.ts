@@ -10,7 +10,10 @@ const intervalSchema = z.enum(['month', 'year']).catch('month');
 
 export const load: PageServerLoad = async (event) => {
 	const session = await event.locals.getSession();
-	console.log('products' + (await stripe.prices.list()));
+
+	const products = await stripe.prices.list();
+	console.log('products' + products);
+	
 	const interval = intervalSchema.parse(event.url.searchParams.get('interval'));
 	const recurring = await stripe.prices.list({
 		expand: ['data.product'],
