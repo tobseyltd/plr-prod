@@ -4,7 +4,7 @@ import { emailSchema, passwordSchema, profileSchema, loginSchema } from './ZodSc
 import { zod } from 'sveltekit-superforms/adapters';
 import { AuthApiError } from '@supabase/supabase-js';
 import { error, fail, redirect } from '@sveltejs/kit';
-import { getUserProfile } from '$lib/helpers';
+import { getUserProfile, handleLoginRedirect } from '$lib/helpers';
 import { getSubscriptionTier } from '$lib/server/subscriptions';
 import { getPaymentStatus } from '$lib/server/onetime';
 import { supabaseAdmin } from '$lib/server/supabase-admin';
@@ -46,7 +46,7 @@ export const actions: Actions = {
 			}
 		}
 
-		throw redirect(302, '/account');
+		throw redirect(302, handleLoginRedirect(event));
 	},
 
 	updateProfile: async (event) => {

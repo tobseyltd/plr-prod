@@ -31,7 +31,7 @@ export const load: PageServerLoad = async (event) => {
 		.sort((a, b) => a.unit_amount - b.unit_amount);
 
 	const onetimePrice = priceListSchema.parse(onetime.data);
-
+	console.log(prices);
 	return {
 		prices: [...prices, ...onetimePrice],
 		interval,
