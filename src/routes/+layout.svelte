@@ -5,6 +5,7 @@
 	import type { LayoutData } from './$types';
 	import { BadgeCheck, BookOpenCheck, CircleUserRound, LogOut } from 'lucide-svelte';
 	import Tooltip from '$lib/utils/Tooltip.svelte';
+	import { Toaster } from 'svelte-french-toast';
 
 	export let data: LayoutData;
 
@@ -31,6 +32,7 @@
 	<title>Programmieren lernen</title>
 </svelte:head>
 
+<Toaster />
 <header>
 	<header-wrapper>
 		<left-side>

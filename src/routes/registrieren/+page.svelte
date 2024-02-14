@@ -1,8 +1,5 @@
-<script context="module" lang="ts">
-	import './registrieren-page.css';
-</script>
-
 <script lang="ts">
+	import './registrieren-page.css';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { superForm } from 'sveltekit-superforms';
 	import registerUserSchema from './ZodSchema';
@@ -20,13 +17,13 @@
 		onResult: ({ result }) => {
 			switch (result.type) {
 				case 'success':
-					toast.success('Success! Confirm your email to login.');
+					toast.success('Registriert! Bitte E-Mail bestätigen');
 					break;
 				case 'error':
-					toast.error('Error creating your account!');
+					toast.error('Error! Bitte versuche es später.');
 					break;
 				case 'failure':
-					toast.error('Check your details and try again!');
+					toast.error('Check deine Angaben nochmal!s');
 					break;
 				default:
 					return;
