@@ -4,14 +4,11 @@
 	import { superForm } from 'sveltekit-superforms';
 	import toast from 'svelte-french-toast';
 	import type { PageData } from './$types';
-	import registerUserSchema from './ZodSchema';
+	import { registerUserSchema } from './ZodSchemas';
 
 	export let data: PageData;
 
-	let { supabase, registerForm } = data;
-	$: ({ supabase, registerForm } = data);
-
-	const { form, errors, enhance } = superForm(registerForm, {
+	const { form, errors, enhance } = superForm(data.registerForm, {
 		validators: zodClient(registerUserSchema),
 		resetForm: true,
 		onResult: ({ result }) => {

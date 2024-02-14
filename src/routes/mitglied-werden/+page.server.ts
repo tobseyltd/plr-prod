@@ -13,19 +13,19 @@ export const load: PageServerLoad = async (event) => {
 
 	const products = await stripe.prices.list();
 	console.log('products' + products);
-	
+
 	const interval = intervalSchema.parse(event.url.searchParams.get('interval'));
 	const recurring = await stripe.prices.list({
 		expand: ['data.product'],
 		recurring: { interval },
 		type: 'recurring',
-		lookup_keys: [...lookupKeys]
+		/* lookup_keys: [...lookupKeys] */
 	});
 
 	const onetime = await stripe.prices.list({
 		expand: ['data.product'],
 		type: 'one_time',
-		lookup_keys: [...lookupKeys]
+		/* lookup_keys: [...lookupKeys] */
 	});
 	console.log('recurring' + recurring, onetime);
 
