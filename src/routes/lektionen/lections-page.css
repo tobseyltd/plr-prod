@@ -1,0 +1,127 @@
+grid-wrapper {
+	margin: 0 auto;
+	width: var(--wrapperWidth);
+	min-height: 80vh;
+	display: grid;
+	grid-template-columns: 18% 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: 'aside main';
+	border-top: 1px solid #2d39db57;
+
+	aside {
+		grid-area: aside;
+		min-height: 60vh;
+		margin-bottom: 1rem;
+		border-right: 1px solid #2d39db57;
+		margin-top: 1rem;
+		padding-right: 2rem;
+
+		& input {
+			width: 100%;
+			padding: 0 0.5rem;
+			border-radius: 0.2rem;
+			background-color: aliceblue;
+			border-bottom: 3px solid var(--tertColor);
+			font-size: 0.6rem;
+			cursor: auto;
+			&:focus-visible {
+				outline: none;
+			}
+		}
+
+		& nav {
+			text-align: left;
+			margin-top: 1rem;
+			border-top: 1px solid #2d39db57;
+			padding-top: 1rem;
+
+			& ul {
+				margin-top: 1rem;
+				& > li {
+					list-style: none;
+
+					& a {
+						display: flex;
+						align-items: center;
+						gap: 0.5rem;
+						color: white;
+						text-decoration: none;
+
+						& > img {
+							width: 10%;
+						}
+
+						& span {
+							padding-top: 0.3rem;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	& main {
+		grid-area: main;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		padding-left: 2rem;
+
+		& lesson-item {
+			gap: 1rem;
+			height: max-content;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			padding-bottom: 1rem;
+			margin-bottom: 1rem;
+			position: relative;
+			border-bottom: 1px solid #2d39db57;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			& img {
+				border-radius: 1rem;
+			}
+
+			& a {
+				text-decoration: none;
+				color: white;
+			}
+
+			& div {
+				& h2 {
+					margin-bottom: 1rem;
+				}
+				padding: 2rem 0;
+			}
+
+			& category-badge {
+				display: flex;
+				align-items: center;
+				background-color: var(--tertColor);
+				padding: 0.1rem 1rem;
+				border-radius: 0.5rem;
+				font-size: 0.6rem;
+				position: absolute;
+				right: 0;
+				top: 1rem;
+			}
+
+			& skill-badge {
+				background-color: var(--secondColor);
+				padding: 0.1rem 1rem;
+				border-radius: 0.5rem;
+				font-size: 0.6rem;
+				position: absolute;
+				right: 4rem;
+				top: 1rem;
+			}
+		}
+	}
+
+	& footer {
+		grid-area: footer;
+	}
+}

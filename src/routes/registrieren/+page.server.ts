@@ -1,0 +1,45 @@
+import { zod } from 'sveltekit-superforms/adapters';
+import { setError, superValidate } from 'sveltekit-superforms';
+import type { Actions, PageServerLoad } from './$types';
+import registerUserSchema from './ZodSchema';
+import { fail } from '@sveltejs/kit';
+
+export const load: PageServerLoad = async () => {
+	return {
+		registerForm: await superValidate(zod(registerUserSchema))
+	};
+};
+
+export const actions: Actions = {
+	default: async (event) => {
+		const form = await superValidate(event, zod(registerUserSchema));
+
+		if (!form.valid) {
+			return fail(400, {
+				form
+			});
+		}
+
+		if (form.data.password !== form.data.passwordConfirm) {
+			return setError(form, 'passwordConfirm', 'Passwords do not match');
+		}
+
+		const { error: authError } = await event.locals.supabase.auth.signUp({
+			email: form.data.email,
+			password: form.data.password,
+			options: {
+				data: {
+					full_name: form.data.full_name ?? ''
+				}
+			}
+		});
+
+		if (authError) {
+			return setError(form, 'An error occurred while registering.');
+		}
+
+		return {
+			form
+		};
+	}
+};
