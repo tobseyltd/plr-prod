@@ -12,7 +12,7 @@ export const load: PageServerLoad = async (event) => {
 	const session = await event.locals.getSession();
 
 	const interval = intervalSchema.parse(event.url.searchParams.get('interval'));
-
+	console.log(await stripe.prices.list());
 	const recurring = await stripe.prices.list({
 		expand: ['data.product'],
 		recurring: { interval },
@@ -29,9 +29,8 @@ export const load: PageServerLoad = async (event) => {
 	const prices = priceListSchema
 		.parse(recurring.data)
 		.sort((a, b) => a.unit_amount - b.unit_amount);
-
-	const onetimePrice = priceListSchema.parse(onetime.data);
 	console.log(prices);
+	const onetimePrice = priceListSchema.parse(onetime.data);
 	return {
 		prices: [...prices, ...onetimePrice],
 		interval,
