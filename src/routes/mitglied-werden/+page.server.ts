@@ -24,6 +24,7 @@ export const load: PageServerLoad = async (event) => {
 		type: 'one_time',
 		lookup_keys: [...lookupKeys]
 	});
+	console.log('recurring' + recurring, onetime);
 
 	const prices = priceListSchema
 		.parse(recurring.data)
