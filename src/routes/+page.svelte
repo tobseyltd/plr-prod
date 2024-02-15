@@ -26,7 +26,6 @@
 					alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen"
 					width="823px"
 					height="666px"
-					loading="lazy"
 				/>
 			</right-side>
 		</hero-section>
@@ -110,7 +109,8 @@
 				<img
 					src="/images/web-development-service.svg"
 					loading="lazy"
-					width="100%"
+					width="550px"
+					height="550px"
 					alt="Web Entwicklung Illustration"
 				/>
 			</left-side>
@@ -460,7 +460,7 @@
 				}
 
 				& img {
-					width: 90%;
+					width: 100%;
 					transform: translatey(0px);
 					animation: float-item-1 6s ease-in-out infinite;
 				}

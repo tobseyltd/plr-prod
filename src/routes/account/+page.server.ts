@@ -8,6 +8,7 @@ import { getUserProfile, handleLoginRedirect } from '$lib/helpers';
 import { getSubscriptionTier } from '$lib/server/subscriptions';
 import { getPaymentStatus } from '$lib/server/onetime';
 import { supabaseAdmin } from '$lib/server/supabase-admin';
+import toast from 'svelte-french-toast';
 
 export const load: PageServerLoad = async (event) => {
 	const session = await event.locals.getSession();
@@ -138,22 +139,20 @@ export const actions: Actions = {
 			throw error(401, 'Unauthorized');
 		}
 
-		const { data: deleteData, error: deleteError } = await supabaseAdmin.auth.admin.deleteUser(
-			session.user.id
-		);
+		const sessionId = session.user.id;
 
-		console.log(deleteData);
-
-		if (deleteError) {
-			throw deleteError.message;
-		}
-
-		const { error: SignoutError } = await supabaseAdmin.auth.admin.signOut(session.user.id);
+		const { error: SignoutError } = await event.locals.supabase.auth.signOut();
 
 		if (SignoutError) {
 			throw SignoutError.message;
 		}
 
+		const { error: deleteError } = await supabaseAdmin.auth.admin.deleteUser(sessionId);
+
+		if (deleteError) {
+			throw deleteError.message;
+		}
+		toast.success('Account gelöscht!');
 		redirect(302, '/account');
 	}
 };

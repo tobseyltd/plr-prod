@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './global.css';
-	import { goto, invalidate } from '$app/navigation';
+
+	import { invalidate, goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
 	import { CircleUserRound, LogOut } from 'lucide-svelte';
@@ -56,22 +57,17 @@
 						<a href="/mitglied-werden"> Mitgliedschaft </a>
 					</li>
 					<li>
-						<a href="/account">
-							<Tooltip tooltip="Konto">
-								<CircleUserRound
-									size={30}
-									strokeWidth={1.2}
-									on:click={() => goto('/account')}
-									class="account"
-								/>
-							</Tooltip>
-						</a>
+						<Tooltip tooltip="Konto">
+							<button class="account" on:click={() => goto('/account')}>
+								<CircleUserRound size={30} strokeWidth={1.2} />
+							</button>
+						</Tooltip>
 					</li>
 					{#if session}
 						<li>
 							<form action="/logout" method="POST">
 								<Tooltip tooltip="Logout">
-									<button type="submit"><LogOut size={20} /></button>
+									<button class="logout" type="submit"><LogOut size={20} /></button>
 								</Tooltip>
 							</form>
 						</li>
@@ -323,12 +319,14 @@
 							}
 
 							& .account {
-								margin-top: 0.25rem;
+								background-color: transparent;
+								padding: 0;
+								border: none;
+								margin-top: -0.1rem;
 							}
 
-							& button {
+							& .logout {
 								padding: 0.3rem 0.5rem;
-								margin-top: -0.2rem;
 							}
 						}
 					}

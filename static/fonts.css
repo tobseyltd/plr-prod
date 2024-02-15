@@ -3,12 +3,14 @@
 	src: url('/LeagueSpartan-Regular.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'League Spartan';
 	src: url('/LeagueSpartan-Bold.ttf') format('truetype');
 	font-weight: bold;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -16,16 +18,19 @@
 	src: url('/LeagueSpartan-ExtraBold.ttf') format('truetype');
 	font-weight: 700;
 	font-style: normal;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'League Spartan';
 	src: url('/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
 	font-weight: 300;
 	font-style: normal;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'League Spartan';
 	src: url('/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
 	font-weight: 200;
 	font-style: normal;
+	font-display: swap;
 }
