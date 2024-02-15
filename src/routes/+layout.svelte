@@ -39,8 +39,8 @@
 				<img
 					src="../../images/logo-white.webp"
 					loading="lazy"
-					width="240px"
-					height="80px"
+					width="auto"
+					height="auto"
 					alt="Website Logo"
 				/>
 			</a>
@@ -58,9 +58,13 @@
 					</li>
 					<li>
 						<Tooltip tooltip="Konto">
-							<button class="account" on:click={() => goto('/account')}>
-								<CircleUserRound size={30} strokeWidth={1.2} />
-							</button>
+							<span
+								role="button"
+								tabindex="0"
+								on:keydown={() => goto('/account')}
+								on:click={() => goto('/account')}
+								><CircleUserRound size={30} strokeWidth={1.2} style="cursor: pointer" /></span
+							>
 						</Tooltip>
 					</li>
 					{#if session}
@@ -318,14 +322,12 @@
 								color: white;
 							}
 
-							& .account {
-								background-color: transparent;
-								padding: 0;
-								border: none;
-								margin-top: -0.1rem;
+							& span {
+								display: inline-block;
+								margin-top: 7px;
 							}
 
-							& .logout {
+							& button {
 								padding: 0.3rem 0.5rem;
 							}
 						}
@@ -509,12 +511,6 @@
 						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 						right: 17rem;
 						top: 1rem;
-						position: absolute;
-						display: block;
-						width: 40px;
-						height: 40px;
-						background: rgb(62, 100, 132);
-						background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 						opacity: 20%;
 					}
 
@@ -522,24 +518,12 @@
 						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 						right: 30rem;
 						top: 3.5rem;
-						position: absolute;
-						display: block;
-						width: 40px;
-						height: 40px;
-						background: rgb(62, 100, 132);
-						background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 						opacity: 20%;
 					}
 					& background-triangle3 {
 						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 						right: 14rem;
 						top: 3rem;
-						position: absolute;
-						display: block;
-						width: 40px;
-						height: 40px;
-						background: rgb(62, 100, 132);
-						background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
 						opacity: 30%;
 					}
 				}

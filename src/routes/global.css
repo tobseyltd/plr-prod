@@ -54,7 +54,6 @@ button {
 
 	&:hover {
 		background-color: #5171fed2;
-		border-color: #5171fed2;
 	}
 }
 
@@ -92,7 +91,9 @@ h3 {
 .highlight {
 	color: var(--secondColor);
 	position: relative;
-	/*
+	display: inline-block;
+	border-bottom: 3px solid transparent; /* Reserve space for the underline */
+
 	&::after {
 		content: '';
 		position: absolute;
@@ -100,10 +101,10 @@ h3 {
 		left: 0;
 		height: 7px;
 		width: 100%;
-		border: solid 4px var(--secondColor);
+		border: solid 3px var(--secondColor);
 		border-color: var(--secondColor) transparent transparent transparent;
-		border-radius: 70%;
-	} */
+		border-radius: 100%;
+	}
 }
 
 background-triangle1,

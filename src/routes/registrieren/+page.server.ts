@@ -2,7 +2,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { setError, superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
 import { registerUserSchema } from './ZodSchemas';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -19,7 +19,6 @@ export const actions: Actions = {
 				form
 			});
 		}
-
 		if (form.data.password !== form.data.passwordConfirm) {
 			return setError(form, 'passwordConfirm', 'Passwörter stimmen nicht überein!');
 		}
@@ -35,8 +34,16 @@ export const actions: Actions = {
 		});
 
 		if (authError) {
-			return setError(form, 'An error occurred while registering.');
+			return setError(
+				form,
+				'email',
+				authError.message === 'User already registered'
+					? 'Diese E-Mail Adresse gibt es bereits'
+					: authError.message
+			);
 		}
+
+		redirect(302, '/account');
 
 		return {
 			form
