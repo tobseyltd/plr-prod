@@ -1,6 +1,6 @@
 <script lang="ts">
 	import './global.css';
-	import { invalidate } from '$app/navigation';
+	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
 	import { BadgeCheck, BookOpenCheck, CircleUserRound, LogOut } from 'lucide-svelte';
@@ -28,10 +28,6 @@
 	};
 </script>
 
-<svelte:head>
-	<title>Programmieren lernen</title>
-</svelte:head>
-
 <Toaster />
 <header>
 	<header-wrapper>
@@ -40,8 +36,8 @@
 				<img
 					src="../../images/logo-white.webp"
 					loading="lazy"
-					width="240"
-					height="80"
+					width="240px"
+					height="80px"
 					alt="Website Logo"
 				/>
 			</a>
@@ -51,24 +47,16 @@
 				<ul>
 					<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 					<li>
-						<a href="/lektionen">
-							<Tooltip tooltip="Lektionen">
-								<BookOpenCheck size={30} strokeWidth={1.2} />
-							</Tooltip>
-						</a>
+						<a href="/lektionen"> Lektionen </a>
 					</li>
 
 					<li>
-						<a href="/mitglied-werden">
-							<Tooltip tooltip="Mitgliedschaft">
-								<BadgeCheck size={30} strokeWidth={1.2} />
-							</Tooltip>
-						</a>
+						<a href="/mitglied-werden"> Mitgliedschaft </a>
 					</li>
 					<li>
 						<a href="/account">
 							<Tooltip tooltip="Account">
-								<CircleUserRound size={30} strokeWidth={1.2} />
+								<CircleUserRound size={30} strokeWidth={1.2} on:click={() => goto('/account')} class="account" />
 							</Tooltip>
 						</a>
 					</li>
@@ -312,32 +300,27 @@
 					justify-content: end;
 
 					& ul {
-						display: flex;
+						display: inline-flex;
 						align-items: center;
 						gap: 1.5rem;
 
 						& li {
-							position: relative;
-							margin-top: 0.2rem;
-
+							margin: 0;
 							& a {
-								display: flex;
-								align-items: center;
 								text-decoration: none;
 								color: white;
 							}
 
+							& .account {
+								margin-top: .25rem;
+							}
+
 							& button {
 								padding: 0.3rem 0.5rem;
-								margin-bottom: 8px;
+								margin-top: -.2rem;
 							}
 						}
 					}
-				}
-
-				& a > iconify-icon {
-					color: white;
-					display: block;
 				}
 			}
 		}

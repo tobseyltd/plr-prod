@@ -5,6 +5,7 @@
 	import Tooltip from '$lib/utils/Tooltip.svelte';
 	import { ShieldCheck } from 'lucide-svelte';
 	import paypalIcon from '../../../static/images/paypal.svg';
+	import MainLayout from '../../layouts/MainLayout.svelte';
 
 	export let data: PageData;
 	const activeButton = writable(0);
@@ -23,175 +24,178 @@
 	}
 </script>
 
-<subscription-page-wrapper>
-	<top-slogan>
-		<h1>All-Access Mitgliedschaft</h1>
-		<p>
-			Werde ein gefragter Entwickler mit dem Zugriff auf alle Coding Lektionen, Challenges, Experten
-			Blog und Community. Wachse an deinen Aufgaben und bekomme einen <span class="underline"
-				>Job in der IT</span
-			> ohne Probleme.
-		</p>
-		<button-group>
-			{#each buttons as button, index}
-				<button
-					class:active={index === $activeButton}
-					on:click={() => navigateTo(button.path, index)}
-					data-type={button.type}
-				>
-					{button.label}
-				</button>
-			{/each}
-		</button-group>
-		Spare Jetzt 20% auf das Jahresabo!
-	</top-slogan>
-
-	<subscription-hero>
-		{#each prices as price, _i (price.id)}
-			<subscription-card>
-				<b>{price.product.name}</b>
-				<p>
-					<br />
-					<span>{price.unit_amount.toLocaleString('de-DE', { minimumFractionDigits: 2 })} </span> € {price.unit_amount <
-					200
-						? interval === 'month'
-							? '/ Monat'
-							: ' / Jahr'
-						: ''}
-					<br />
-				</p>
-
-				<ul>
-					{#each price.product.features as feature}
-						<li>
-							<span>
-								<img src="/images/success-top.svg" alt="video icon" width="25px" height="25px" />
-							</span>
-							{feature}
-						</li>
-					{/each}
-				</ul>
-				{#if tier === 'ABO' || paymentStatus === 'paid'}
-					<Tooltip tooltip="Mitgliedschaft aktiv, verwalte diese in deinem Account">
-						<button class="button" disabled>{price.product.call_to_action} </button>
-					</Tooltip>
-				{:else}
+<MainLayout title="Mitglied werden" description="" imageUrl="">
+	<subscription-page-wrapper>
+		<top-slogan>
+			<h1>All-Access Mitgliedschaft</h1>
+			<p>
+				Werde ein gefragter Entwickler mit dem Zugriff auf alle Coding Lektionen, Challenges,
+				Experten Blog und Community. Wachse an deinen Aufgaben und bekomme einen <span
+					class="underline">Job in der IT</span
+				> ohne Probleme.
+			</p>
+			<button-group>
+				{#each buttons as button, index}
 					<button
-						on:click={() => {
-							if (session) {
-								goto(`/api/stripe/checkout?id=${price.id}`);
-							} else {
-								goto('/registrieren');
-							}
-						}}
-						class="button"
-						>{price.product.call_to_action}
+						class:active={index === $activeButton}
+						on:click={() => navigateTo(button.path, index)}
+						data-type={button.type}
+					>
+						{button.label}
 					</button>
-				{/if}
-				<br />
-			</subscription-card>
-		{/each}
-	</subscription-hero>
+				{/each}
+			</button-group>
+			Spare Jetzt 20% auf das Jahresabo!
+		</top-slogan>
 
-	<payment-box>
-		<slogan-box>
-			<ShieldCheck strokeWidth={1.5} class="icon" />
-			<p>Gesicherte AES-256-verschlüsselte Zahlungen mit Stripe:</p>
-		</slogan-box>
+		<subscription-hero>
+			{#each prices as price, _i (price.id)}
+				<subscription-card>
+					<b>{price.product.name}</b>
+					<p>
+						<br />
+						<span>{price.unit_amount.toLocaleString('de-DE', { minimumFractionDigits: 2 })} </span>
+						€ {price.unit_amount < 200 ? (interval === 'month' ? '/ Monat' : ' / Jahr') : ''}
+						<br />
+					</p>
 
-		<payment-icons>
-			<img src="/images/stripe.svg" width="50px" height="50px" alt="stripe payment icon" />
-			<img src="/images/paypal.svg" width="50px" height="50px" alt="paypal payment icon" />
-			<img src="/images/giropay.svg" width="50px" height="50px" alt="giropay payment icon" />
-			<img src="/images/klarna.svg" width="50px" height="50px" alt="klarna payment icon" />
-			<img src="/images/mastercard.svg" width="50px" height="50px" alt="mastercard payment icon" />
-			<img src="/images/visa.svg" width="50px" height="50px" alt="visa payment icon" />
-		</payment-icons>
-	</payment-box>
+					<ul>
+						{#each price.product.features as feature}
+							<li>
+								<span>
+									<img src="/images/success-top.svg" alt="video icon" width="25px" height="25px" />
+								</span>
+								{feature}
+							</li>
+						{/each}
+					</ul>
+					{#if tier === 'ABO' || paymentStatus === 'paid'}
+						<Tooltip tooltip="Mitgliedschaft aktiv, verwalte diese in deinem Account">
+							<button class="button" disabled>{price.product.call_to_action} </button>
+						</Tooltip>
+					{:else}
+						<button
+							on:click={() => {
+								if (session) {
+									goto(`/api/stripe/checkout?id=${price.id}`);
+								} else {
+									goto('/registrieren');
+								}
+							}}
+							class="button"
+							>{price.product.call_to_action}
+						</button>
+					{/if}
+					<br />
+				</subscription-card>
+			{/each}
+		</subscription-hero>
 
-	<subscription-content>
-		<p>Praktisch orientiert</p>
-		<h2>Was du lernen wirst</h2>
-		<ul>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Erlernen gefragter
-					Programmiersprachen, Frameworks, Tools. Anwendung modernster Programmier-Techniken mit Best
-					Practice Fokus.
-				</span>
-			</li>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Entwickel eine
-					praxisnahe Routine sowie Anwendungen, um Dein Portfolio zu erweitern und potenzielle Arbeitgeber
-					zu beeindrucken.
-				</span>
-			</li>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Erwirb Kenntnisse
-					in einer Vielzahl von Themen wie z.B Webentwicklung, Datenbanken and Headless Backends ( Firebase,
-					Supabase ).
-				</span>
-			</li>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Eröffne Dir
-					neue Karrierechancen und erhöhe deine Verdienstmöglichkeiten durch anwendbares Fachwissen,
-					sowie einem tiefgreifenden Verständis.
-				</span>
-			</li>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Bleibe mit
-					den neuesten Technologien und Trends auf dem Laufenden.
-				</span>
-			</li>
-		</ul>
-	</subscription-content>
-	<subscription-content>
-		<p>Zielgruppe</p>
-		<h2>Für wen ist es geeignet?</h2>
-		<ul>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Angehende Coder,
-					die die für eine erfolgreiche Karriere in der Software- bzw. Web-Entwicklung erforderlichen
-					Fähigkeiten erlernen möchten.
-				</span>
-			</li>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Fachleute,
-					die ihr Wissen erweitern und über die neuesten Trends und Technologien auf einem aktuellen
-					Stand bleiben wollen.
-				</span>
-			</li>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Unternehmer,
-					die ihre eigenen Softwareprodukte bzw. Web-Apps mit aktuellen Tech-Stacks entwickeln möchten.
-				</span>
-			</li>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Studierende
-					& Azubis sowie Quereinsteiger, die ihre formale Ausbildung durch praktisches, praxisnahes Lernen
-					ergänzen möchten.
-				</span>
-			</li>
-			<li>
-				<span>
-					<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Jeder, der
-					neugierig auf Programmierung ist und die Welt der modernen Softwareentwicklung erkunden möchte.
-				</span>
-			</li>
-		</ul>
-		<background-triangle1 class="rotate"></background-triangle1>
-		<background-triangle2 class="rotate"></background-triangle2>
-		<background-triangle3 class="rotate"></background-triangle3>
-	</subscription-content>
-</subscription-page-wrapper>
+		<payment-box>
+			<slogan-box>
+				<ShieldCheck strokeWidth={1.5} class="icon" />
+				<p>Gesicherte AES-256-verschlüsselte Zahlungen mit Stripe:</p>
+			</slogan-box>
+
+			<payment-icons>
+				<img src="/images/stripe.svg" width="50px" height="50px" alt="stripe payment icon" />
+				<img src="/images/paypal.svg" width="50px" height="50px" alt="paypal payment icon" />
+				<img src="/images/giropay.svg" width="50px" height="50px" alt="giropay payment icon" />
+				<img src="/images/klarna.svg" width="50px" height="50px" alt="klarna payment icon" />
+				<img
+					src="/images/mastercard.svg"
+					width="50px"
+					height="50px"
+					alt="mastercard payment icon"
+				/>
+				<img src="/images/visa.svg" width="50px" height="50px" alt="visa payment icon" />
+			</payment-icons>
+		</payment-box>
+
+		<subscription-content>
+			<p>Praktisch orientiert</p>
+			<h2>Was du lernen wirst</h2>
+			<ul>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Erlernen
+						gefragter Programmiersprachen, Frameworks, Tools. Anwendung modernster Programmier-Techniken
+						mit Best Practice Fokus.
+					</span>
+				</li>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Entwickel
+						eine praxisnahe Routine sowie Anwendungen, um Dein Portfolio zu erweitern und potenzielle
+						Arbeitgeber zu beeindrucken.
+					</span>
+				</li>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Erwirb Kenntnisse
+						in einer Vielzahl von Themen wie z.B Webentwicklung, Datenbanken and Headless Backends (
+						Firebase, Supabase ).
+					</span>
+				</li>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Eröffne Dir
+						neue Karrierechancen und erhöhe deine Verdienstmöglichkeiten durch anwendbares Fachwissen,
+						sowie einem tiefgreifenden Verständis.
+					</span>
+				</li>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Bleibe mit
+						den neuesten Technologien und Trends auf dem Laufenden.
+					</span>
+				</li>
+			</ul>
+		</subscription-content>
+		<subscription-content>
+			<p>Zielgruppe</p>
+			<h2>Für wen ist es geeignet?</h2>
+			<ul>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Angehende
+						Coder, die die für eine erfolgreiche Karriere in der Software- bzw. Web-Entwicklung erforderlichen
+						Fähigkeiten erlernen möchten.
+					</span>
+				</li>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Fachleute,
+						die ihr Wissen erweitern und über die neuesten Trends und Technologien auf einem aktuellen
+						Stand bleiben wollen.
+					</span>
+				</li>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Unternehmer,
+						die ihre eigenen Softwareprodukte bzw. Web-Apps mit aktuellen Tech-Stacks entwickeln möchten.
+					</span>
+				</li>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Studierende
+						& Azubis sowie Quereinsteiger, die ihre formale Ausbildung durch praktisches, praxisnahes
+						Lernen ergänzen möchten.
+					</span>
+				</li>
+				<li>
+					<span>
+						<img src="/images/success.svg" alt="Success Icon" width="25px" height="25px" /> Jeder, der
+						neugierig auf Programmierung ist und die Welt der modernen Softwareentwicklung erkunden möchte.
+					</span>
+				</li>
+			</ul>
+			<background-triangle1 class="rotate"></background-triangle1>
+			<background-triangle2 class="rotate"></background-triangle2>
+			<background-triangle3 class="rotate"></background-triangle3>
+		</subscription-content>
+	</subscription-page-wrapper>
+</MainLayout>
 
 <style>
 	subscription-page-wrapper {

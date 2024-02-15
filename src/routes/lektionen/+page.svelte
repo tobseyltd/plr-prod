@@ -2,6 +2,7 @@
 	import { MessageCircle, Search, ThumbsUp } from 'lucide-svelte';
 	import type { PageData } from './$types';
 	import { derived, writable } from 'svelte/store';
+	import MainLayout from '../../layouts/MainLayout.svelte';
 
 	export let data: PageData;
 
@@ -29,77 +30,79 @@
 	}
 </script>
 
-<lessons-section>
-	<filter-section>
-		<Search size={20} strokeWidth={1.5} class="search-icon" />
-		<input
-			bind:value={$searchInput}
-			on:input={applyFilters}
-			type="search"
-			name=""
-			id=""
-			placeholder="Lektion suchen"
-		/>
-		<select-filter>
-			<select
-				name="category-filter"
-				id="category-filter"
-				bind:value={$selectedCategory}
-				on:change={applyFilters}
-			>
-				<option value="">Filtern nach Kategorie</option>
+<MainLayout title="Programmier / Coding Aufgaben & Challenges" description="" imageUrl="">
+	<lessons-section>
+		<filter-section>
+			<Search size={20} strokeWidth={1.5} class="search-icon" />
+			<input
+				bind:value={$searchInput}
+				on:input={applyFilters}
+				type="search"
+				name=""
+				id=""
+				placeholder="Lektion suchen"
+			/>
+			<select-filter>
+				<select
+					name="category-filter"
+					id="category-filter"
+					bind:value={$selectedCategory}
+					on:change={applyFilters}
+				>
+					<option value="">Filtern nach Kategorie</option>
 
-				{#each categoryFilterOptions as category}
-					<option value={category}>{category}</option>
-				{/each}
-			</select>
+					{#each categoryFilterOptions as category}
+						<option value={category}>{category}</option>
+					{/each}
+				</select>
 
-			<select
-				name="skill-filter"
-				id="skill-filter"
-				bind:value={$selectedSkill}
-				on:change={applyFilters}
-			>
-				<option value="">Filtern nach Skill</option>
+				<select
+					name="skill-filter"
+					id="skill-filter"
+					bind:value={$selectedSkill}
+					on:change={applyFilters}
+				>
+					<option value="">Filtern nach Skill</option>
 
-				{#each skillFilterOptions as skill}
-					<option value={skill}>{skill}</option>
-				{/each}
-			</select>
-		</select-filter>
-	</filter-section>
+					{#each skillFilterOptions as skill}
+						<option value={skill}>{skill}</option>
+					{/each}
+				</select>
+			</select-filter>
+		</filter-section>
 
-	<grid-wrapper>
-		{#each $filteredLessons as lesson}
-			<lesson-card>
-				<img src={lesson.img} alt={lesson.title} loading="lazy" />
+		<grid-wrapper>
+			{#each $filteredLessons as lesson}
+				<lesson-card>
+					<img src={lesson.img} alt={lesson.title} loading="lazy" />
 
-				<a href={`/lektionen/ep-${lesson.ep}`}>
-					<lesson-info>
-						<h2>EP-{lesson.ep} : {lesson.title}</h2>
-						<info-box>
-							<likes-box>
-								<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
-								<span>( {lesson.likes} )</span>
-							</likes-box>
-							<comment-box>
-								<MessageCircle size={20} strokeWidth={1.5} class="icon" />
-								<span>( {lesson.comments?.length} )</span>
-							</comment-box>
-							<topic-box>
-								{lesson.skill}
-							</topic-box>
-							<skill-box>
-								{lesson.topic}
-							</skill-box>
-						</info-box>
-						<p>{lesson.description}</p>
-					</lesson-info>
-				</a>
-			</lesson-card>
-		{/each}
-	</grid-wrapper>
-</lessons-section>
+					<a href={`/lektionen/ep-${lesson.ep}`}>
+						<lesson-info>
+							<h2>EP-{lesson.ep} : {lesson.title}</h2>
+							<info-box>
+								<likes-box>
+									<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
+									<span>( {lesson.likes} )</span>
+								</likes-box>
+								<comment-box>
+									<MessageCircle size={20} strokeWidth={1.5} class="icon" />
+									<span>( {lesson.comments?.length} )</span>
+								</comment-box>
+								<topic-box>
+									{lesson.skill}
+								</topic-box>
+								<skill-box>
+									{lesson.topic}
+								</skill-box>
+							</info-box>
+							<p>{lesson.description}</p>
+						</lesson-info>
+					</a>
+				</lesson-card>
+			{/each}
+		</grid-wrapper>
+	</lessons-section>
+</MainLayout>
 
 <style>
 	lessons-section {
