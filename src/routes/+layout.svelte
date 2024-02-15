@@ -3,9 +3,10 @@
 	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
-	import { BadgeCheck, BookOpenCheck, CircleUserRound, LogOut } from 'lucide-svelte';
+	import { CircleUserRound, LogOut } from 'lucide-svelte';
 	import Tooltip from '$lib/utils/Tooltip.svelte';
 	import { Toaster } from 'svelte-french-toast';
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
 	export let data: LayoutData;
 
@@ -13,6 +14,7 @@
 	$: ({ session, supabase } = data);
 
 	onMount(() => {
+		injectSpeedInsights();
 		const {
 			data: { subscription }
 		} = supabase.auth.onAuthStateChange((event, _session) => {
@@ -55,8 +57,13 @@
 					</li>
 					<li>
 						<a href="/account">
-							<Tooltip tooltip="Account">
-								<CircleUserRound size={30} strokeWidth={1.2} on:click={() => goto('/account')} class="account" />
+							<Tooltip tooltip="Konto">
+								<CircleUserRound
+									size={30}
+									strokeWidth={1.2}
+									on:click={() => goto('/account')}
+									class="account"
+								/>
 							</Tooltip>
 						</a>
 					</li>
@@ -279,7 +286,7 @@
 
 				& a {
 					& img {
-						@media (width < 400px) {
+						@media (width < 450px) {
 							width: 100%;
 							height: auto;
 						}
@@ -299,6 +306,10 @@
 					gap: 2rem;
 					justify-content: end;
 
+					@media (width < 450px) {
+						display: none;
+					}
+
 					& ul {
 						display: inline-flex;
 						align-items: center;
@@ -312,12 +323,12 @@
 							}
 
 							& .account {
-								margin-top: .25rem;
+								margin-top: 0.25rem;
 							}
 
 							& button {
 								padding: 0.3rem 0.5rem;
-								margin-top: -.2rem;
+								margin-top: -0.2rem;
 							}
 						}
 					}

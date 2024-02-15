@@ -212,13 +212,6 @@
 			margin: 0 auto;
 			text-align: center;
 
-			/* 	& a {
-				padding: 0.5rem 2rem;
-				background-color: var(--tertColor);
-				color: white;
-				text-decoration: none;
-			} */
-
 			& p {
 				color: rgba(239, 238, 238, 0.732);
 			}
@@ -418,12 +411,6 @@
 				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 				right: 0rem;
 				top: 10rem;
-				position: absolute;
-				display: block;
-				width: 40px;
-				height: 40px;
-				background: rgb(62, 100, 132);
-				background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 				opacity: 20%;
 			}
 
@@ -431,24 +418,12 @@
 				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 				right: 2rem;
 				top: 5rem;
-				position: absolute;
-				display: block;
-				width: 40px;
-				height: 40px;
-				background: rgb(62, 100, 132);
-				background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 				opacity: 40%;
 			}
 			& background-triangle3 {
 				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 				right: 4rem;
 				bottom: 0;
-				position: absolute;
-				display: block;
-				width: 40px;
-				height: 40px;
-				background: rgb(62, 100, 132);
-				background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
 				opacity: 30%;
 			}
 		}

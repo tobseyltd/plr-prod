@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('/fonts.css');
 
 :root {
 	--secondColor: #ff0066;
@@ -23,6 +23,7 @@
 body {
 	background: linear-gradient(90deg, #101222 0%, #191a27 35%, #171930 100%);
 	min-width: 320px;
+	font-family: 'League Spartan', sans-serif;
 }
 
 * {
@@ -88,10 +89,10 @@ h3 {
 	transition: transform 16.5s ease-in-out infinite;
 }
 
-.underline {
+.highlight {
 	color: var(--secondColor);
 	position: relative;
-
+	/*
 	&::after {
 		content: '';
 		position: absolute;
@@ -102,5 +103,20 @@ h3 {
 		border: solid 4px var(--secondColor);
 		border-color: var(--secondColor) transparent transparent transparent;
 		border-radius: 70%;
+	} */
+}
+
+background-triangle1,
+background-triangle2,
+background-triangle3 {
+	position: absolute;
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: rgb(62, 100, 132);
+	background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
+
+	@media (width < 451px) {
+		display: none;
 	}
 }

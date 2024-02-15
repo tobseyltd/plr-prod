@@ -14,7 +14,7 @@
 				<p>
 					Erlerne das Programmieren mit wöchentlichen Coding Aufgaben, die ein Programmierer täglich
 					genauso umsetzt. Jede Lektion mit
-					<span class="underline">kostenlosem Zugang</span>
+					<span class="highlight">kostenlosem Zugang</span>
 					zu den Basis Informationen.
 				</p>
 				<a href="/lektionen"><button>Jetzt Loslegen</button></a>
@@ -24,7 +24,8 @@
 				<img
 					src="./images/home-top-img.webp"
 					alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen"
-					width="auto"
+					width="823px"
+					height="666px"
 					loading="lazy"
 				/>
 			</right-side>
@@ -33,7 +34,7 @@
 
 	<tech-grid-wrapper>
 		<top-section>
-			<h2>Erlene die essentiellen <span class="underline">Grundlagen</span> des Web.</h2>
+			<h2>Erlene die essentiellen <span class="highlight">Grundlagen</span> des Web.</h2>
 		</top-section>
 		<tech-grid>
 			<grid-item-1 class="style">
@@ -137,7 +138,7 @@
 
 	<faq-wrapper>
 		<top-section>
-			<h2>Häufig gestellte Programmier <span class="underline">Fragen</span> ? ? ?</h2>
+			<h2>Häufig gestellte Programmier <span class="highlight">Fragen</span> ? ? ?</h2>
 		</top-section>
 		<faq-section>
 			<section>
@@ -264,7 +265,13 @@
 						transform="translate(100 100)"
 					/>
 				</svg>
-				<img src="/images/man-launching-startup-blue.webp" loading="lazy" width="100%" alt="" />
+				<img
+					src="/images/man-launching-startup-blue.webp"
+					loading="lazy"
+					width="500px"
+					height="500px"
+					alt="Illustration eines Mannes, der eine Rakete in der Hand hält, bezeichnend für ein Startup Launch"
+				/>
 				<background-triangle1 class="rotate"></background-triangle1>
 				<background-triangle2 class="rotate"></background-triangle2>
 				<background-triangle3 class="rotate"></background-triangle3>
@@ -283,17 +290,16 @@
 
 		& hero-section {
 			container-type: inline-size;
+			width: var(--wrapperWidth);
+			display: flex;
+			margin: 0 auto;
+			background-position: top left;
 
 			@media (width < 451px) {
 				width: 94%;
 				flex-direction: column-reverse;
 				gap: 2rem;
 			}
-
-			width: var(--wrapperWidth);
-			display: flex;
-			margin: 0 auto;
-			background-position: top left;
 
 			& left-side {
 				width: 35%;
@@ -305,7 +311,8 @@
 				margin-right: 10%;
 
 				@media (width <451px) {
-					width: 90%;
+					width: 100%;
+					margin: 0 auto;
 				}
 
 				& h1 {
@@ -336,7 +343,7 @@
 
 			& right-side {
 				@media (width <451px) {
-					margin: 0;
+					width: 100%;
 				}
 
 				& img {
@@ -377,7 +384,7 @@
 			position: relative;
 
 			@media (width < 451px) {
-				width: 94%;
+				width: 100%;
 				grid-template-columns: 1fr;
 				padding-bottom: 0;
 			}
@@ -401,12 +408,6 @@
 				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 				right: 0;
 				bottom: 0;
-				position: absolute;
-				display: block;
-				width: 40px;
-				height: 40px;
-				background: rgb(34, 193, 195);
-				background: linear-gradient(130deg, rgb(34, 85, 195) 0%, rgb(45, 191, 253) 100%);
 				opacity: 40%;
 			}
 
@@ -414,24 +415,12 @@
 				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 				right: 0;
 				bottom: -3.5rem;
-				position: absolute;
-				display: block;
-				width: 40px;
-				height: 40px;
-				background: rgb(62, 100, 132);
-				background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 				opacity: 40%;
 			}
 			& background-triangle3 {
 				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 				right: 0;
 				bottom: -5rem;
-				position: absolute;
-				display: block;
-				width: 40px;
-				height: 40px;
-				background: rgb(62, 100, 132);
-				background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
 				opacity: 40%;
 			}
 		}
@@ -620,12 +609,6 @@
 			/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 			right: 37rem;
 			top: 5rem;
-			position: absolute;
-			display: block;
-			width: 40px;
-			height: 40px;
-			background: rgb(62, 100, 132);
-			background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 			opacity: 20%;
 		}
 
@@ -633,24 +616,12 @@
 			/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 			left: 20rem;
 			top: 25.5rem;
-			position: absolute;
-			display: block;
-			width: 40px;
-			height: 40px;
-			background: rgb(62, 100, 132);
-			background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 			opacity: 40%;
 		}
 		& background-triangle3 {
 			/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 			right: 44rem;
 			bottom: 0;
-			position: absolute;
-			display: block;
-			width: 40px;
-			height: 40px;
-			background: rgb(62, 100, 132);
-			background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
 			opacity: 30%;
 		}
 	}
@@ -748,12 +719,6 @@
 					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 					right: 17rem;
 					top: 5rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(62, 100, 132);
-					background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 					opacity: 20%;
 				}
 
@@ -761,24 +726,12 @@
 					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 					right: 0;
 					top: 2.5rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(62, 100, 132);
-					background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
 					opacity: 40%;
 				}
 				& background-triangle3 {
 					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 					right: 14rem;
 					bottom: 3rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(62, 100, 132);
-					background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
 					opacity: 30%;
 				}
 			}
