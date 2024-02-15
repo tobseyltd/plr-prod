@@ -39,9 +39,13 @@
 				<img
 					src="../../images/logo-white.webp"
 					loading="lazy"
-					width="auto"
-					height="auto"
+					width="240px"
+					height="80px"
 					alt="Website Logo"
+					srcset="
+   					../../images/logo-white.webp 240w"
+					sizes="(max-width: 480px) 240px,
+        			(min-width: 481px) 240px"
 				/>
 			</a>
 		</left-side>

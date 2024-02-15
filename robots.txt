@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin
+Disallow: /secret-page
+Disallow: /account
+Disallow: /impressum
+Disallow: /datenschutz
+Disallow: /agb
+Disallow: /logout
+Disallow: /login
