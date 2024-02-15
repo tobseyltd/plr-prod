@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="980" height="680" viewBox="0 0 980 680">
+  <defs>
+    <linearGradient id="c" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF"/>
+      <stop offset="100%" stop-color="#EDEDED"/>
+    </linearGradient>
+    <filter id="a" width="113.3%" height="120%" x="-6.7%" y="-10%" filterUnits="objectBoundingBox">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="2.5" result="shadowSpreadOuter1"/>
+      <feOffset in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="17.5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+    </filter>
+    <rect id="b" width="900" height="600" x="0" y="0" rx="80"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g transform="translate(40 40)">
+      <use xlink:href="#b" fill="#000" filter="url(#a)"/>
+      <use xlink:href="#b" fill="url(#c)"/>
+    </g>
+    <path fill="#1434CB" fill-rule="nonzero" d="M611.57 210.5c-56.804 0-107.566 29.442-107.566 83.839 0 62.382 90.028 66.691 90.028 98.03 0 13.196-15.122 25.008-40.95 25.008-36.655 0-64.051-16.505-64.051-16.505l-11.723 54.892s31.56 13.942 73.46 13.942c62.105 0 110.973-30.888 110.973-86.214 0-65.919-90.403-70.1-90.403-99.188 0-10.337 12.414-21.663 38.168-21.663 29.058 0 52.766 12.004 52.766 12.004l11.473-53.017S647.948 210.5 611.569 210.5Zm-519.695 4.001-1.375 8.003s23.897 4.373 45.42 13.098c27.713 10.004 29.688 15.828 34.355 33.916l50.86 196.062h68.177L394.345 214.5h-68.021l-67.49 170.71-27.54-144.702c-2.526-16.56-15.319-26.008-30.978-26.008H91.876Zm329.822 0-53.36 251.079H433.2L486.374 214.5h-64.677Zm361.77 0c-15.642 0-23.929 8.374-30.01 23.007l-95.03 228.072h68.022l13.16-38.012h82.87l8.002 38.012H890.5L838.14 214.5h-54.673Zm8.846 67.834 20.163 94.217h-54.017l33.854-94.217Z"/>
+  </g>
+</svg>

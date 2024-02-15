@@ -62,7 +62,7 @@
 		flex-direction: column;
 		text-align: center;
 		gap: 1rem;
-		height: 100vh;
+		height: 60vh;
 
 		& form {
 			width: 100%;

@@ -3,6 +3,8 @@
 	import { goto } from '$app/navigation';
 	import { writable } from 'svelte/store';
 	import Tooltip from '$lib/utils/Tooltip.svelte';
+	import { ShieldCheck } from 'lucide-svelte';
+	import paypalIcon from '../../../static/images/paypal.svg';
 
 	export let data: PageData;
 	const activeButton = writable(0);
@@ -41,6 +43,7 @@
 				</button>
 			{/each}
 		</button-group>
+		Spare Jetzt 20% auf das Jahresabo!
 	</top-slogan>
 
 	<subscription-hero>
@@ -89,6 +92,22 @@
 			</subscription-card>
 		{/each}
 	</subscription-hero>
+
+	<payment-box>
+		<slogan-box>
+			<ShieldCheck strokeWidth={1.5} class="icon" />
+			<p>Gesicherte AES-256-verschlüsselte Zahlungen mit Stripe:</p>
+		</slogan-box>
+
+		<payment-icons>
+			<img src="/images/stripe.svg" width="50px" height="50px" alt="stripe payment icon" />
+			<img src="/images/paypal.svg" width="50px" height="50px" alt="paypal payment icon" />
+			<img src="/images/giropay.svg" width="50px" height="50px" alt="giropay payment icon" />
+			<img src="/images/klarna.svg" width="50px" height="50px" alt="klarna payment icon" />
+			<img src="/images/mastercard.svg" width="50px" height="50px" alt="mastercard payment icon" />
+			<img src="/images/visa.svg" width="50px" height="50px" alt="visa payment icon" />
+		</payment-icons>
+	</payment-box>
 
 	<subscription-content>
 		<p>Praktisch orientiert</p>
@@ -179,7 +198,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.6rem;
-		margin: 0 auto;
+		margin: auto;
 		width: var(--wrapperWidth);
 		padding: 2rem 0;
 		justify-content: center;
@@ -239,7 +258,7 @@
 
 		& subscription-hero {
 			display: flex;
-			gap: 2rem;
+			gap: 3rem;
 			width: 100%;
 			margin-bottom: 2rem;
 			justify-content: center;
@@ -247,7 +266,6 @@
 			& subscription-card {
 				background-color: #3536508b;
 				padding: 3rem;
-				margin-left: 4rem;
 				border-radius: 0.4rem;
 				border: 3px solid rgba(128, 128, 128, 0.194);
 				-webkit-box-shadow: 0px 20px 20px -17px var(--tertColor);
@@ -342,10 +360,31 @@
 				}
 			}
 		}
+		& payment-box {
+			margin: 0 auto;
+
+			& slogan-box {
+				display: flex;
+				align-items: center;
+				gap: 0.3rem;
+
+				& p {
+					margin-top: 0.25rem;
+				}
+			}
+
+			& payment-icons {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+			}
+		}
 
 		& subscription-content {
 			position: relative;
 			text-align: center;
+			margin-top: 2rem;
 
 			& ul {
 				display: inline-block;

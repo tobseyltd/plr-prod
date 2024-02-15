@@ -116,97 +116,136 @@
             </right-side>
         </top-footer> -->
 		<mid-footer>
-			<left-side>
+			<left-section-1>
 				<p><b>Informationen</b></p>
 				<ul>
-					<li>Impressum</li>
-					<li>Datenschutz</li>
-					<li>Geschäftsbedingungen</li>
-					<li></li>
-					<li></li>
+					<li><a href="/impressum">Impressum</a></li>
+					<li><a href="/datenschutz">Datenschutz</a></li>
+					<li><a href="/agb">Geschäftsbedingungen</a></li>
 				</ul>
-			</left-side>
-			<mid-section-1>
+			</left-section-1>
+
+			<left-section-2>
 				<p><b>Site Links</b></p>
 				<ul>
-					<li>Lektionen</li>
-					<li>Coding Blog</li>
-					<li>Online Shop</li>
-					<li></li>
-					<li></li>
+					<li><a href="/lektionen">Lektionen</a></li>
+					<li><Tooltip tooltip="Bald!">Coding Blog</Tooltip></li>
+					<li><Tooltip tooltip="Bald!">Online Shop</Tooltip></li>
 				</ul>
-			</mid-section-1>
-			<mid-section-2>
-				<p class=""><b>Über mich</b></p>
-				<ul>
-					<li>Dozententätigkeit</li>
-					<li>Web Entwickler</li>
-					<li>YouTube</li>
-					<li></li>
-					<li></li>
-				</ul>
-			</mid-section-2>
-			<mid-section-3>
-				<p><b>Remote Kurs</b></p>
-				<ul>
-					<li>Teilnahme</li>
-					<li>Bergemann & Höhne</li>
-					<li>Informationen</li>
-					<li></li>
-					<li></li>
-				</ul>
-			</mid-section-3>
-			<right-side>
+			</left-section-2>
+
+			<mid-column>
 				<background-triangle1 class="rotate"></background-triangle1>
 				<background-triangle2 class="rotate"></background-triangle2>
 				<background-triangle3 class="rotate"></background-triangle3>
 				<p><b>Folge mir</b></p>
 				<ul>
 					<li>
-						<img
-							src="../../images/youtube.svg"
-							loading="lazy"
-							width="40px"
-							height="40px"
-							alt="YouTube Icon"
-						/>
+						<a
+							href="https://www.youtube.com/channel/UChpTG75PFHDO9NHlK8rV1og"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img
+								src="../../images/youtube.svg"
+								loading="lazy"
+								width="40px"
+								height="40px"
+								alt="YouTube Icon"
+							/>
+						</a>
 					</li>
 					<li>
-						<img
-							src="../../images/github.svg"
-							loading="lazy"
-							width="40px"
-							height="40px"
-							alt="GitHub Icon"
-						/>
+						<a href="https://github.com/tobseyltd/" target="_blank" rel="noopener noreferrer">
+							<img
+								src="../../images/github.svg"
+								loading="lazy"
+								width="40px"
+								height="40px"
+								alt="GitHub Icon"
+							/>
+						</a>
 					</li>
 					<li>
-						<img
-							src="../../images/discord.svg"
-							loading="lazy"
-							width="40px"
-							height="40px"
-							alt="Discord Icon"
-						/>
+						<a
+							href="https://discord.com/channels/1207608743588663306/1207608744264081449"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img
+								src="../../images/discord.svg"
+								loading="lazy"
+								width="40px"
+								height="40px"
+								alt="Discord Icon"
+							/>
+						</a>
 					</li>
 					<li>
-						<img
-							src="../../images/spotify.svg"
-							loading="lazy"
-							width="40px"
-							height="40px"
-							alt="Spotify Icon"
-						/>
+						<a
+							href="https://open.spotify.com/user/slipdub?si=d0a1db7788ce482b"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img
+								src="../../images/spotify.svg"
+								loading="lazy"
+								width="40px"
+								height="40px"
+								alt="Spotify Icon"
+							/>
+						</a>
 					</li>
+				</ul>
+				<a href="https://www.codewars.com/users/tobsey/" target="_blank" rel="noopener noreferrer">
+					<img
+						src="https://www.codewars.com/users/tobsey/badges/small"
+						alt="codewars banner"
+						loading="lazy"
+						width="300px"
+						height="20px"
+					/>
+				</a>
+			</mid-column>
+
+			<right-column-1>
+				<p class=""><b>Über mich</b></p>
+				<ul>
+					<li><Tooltip tooltip="Bald!">Dozententätigkeit</Tooltip></li>
+					<li><Tooltip tooltip="Bald!">Web Entwickler</Tooltip></li>
+					<li><Tooltip tooltip="Bald!">Coaching</Tooltip></li>
+					<li></li>
 					<li></li>
 				</ul>
-				<img
-					src="https://www.codewars.com/users/tobsey/badges/small"
-					alt="codewars banner"
-					width="300px"
-					height="20px"
-				/>
-			</right-side>
+			</right-column-1>
+			<right-column-2>
+				<p><b>Remote Kurs</b></p>
+				<ul>
+					<li>
+						<a
+							href="https://bergemann-hoehne.com/fullstack-developer/"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Teilnahme
+						</a>
+					</li>
+					<li>
+						<a href="https://bergemann-hoehne.com/" target="_blank" rel="noopener noreferrer"
+							>Bergemann & Höhne
+						</a>
+					</li>
+					<li>
+						<a
+							href="https://bergemann-hoehne.com/wp-content/uploads/2023/10/Flyer-FullStack-w.pdf"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Informationen
+						</a>
+					</li>
+					<li></li>
+					<li></li>
+				</ul>
+			</right-column-2>
 		</mid-footer>
 		<bottom-footer>
 			<left-side
@@ -219,13 +258,13 @@
 						height="20"
 					/></span
 				>
-				2023 programmieren-lernen.rocks
+				2024 programmieren-lernen.rocks
 			</left-side>
 			<right-side>
 				Made with
 				<span><img src="../../images/love.svg" loading="lazy" width="35" height="35" alt="" /></span
 				>
-				in HTML, CSS & Vanilla JS
+				with Svelte & Supabase
 			</right-side>
 		</bottom-footer>
 	</footer-wrapper>
@@ -299,6 +338,258 @@
 				& a > iconify-icon {
 					color: white;
 					display: block;
+				}
+			}
+		}
+	}
+
+	footer {
+		position: relative;
+
+		& footer-wrapper {
+			display: block;
+			margin: 0 auto;
+			width: var(--wrapperWidth);
+
+			@media (width < 451px) {
+				width: 90%;
+			}
+			background-size: cover;
+			background-position: center center;
+
+			& top-footer {
+				border-top: 1px solid #2d39db57;
+				padding: 2rem 0;
+				display: flex;
+				margin: 0 auto;
+				position: relative;
+				display: flex;
+				gap: 1rem;
+
+				@media (width < 451px) {
+					flex-direction: column;
+				}
+
+				& left-side {
+					text-align: left;
+					width: 60%;
+
+					@media (width < 451px) {
+						width: 100%;
+					}
+
+					& section {
+						& h4 {
+							margin-bottom: 0.1rem;
+						}
+
+						& p {
+							color: var(--textAccent);
+						}
+					}
+				}
+
+				& right-side {
+					width: 40%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					gap: 1rem;
+					text-align: left;
+
+					@media (width < 451px) {
+						width: 100%;
+					}
+
+					& section {
+						& h4 {
+							margin-bottom: 0.1rem;
+						}
+					}
+
+					& img {
+						position: absolute;
+						width: 3%;
+						right: 1rem;
+
+						@media (width < 451px) {
+							width: 10%;
+						}
+					}
+
+					& ul {
+						list-style: none;
+					}
+
+					& input {
+						background-color: transparent;
+						border: none;
+						border-bottom: 1px solid white;
+						border-radius: 10px;
+						padding: 0.6rem;
+						/* margin-left: -2.5rem; */
+						width: 100%;
+						color: white;
+						font-size: 0.7rem;
+
+						&:focus-visible {
+							outline: none;
+						}
+
+						&::placeholder {
+							color: white;
+							font-size: 0.7rem;
+							font-family: 'League Spartan', sans-serif;
+						}
+					}
+				}
+			}
+			& mid-footer {
+				display: flex;
+				gap: 1rem;
+				justify-content: space-between;
+				margin: 0 auto;
+				text-align: start;
+				padding: 3rem 0;
+				border-top: 1px solid #2d39db57;
+
+				@media (width < 451px) {
+					text-align: center;
+					flex-wrap: wrap;
+
+					& *:not(right-side) {
+						width: 40%;
+					}
+				}
+
+				& h4 {
+					text-transform: capitalize;
+				}
+
+				& p {
+					margin-bottom: 1rem;
+					text-transform: capitalize;
+					/* text-decoration: underline; */
+				}
+
+				& ul li {
+					font-size: 0.8rem;
+					color: var(--textAccent);
+
+					& a {
+						color: var(--textAccent);
+					}
+
+					& [data-tooltip]:before {
+						bottom: -110%;
+						left: 50%;
+						margin-bottom: 5px;
+					}
+
+					& [data-tooltip]:after {
+						position: absolute;
+						top: 80%;
+						left: 50%;
+					}
+				}
+
+				& mid-column {
+					position: relative;
+					text-align: center;
+
+					@media (width < 451px) {
+						width: 100%;
+						text-align: center;
+						margin-top: 1rem;
+
+						& p {
+							display: none;
+						}
+					}
+
+					& ul {
+						display: flex;
+						gap: 1rem;
+						justify-content: center;
+					}
+
+					& background-triangle1 {
+						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
+						right: 17rem;
+						top: 1rem;
+						position: absolute;
+						display: block;
+						width: 40px;
+						height: 40px;
+						background: rgb(62, 100, 132);
+						background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
+						opacity: 20%;
+					}
+
+					& background-triangle2 {
+						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
+						right: 30rem;
+						top: 3.5rem;
+						position: absolute;
+						display: block;
+						width: 40px;
+						height: 40px;
+						background: rgb(62, 100, 132);
+						background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
+						opacity: 20%;
+					}
+					& background-triangle3 {
+						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
+						right: 14rem;
+						top: 3rem;
+						position: absolute;
+						display: block;
+						width: 40px;
+						height: 40px;
+						background: rgb(62, 100, 132);
+						background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
+						opacity: 30%;
+					}
+				}
+				& [alt='codewars banner'] {
+					margin-top: 1rem;
+					width: 100%;
+				}
+			}
+
+			& bottom-footer {
+				border-top: 1px solid #2d39db57;
+				padding: 1rem 0;
+				margin: 0 auto;
+				display: flex;
+				justify-content: space-between;
+				font-size: 0.7rem;
+
+				@media (width < 451px) {
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+				}
+
+				& left-side {
+					display: flex;
+					align-items: center;
+					gap: 0.4rem;
+
+					& span {
+						display: flex;
+						align-items: center;
+					}
+				}
+
+				& right-side {
+					display: flex;
+					align-items: center;
+
+					& span {
+						display: flex;
+						align-items: center;
+					}
 				}
 			}
 		}

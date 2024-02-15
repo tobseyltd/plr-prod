@@ -38,7 +38,7 @@ button {
 	padding: 0.6rem;
 	border: none;
 	border-radius: 10px;
-	background-color: #5170fe;
+	background-color: var(--tertColor);
 	font-size: 0.7rem;
 	font-weight: 700;
 	color: white;
@@ -46,11 +46,20 @@ button {
 	cursor: pointer;
 	text-shadow: 0 0 5px black;
 	justify-content: center;
+
+	&:hover {
+		background-color: #5171fed2;
+		border-color: #5171fed2;
+	}
 }
 
 .button {
 	background-color: var(--secondColor);
 	text-shadow: 0 0 5px black;
+
+	&:hover {
+		background-color: #ff0066b9;
+	}
 }
 
 ul {
@@ -89,240 +98,5 @@ h3 {
 		border: solid 4px var(--secondColor);
 		border-color: var(--secondColor) transparent transparent transparent;
 		border-radius: 70%;
-	}
-}
-
-
-
-footer {
-	position: relative;
-
-	& footer-wrapper {
-		display: block;
-		margin: 0 auto;
-		width: var(--wrapperWidth);
-
-		@media (width < 451px) {
-			width: 90%;
-		}
-		background-size: cover;
-		background-position: center center;
-
-		& top-footer {
-			border-top: 1px solid #2d39db57;
-			padding: 2rem 0;
-			display: flex;
-			margin: 0 auto;
-			position: relative;
-			display: flex;
-			gap: 1rem;
-
-			@media (width < 451px) {
-				flex-direction: column;
-			}
-
-			& left-side {
-				text-align: left;
-				width: 60%;
-
-				@media (width < 451px) {
-					width: 100%;
-				}
-
-				& section {
-					& h4 {
-						margin-bottom: 0.1rem;
-					}
-
-					& p {
-						color: var(--textAccent);
-					}
-				}
-			}
-
-			& right-side {
-				width: 40%;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				gap: 1rem;
-				text-align: left;
-
-				@media (width < 451px) {
-					width: 100%;
-				}
-
-				& section {
-					& h4 {
-						margin-bottom: 0.1rem;
-					}
-				}
-
-				& img {
-					position: absolute;
-					width: 3%;
-					right: 1rem;
-
-					@media (width < 451px) {
-						width: 10%;
-					}
-				}
-
-				& ul {
-					list-style: none;
-				}
-
-				& input {
-					background-color: transparent;
-					border: none;
-					border-bottom: 1px solid white;
-					border-radius: 10px;
-					padding: 0.6rem;
-					/* margin-left: -2.5rem; */
-					width: 100%;
-					color: white;
-					font-size: 0.7rem;
-
-					&:focus-visible {
-						outline: none;
-					}
-
-					&::placeholder {
-						color: white;
-						font-size: 0.7rem;
-						font-family: 'League Spartan', sans-serif;
-					}
-				}
-			}
-		}
-		& mid-footer {
-			display: flex;
-			gap: 1rem;
-			justify-content: space-between;
-			margin: 0 auto;
-			text-align: start;
-			padding: 3rem 0;
-
-			@media (width < 451px) {
-				text-align: center;
-				flex-wrap: wrap;
-
-				> *:not(right-side) {
-					width: 40%;
-				}
-			}
-
-			> h4 {
-				text-transform: capitalize;
-			}
-
-			& p {
-				margin-bottom: 1rem;
-				text-transform: capitalize;
-				/* text-decoration: underline; */
-			}
-
-			& ul li {
-				font-size: 0.8rem;
-				color: var(--textAccent);
-			}
-
-			& right-side {
-				position: relative;
-
-				@media (width < 451px) {
-					width: 100%;
-					text-align: center;
-					margin-top: 1rem;
-
-					& p {
-						display: none;
-					}
-				}
-
-				& ul li {
-					display: inline;
-					margin-right: 1rem;
-				}
-
-				& background-triangle1 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					right: 17rem;
-					top: 1rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(62, 100, 132);
-					background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
-					opacity: 20%;
-				}
-
-				& background-triangle2 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					right: 30rem;
-					top: 3.5rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(62, 100, 132);
-					background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
-					opacity: 20%;
-				}
-				& background-triangle3 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					right: 14rem;
-					top: 3rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(62, 100, 132);
-					background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
-					opacity: 30%;
-				}
-			}
-			& [alt='codewars banner'] {
-				margin-top: 1rem;
-				width: 100%;
-			}
-		}
-
-		& bottom-footer {
-			border-top: 1px solid #2d39db57;
-			padding: 1rem 0;
-			margin: 0 auto;
-			display: flex;
-			justify-content: space-between;
-			font-size: 0.7rem;
-
-			@media (width < 451px) {
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-			}
-
-			& left-side {
-				display: flex;
-				align-items: center;
-				gap: 0.4rem;
-
-				> span {
-					display: flex;
-					align-items: center;
-				}
-			}
-
-			& right-side {
-				display: flex;
-				align-items: center;
-
-				> span {
-					display: flex;
-					align-items: center;
-				}
-			}
-		}
 	}
 }
