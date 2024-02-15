@@ -26,6 +26,10 @@
 					alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen"
 					width="823px"
 					height="666px"
+					srcset="
+   					../../images/home-top-img.webp 823w"
+					sizes="(max-width: 480px) 823px,
+        			(min-width: 481px) 823px"
 				/>
 			</right-side>
 		</hero-section>
@@ -112,6 +116,10 @@
 					width="550px"
 					height="550px"
 					alt="Web Entwicklung Illustration"
+					srcset="
+   					../../images/logo-white.webp 550w"
+					sizes="(max-width: 480px) 550px,
+        			(min-width: 481px) 550px"
 				/>
 			</left-side>
 			<right-side>

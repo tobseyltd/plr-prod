@@ -8,7 +8,7 @@ import { getUserProfile, handleLoginRedirect } from '$lib/helpers';
 import { getSubscriptionTier } from '$lib/server/subscriptions';
 import { getPaymentStatus } from '$lib/server/onetime';
 import { supabaseAdmin } from '$lib/server/supabase-admin';
-import toast from 'svelte-french-toast';
+import { stripe } from '$lib/server/stripe';
 
 export const load: PageServerLoad = async (event) => {
 	const session = await event.locals.getSession();
@@ -141,10 +141,29 @@ export const actions: Actions = {
 
 		const sessionId = session.user.id;
 
-		const { error: SignoutError } = await event.locals.supabase.auth.signOut();
+		try {
+			const { data: billingCustomer, error: customerError } = await event.locals.supabase
+				.from('billing_customers')
+				.select('id')
+				.eq('user_id', sessionId)
+				.limit(1)
+				.maybeSingle();
 
-		if (SignoutError) {
-			throw SignoutError.message;
+			if (customerError) {
+				throw customerError.message;
+			}
+
+			if (billingCustomer) {
+				await stripe.customers.del(billingCustomer.id);
+			}
+		} catch (ERROR) {
+			console.log(ERROR);
+		}
+
+		const { error: singoutError } = await event.locals.supabase.auth.signOut();
+
+		if (singoutError) {
+			throw singoutError.message;
 		}
 
 		const { error: deleteError } = await supabaseAdmin.auth.admin.deleteUser(sessionId);
@@ -152,7 +171,6 @@ export const actions: Actions = {
 		if (deleteError) {
 			throw deleteError.message;
 		}
-		toast.success('Account gelöscht!');
 		redirect(302, '/account');
 	}
 };

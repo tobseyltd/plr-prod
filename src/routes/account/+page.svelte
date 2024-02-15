@@ -4,12 +4,15 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { loginSchema } from './ZodSchema';
 	import toast, { Toaster } from 'svelte-french-toast';
-	import { ReceiptEuro } from 'lucide-svelte';
+	import { ReceiptEuro, UserRound, UserRoundX } from 'lucide-svelte';
 	import ProfileForm from './PofileForm.svelte';
 	import EmaiLForm from './EmaiLForm.svelte';
 	import PasswordForm from './PasswordForm.svelte';
 	import { goto } from '$app/navigation';
 	import Tooltip from '$lib/utils/Tooltip.svelte';
+	import { modal } from '$lib/stores/stores';
+	import Modal from '../../lib/utils/Modal.svelte';
+	import DeleteModalContent from './DeleteModalContent.svelte';
 
 	export let data: PageData;
 
@@ -27,9 +30,6 @@
 			<section>
 				<h1>Account Einstellungen</h1>
 				<p>Ändere dein Passwort, E-Mail Adresse, Bezahlung und andere Details</p>
-				<form action="?/deleteProfile" method="POST">
-					<button type="submit">Account löschen</button>
-				</form>
 			</section>
 
 			<billing-section>
@@ -52,6 +52,16 @@
 			<ProfileForm data={data.profileForm} />
 			<EmaiLForm data={data.emailForm} />
 			<PasswordForm data={data.passwordForm} />
+
+			<delete-account>
+				<h2><span><UserRoundX size={22} strokeWidth={1.5} /></span> Account & Daten löschen</h2>
+				<p>Lösche alle Daten (inkl. Stripe) & Account</p>
+				<br />
+
+				<Modal show={$modal}>
+					<DeleteModalContent />
+				</Modal>
+			</delete-account>
 		</account-page-content>
 	{/if}
 </account-page-wrapper>
@@ -75,7 +85,8 @@
 			& billing-section,
 			personal-details,
 			email-details,
-			password-details {
+			password-details,
+			delete-account {
 				display: block;
 				margin: 0 auto;
 				text-align: start;

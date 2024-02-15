@@ -63,8 +63,9 @@
 					<li>
 						<Tooltip tooltip="Konto">
 							<span
-								role="button"
+								role="link"
 								tabindex="0"
+								aria-label="account"
 								on:keydown={() => goto('/account')}
 								on:click={() => goto('/account')}
 								><CircleUserRound size={30} strokeWidth={1.2} style="cursor: pointer" /></span
