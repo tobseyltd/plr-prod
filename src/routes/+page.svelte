@@ -2,7 +2,11 @@
 	import MainLayout from '../layouts/MainLayout.svelte';
 </script>
 
-<MainLayout title="Programmieren lernen - Dein Coding Mentor" description="" imageUrl="">
+<MainLayout
+	title="Programmieren lernen - Dein Coding Mentor"
+	description="Sicherlich interessieren Sie sich dafür, wie Sie das Programmieren lernen können. Wir bieten Ihnen hier die Möglichkeit, das Coden zu erlernen und Ihre Fähigkeiten in den Bereichen HTML, CSS und JavaScript zu verbessern. Egal, ob Sie ein Anfänger sind oder bereits Erfahrung haben, unsere Lehrmaterialien und Kurse werden Ihnen helfen, Ihre Programmierkenntnisse auf das nächste Level zu bringen. Beginnen Sie noch heute und tauchen Sie ein in die faszinierende Welt des Codens!"
+	imageUrl=""
+>
 	<hero-wrapper>
 		<hero-section>
 			<left-side>
@@ -17,7 +21,12 @@
 			</left-side>
 
 			<right-side>
-				<img src="./images/home-top-img.webp" alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen" width="auto" loading="lazy" />
+				<img
+					src="./images/home-top-img.webp"
+					alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen"
+					width="auto"
+					loading="lazy"
+				/>
 			</right-side>
 		</hero-section>
 	</hero-wrapper>
