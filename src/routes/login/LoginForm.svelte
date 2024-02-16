@@ -8,7 +8,8 @@
 
 	export let data: SuperValidated<Infer<LoginSchema>>;
 	export let supabase: SupabaseClient;
-	export let height: string = '60vh';
+	export let height: string = '70vh';
+	export let borderTop: string = '1px solid #2d39db57';
 
 	const { form, errors, enhance } = superForm(data, {
 		validators: zodClient(loginSchema),
@@ -32,7 +33,7 @@
 	});
 </script>
 
-<login-form style={`height: ${height}`}>
+<login-form style={`height: ${height}; border-top: ${borderTop};`}>
 	<h1>Login</h1>
 	<form method="POST" action="?/login" use:enhance>
 		<input
@@ -60,8 +61,8 @@
 		- oder -<br />
 		<SocialLogins {supabase} buttonSlogan="einloggen" />
 	</form>
-	- oder -<br />
-	<a href="/registrieren"><button class="button">Mitglied werden</button></a>
+	<!-- - oder -<br />
+	<a href="/registrieren"><button class="button">Mitglied werden</button></a> -->
 </login-form>
 
 <style>
@@ -104,7 +105,7 @@
 			& password-reset {
 				width: 350px;
 				text-align: left;
-				font-size: 0.9rem;
+				font-size: 0.8rem;
 				margin-top: 0.2rem;
 
 				& a {

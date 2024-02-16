@@ -93,7 +93,12 @@
 		margin: 0 auto;
 		width: var(--wrapperWidth);
 		border-top: 1px solid #2d39db57;
-		height: 60vh;
+		height: 80vh;
+		width: 100%;
+
+		@media (width < 769px) {
+			height: 50vh;
+		}
 
 		& account-page-content {
 			padding-top: 1rem;
