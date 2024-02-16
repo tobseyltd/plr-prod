@@ -3,6 +3,7 @@ import { setError, superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
 import { registerUserSchema } from './ZodSchemas';
 import { error, fail, redirect } from '@sveltejs/kit';
+import { supabaseAdmin } from '$lib/server/supabase-admin';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -49,12 +50,13 @@ export const actions: Actions = {
 			form
 		};
 	},
-	signupWithGithub: async (event) => {
-		const { error: githubError } = await event.locals.supabase.auth.signInWithOAuth({
+	signupWithGithub: async () => {
+		const { error: githubError } = await supabaseAdmin.auth.signInWithOAuth({
 			provider: 'github'
 		});
 
 		if (githubError) {
+			console.log(githubError);
 			throw error(500, githubError.message);
 		}
 	},
