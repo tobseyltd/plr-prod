@@ -38,7 +38,6 @@ body {
 }
 
 button {
-	width: 300px;
 	display: flex;
 	align-items: center;
 	padding: 0.6rem;

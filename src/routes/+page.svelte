@@ -351,6 +351,10 @@
 				& a {
 					text-decoration: none;
 				}
+
+				& button {
+					width: 300px;
+				}
 			}
 
 			& right-side {
@@ -551,6 +555,7 @@
 
 				& button {
 					margin-top: 1rem;
+					width: 300px;
 
 					@media (width < 769px) {
 						width: 100%;
