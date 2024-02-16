@@ -4,6 +4,8 @@
 	import toast from 'svelte-french-toast';
 	import type { PageData } from './$types';
 	import { registerUserSchema } from './ZodSchemas';
+	import GithubButton from './GithubButton.svelte';
+	import DiscordButton from './DiscordButton.svelte';
 
 	export let data: PageData;
 
@@ -82,18 +84,8 @@
 			</dsgvo-box> -->
 		</form>
 		- oder -<br />
-		<form id="github" method="POST" action="?/signupWithGithub">
-			<button type="submit"
-				><img width="40px" height="40px" src="/images/github-logo.svg" alt="" />Mit GitHub
-				registrieren</button
-			>
-		</form>
-		<form id="discord" method="POST" action="?/signupWithDiscord">
-			<button type="submit"
-				><img width="40px" height="40px" src="/images/discord-logo.svg" alt="" />Mit Discord
-				registrieren</button
-			>
-		</form>
+		<GithubButton />
+		<DiscordButton />
 	</register-form>
 </register-page-wrapper>
 
