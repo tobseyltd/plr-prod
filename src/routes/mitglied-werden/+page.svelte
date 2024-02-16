@@ -4,7 +4,6 @@
 	import { writable } from 'svelte/store';
 	import Tooltip from '$lib/utils/Tooltip.svelte';
 	import { ShieldCheck } from 'lucide-svelte';
-	import paypalIcon from '../../../static/images/paypal.svg';
 	import MainLayout from '../../layouts/MainLayout.svelte';
 
 	export let data: PageData;

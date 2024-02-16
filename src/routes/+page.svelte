@@ -117,7 +117,7 @@
 					height="550px"
 					alt="Web Entwicklung Illustration"
 					srcset="
-   					../../images/logo-white.webp 550w"
+   					../../images/web-development-service.svg 550w"
 					sizes="(max-width: 480px) 550px,
         			(min-width: 481px) 550px"
 				/>
@@ -279,6 +279,10 @@
 					width="500px"
 					height="500px"
 					alt="Illustration eines Mannes, der eine Rakete in der Hand hält, bezeichnend für ein Startup Launch"
+					srcset="
+   					../../images/man-launching-startup-blue.webp 500w"
+					sizes="(max-width: 480px) 500px,
+        			(min-width: 481px) 500px"
 				/>
 				<background-triangle1 class="rotate"></background-triangle1>
 				<background-triangle2 class="rotate"></background-triangle2>

@@ -7,3 +7,4 @@ Disallow: /datenschutz
 Disallow: /agb
 Disallow: /logout
 Disallow: /login
+Disallow: /neues-passwort

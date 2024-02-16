@@ -81,6 +81,18 @@
 				>
 			</dsgvo-box> -->
 		</form>
+		- oder -<br />
+		<form id="github" method="GET" action="/?signupWithGithub">
+			<button type="submit"
+				><img width="40px" height="40px" src="/images/github-logo.svg" alt="" />Mit GitHub
+				registrieren</button
+			>
+		</form>
+		<form id="discord" method="GET" action="/?signupWithDiscord">
+			<button type="submit"
+				><img width="40px" height="40px" src="/images/discord-logo.svg" alt="" />Mit Discord registrieren</button
+			>
+		</form>
 	</register-form>
 </register-page-wrapper>
 
@@ -137,6 +149,27 @@
 			& .button {
 				width: 350px;
 				align-self: center;
+			}
+
+			& #github {
+				& button {
+					padding: 0.2rem 0;
+					background-color: black;
+
+					& img {
+						color: white;
+					}
+				}
+			}
+			& #discord {
+				& button {
+					padding: 0.2rem 0;
+					background-color: #5C6BC0;
+
+					/* & img {
+						background-color: white;
+					} */
+				}
 			}
 		}
 	}

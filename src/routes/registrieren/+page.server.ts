@@ -2,7 +2,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { setError, superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
 import { registerUserSchema } from './ZodSchemas';
-import { fail, redirect } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -48,5 +48,23 @@ export const actions: Actions = {
 		return {
 			form
 		};
+	},
+	signupWithGithub: async (event) => {
+		const { error: githubError } = await event.locals.supabase.auth.signInWithOAuth({
+			provider: 'github'
+		});
+
+		if (githubError) {
+			throw error(500, githubError.message);
+		}
+	},
+	signupWithDiscord: async (event) => {
+		const { error: discordError } = await event.locals.supabase.auth.signInWithOAuth({
+			provider: 'discord'
+		});
+
+		if (discordError) {
+			throw error(500, discordError.message);
+		}
 	}
 };
