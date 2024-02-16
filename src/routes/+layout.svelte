@@ -44,8 +44,7 @@
 					alt="Website Logo"
 					srcset="
    					../../images/logo-white.webp 240w"
-					sizes="(max-width: 480px) 240px,
-        			(min-width: 481px) 240px"
+					sizes="(max-width: 480px) 100vw, 240px"
 				/>
 			</a>
 		</left-side>

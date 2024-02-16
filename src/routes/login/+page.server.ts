@@ -1,6 +1,6 @@
 import { setError, superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
-import { AuthApiError } from '@supabase/supabase-js';
+import { AuthApiError, type Provider } from '@supabase/supabase-js';
 import { fail, redirect } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
 import { loginSchema } from '../account/ZodSchema';
@@ -15,6 +15,24 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	login: async (event) => {
 		const redirectTo = event.url.searchParams.get('redirectedTo');
+		const provider = event.url.searchParams.get('provider') as Provider;
+
+		if (provider) {
+			const { data: providerData, error: providerError } =
+				await event.locals.supabase.auth.signInWithOAuth({
+					provider: 'github'
+				});
+
+			if (providerError) {
+				console.log(providerError.message);
+				return fail(400, {
+					message: 'Fehler, probiere es später nochmal'
+				});
+			}
+
+			redirect(303, providerData.url);
+		}
+
 		const form = await superValidate(event, zod(loginSchema));
 
 		if (!form.valid) {

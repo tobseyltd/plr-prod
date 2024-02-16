@@ -14,7 +14,7 @@
 				<p>
 					Erlerne das Programmieren mit wöchentlichen Coding Aufgaben, die ein Programmierer täglich
 					genauso umsetzt. Jede Lektion mit
-					<span class="highlight">kostenlosem Zugang</span>
+					<b class="highlight">kostenlosem Zugang</b>
 					zu den Basis Informationen.
 				</p>
 				<a href="/lektionen"><button>Jetzt Loslegen</button></a>
@@ -24,6 +24,8 @@
 				<img
 					src="./images/home-top-img.webp"
 					alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen"
+					width="823"
+					height="666"
 					srcset="
    					../../images/home-top-img.webp 823w"
 					sizes="(max-width: 480px) 100vw, 823px"
@@ -110,6 +112,8 @@
 				<img
 					src="/images/web-development-service.svg"
 					loading="lazy"
+					width="550"
+					height="550"
 					alt="Web Entwicklung Illustration"
 					srcset="
    					../../images/web-development-service.svg 550w"
@@ -271,6 +275,8 @@
 					src="/images/man-launching-startup-blue.webp"
 					loading="lazy"
 					alt="Illustration eines Mannes, der eine Rakete in der Hand hält, bezeichnend für ein Startup Launch"
+					width="500"
+					height="500"
 					srcset="
    					../../images/man-launching-startup-blue.webp 500w"
 					sizes="(max-width: 480px) 100vw, 500px"
@@ -290,6 +296,10 @@
 		padding-bottom: 2rem;
 		width: 100%;
 		display: block;
+
+		@media (width < 769px) {
+			margin: 1rem 0;
+		}
 
 		& hero-section {
 			container-type: inline-size;
@@ -381,13 +391,13 @@
 			position: relative;
 
 			@media (width < 769px) {
-				width: 100%;
+				width: 80%;
 				grid-template-columns: 1fr;
 				padding-bottom: 0;
 			}
 
-			@media (width <769px) {
-				width: 80%;
+			@media (width < 451px) {
+				width: 100%;
 			}
 
 			& .style {
@@ -453,6 +463,10 @@
 					margin-top: 2rem;
 					width: 100%;
 					text-align: center;
+				}
+				@media (width < 451px) {
+					margin: 0;
+					height: 500px;
 				}
 
 				& img {
@@ -617,6 +631,11 @@
 			padding-bottom: 2rem;
 		}
 
+		@media (width < 451px) {
+			margin-top: 2rem;
+			padding-bottom: 2rem;
+		}
+
 		& action-call {
 			width: 50%;
 			margin: 0 auto;
@@ -640,7 +659,7 @@
 			}
 
 			@media (width < 451px) {
-				width: 90%;
+				width: 100%;
 				flex-direction: column;
 				padding: 2rem 0;
 			}

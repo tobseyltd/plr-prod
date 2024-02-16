@@ -4,8 +4,7 @@
 	import toast from 'svelte-french-toast';
 	import type { PageData } from './$types';
 	import { registerUserSchema } from './ZodSchemas';
-	import GithubButton from './GithubButton.svelte';
-	import DiscordButton from './DiscordButton.svelte';
+	import SocialLogins from '$lib/utils/SocialLogins.svelte';
 
 	export let data: PageData;
 
@@ -35,7 +34,7 @@
 <register-page-wrapper>
 	<register-form>
 		<h1>Registrieren</h1>
-		<form method="POST" action="?/registerWithEmail" use:enhance>
+		<form method="POST" use:enhance>
 			<input
 				type="text"
 				name="full_name"
@@ -84,8 +83,7 @@
 			</dsgvo-box> -->
 		</form>
 		- oder -<br />
-		<GithubButton />
-		<DiscordButton />
+		<SocialLogins />
 	</register-form>
 </register-page-wrapper>
 
@@ -142,27 +140,6 @@
 			& .button {
 				width: 350px;
 				align-self: center;
-			}
-
-			& #github {
-				& button {
-					padding: 0.2rem 0;
-					background-color: black;
-
-					& img {
-						color: white;
-					}
-				}
-			}
-			& #discord {
-				& button {
-					padding: 0.2rem 0;
-					background-color: #5c6bc0;
-
-					/* & img {
-						background-color: white;
-					} */
-				}
 			}
 		}
 	}

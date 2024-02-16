@@ -2,8 +2,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { setError, superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
 import { registerUserSchema } from './ZodSchemas';
-import { error, fail, redirect } from '@sveltejs/kit';
-import { supabaseAdmin } from '$lib/server/supabase-admin';
+import { fail, redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -12,7 +11,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-	registerWithEmail: async (event) => {
+	default: async (event) => {
 		const form = await superValidate(event, zod(registerUserSchema));
 
 		if (!form.valid) {
@@ -49,24 +48,5 @@ export const actions: Actions = {
 		return {
 			form
 		};
-	},
-	signupWithGithub: async () => {
-		const { error: githubError } = await supabaseAdmin.auth.signInWithOAuth({
-			provider: 'github'
-		});
-
-		if (githubError) {
-			console.log(githubError);
-			throw error(500, githubError.message);
-		}
-	},
-	signupWithDiscord: async (event) => {
-		const { error: discordError } = await event.locals.supabase.auth.signInWithOAuth({
-			provider: 'discord'
-		});
-
-		if (discordError) {
-			throw error(500, discordError.message);
-		}
 	}
 };
