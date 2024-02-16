@@ -23,7 +23,11 @@
 	}
 </script>
 
-<MainLayout title="Mitglied werden" description="" imageUrl="">
+<MainLayout
+	title="Mitglied werden"
+	description="Entdecke die spannende Welt des Programmierens und tauche ein in eine lebendige Community von Gleichgesinnten! Mit meiner einzigartigen Coding-Membership erhältst du Zugang zu hochwertigem Content und Challenges, die dir helfen, Deine Fähigkeiten im Programmieren zu verbessern. Gerade, wenn du gerade erst angefangen oder bereits Erfahrung hast, meine Plattform bietet maßgeschneiderte Lerninhalte und persönliche Unterstützung, um Dir auf Deinem Weg zum erfolgreichen Entwickler zu helfen. Werde jetzt Teil meiner Community und entdecke die endlosen Möglichkeiten des Programmierens!"
+	imageUrl=""
+>
 	<subscription-page-wrapper>
 		<top-slogan>
 			<h1>All-Access Mitgliedschaft</h1>
@@ -111,7 +115,10 @@
 			</payment-icons>
 		</payment-box>
 
-		<subscription-content>
+		<subscription-content-1>
+			<background-triangle1 class="rotate"></background-triangle1>
+			<background-triangle2 class="rotate"></background-triangle2>
+			<background-triangle3 class="rotate"></background-triangle3>
 			<p>Praktisch orientiert</p>
 			<h2>Was du lernen wirst</h2>
 			<ul>
@@ -150,8 +157,8 @@
 					</span>
 				</li>
 			</ul>
-		</subscription-content>
-		<subscription-content>
+		</subscription-content-1>
+		<subscription-content-2>
 			<p>Zielgruppe</p>
 			<h2>Für wen ist es geeignet?</h2>
 			<ul>
@@ -192,7 +199,7 @@
 			<background-triangle1 class="rotate"></background-triangle1>
 			<background-triangle2 class="rotate"></background-triangle2>
 			<background-triangle3 class="rotate"></background-triangle3>
-		</subscription-content>
+		</subscription-content-2>
 	</subscription-page-wrapper>
 </MainLayout>
 
@@ -206,10 +213,19 @@
 		padding: 2rem 0;
 		justify-content: center;
 
+		@media (width < 451px) {
+			padding: 0;
+			margin-top: 1rem;
+		}
+
 		& top-slogan {
 			width: 65%;
 			margin: 0 auto;
 			text-align: center;
+
+			@media (width < 451px) {
+				width: 100%;
+			}
 
 			& p {
 				color: rgba(239, 238, 238, 0.732);
@@ -228,6 +244,11 @@
 					background-color: transparent;
 					font-size: 0.65em;
 					padding: 0.2rem 1.5rem;
+					width: 15%;
+
+					@media (width < 451px) {
+						width: 25%;
+					}
 
 					&:not(.active) {
 						&:hover {
@@ -259,6 +280,10 @@
 			margin-bottom: 2rem;
 			justify-content: center;
 
+			@media (width < 451px) {
+				flex-wrap: wrap;
+			}
+
 			& subscription-card {
 				background-color: #3536508b;
 				padding: 3rem;
@@ -268,6 +293,10 @@
 				-moz-box-shadow: 0px 20px 20px -17px var(--tertColor);
 				box-shadow: 0px 20px 20px -17px var(--tertColor);
 				text-align: center;
+
+				@media (width < 451px) {
+					width: 100%;
+				}
 
 				& ul {
 					margin: 2rem 0;
@@ -364,6 +393,11 @@
 				align-items: center;
 				gap: 0.3rem;
 
+				@media (width < 451px) {
+					display: inline-block;
+					text-align: center;
+				}
+
 				& p {
 					margin-top: 0.25rem;
 				}
@@ -377,15 +411,24 @@
 			}
 		}
 
-		& subscription-content {
+		& subscription-content-1,
+		subscription-content-2 {
 			position: relative;
 			text-align: center;
 			margin-top: 2rem;
+
+			@media (width < 451px) {
+				margin: 0;
+			}
 
 			& ul {
 				display: inline-block;
 				text-align: left;
 				width: 60ch;
+
+				@media (width < 451px) {
+					width: 100%;
+				}
 
 				& li {
 					color: rgba(211, 211, 211, 0.732);
@@ -405,12 +448,56 @@
 			& p {
 				color: var(--tertColor);
 			}
+		}
+
+		& subscription-content-1 {
+			& background-triangle1 {
+				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
+				left: 0rem;
+				top: 10rem;
+				opacity: 20%;
+
+				@media (width < 451px) {
+					display: none;
+				}
+			}
+
+			& background-triangle2 {
+				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
+				left: 2rem;
+				top: 5rem;
+				opacity: 40%;
+
+				@media (width < 451px) {
+					display: none;
+				}
+			}
+			& background-triangle3 {
+				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
+				left: 4rem;
+				bottom: 0;
+				opacity: 30%;
+
+				@media (width < 451px) {
+					display: none;
+				}
+			}
+		}
+
+		& subscription-content-2 {
+			@media (width < 451px) {
+				margin-top: -1rem;
+			}
 
 			& background-triangle1 {
 				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 				right: 0rem;
 				top: 10rem;
 				opacity: 20%;
+
+				@media (width < 451px) {
+					display: none;
+				}
 			}
 
 			& background-triangle2 {
@@ -418,12 +505,20 @@
 				right: 2rem;
 				top: 5rem;
 				opacity: 40%;
+
+				@media (width < 451px) {
+					display: none;
+				}
 			}
 			& background-triangle3 {
 				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 				right: 4rem;
 				bottom: 0;
 				opacity: 30%;
+
+				@media (width < 451px) {
+					display: none;
+				}
 			}
 		}
 	}

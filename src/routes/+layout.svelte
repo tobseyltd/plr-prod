@@ -116,23 +116,23 @@
             </right-side>
         </top-footer> -->
 		<mid-footer>
-			<left-section-1>
+			<left-column-1>
 				<p><b>Informationen</b></p>
 				<ul>
 					<li><a href="/impressum">Impressum</a></li>
 					<li><a href="/datenschutz">Datenschutz</a></li>
 					<li><a href="/agb">Geschäftsbedingungen</a></li>
 				</ul>
-			</left-section-1>
+			</left-column-1>
 
-			<left-section-2>
+			<left-column-2>
 				<p><b>Site Links</b></p>
 				<ul>
 					<li><a href="/lektionen">Lektionen</a></li>
 					<li><Tooltip tooltip="Bald!">Coding Blog</Tooltip></li>
 					<li><Tooltip tooltip="Bald!">Online Shop</Tooltip></li>
 				</ul>
-			</left-section-2>
+			</left-column-2>
 
 			<mid-column>
 				<background-triangle1 class="rotate"></background-triangle1>
@@ -280,7 +280,23 @@
 			display: flex;
 
 			@media (width < 450px) {
-				width: 95%;
+				width: 90%;
+			}
+
+			@media (width < 1025px) {
+				width: 90%;
+			}
+
+			@media (width < 769px) {
+				width: 80%;
+			}
+
+			@media (width > 1023px) {
+				width: 80%;
+			}
+
+			@media (width > 1919px) {
+				width: 60%;
 			}
 
 			& left-side {
@@ -342,6 +358,31 @@
 		}
 	}
 
+	main {
+		width: var(--wrapperWidth);
+		margin: 0 auto;
+
+		@media (width < 451px) {
+			width: 90%;
+		}
+
+		@media (width < 1025px) {
+			width: 90%;
+		}
+
+		@media (width < 769px) {
+			width: 80%;
+		}
+
+		@media (width > 1023px) {
+			width: 80%;
+		}
+
+		@media (width > 1919px) {
+			width: 60%;
+		}
+	}
+
 	footer {
 		position: relative;
 
@@ -353,8 +394,22 @@
 			@media (width < 451px) {
 				width: 90%;
 			}
-			background-size: cover;
-			background-position: center center;
+
+			@media (width < 1025px) {
+				width: 90%;
+			}
+
+			@media (width < 769px) {
+				width: 80%;
+			}
+
+			@media (width > 1023px) {
+				width: 80%;
+			}
+
+			@media (width > 1919px) {
+				width: 60%;
+			}
 
 			& top-footer {
 				border-top: 1px solid #2d39db57;
@@ -365,7 +420,7 @@
 				display: flex;
 				gap: 1rem;
 
-				@media (width < 451px) {
+				@media (width < 769px) {
 					flex-direction: column;
 				}
 
@@ -373,7 +428,7 @@
 					text-align: left;
 					width: 60%;
 
-					@media (width < 451px) {
+					@media (width < 769px) {
 						width: 100%;
 					}
 
@@ -396,7 +451,7 @@
 					gap: 1rem;
 					text-align: left;
 
-					@media (width < 451px) {
+					@media (width < 769px) {
 						width: 100%;
 					}
 
@@ -411,7 +466,7 @@
 						width: 3%;
 						right: 1rem;
 
-						@media (width < 451px) {
+						@media (width < 769px) {
 							width: 10%;
 						}
 					}
@@ -451,13 +506,15 @@
 				text-align: start;
 				padding: 3rem 0;
 				border-top: 1px solid #2d39db57;
+				width: 100%;
 
-				@media (width < 451px) {
+				@media (width < 769px) {
 					text-align: center;
 					flex-wrap: wrap;
+					gap: 0;
 
-					& *:not(right-side) {
-						width: 40%;
+					& :nth-child(3) {
+						order: 4;
 					}
 				}
 
@@ -492,14 +549,21 @@
 					}
 				}
 
+				& left-column-1,
+				left-column-2 {
+					@media (width < 769px) {
+						width: 50%;
+					}
+				}
+
 				& mid-column {
 					position: relative;
 					text-align: center;
 
-					@media (width < 451px) {
+					@media (width < 769px) {
 						width: 100%;
 						text-align: center;
-						margin-top: 1rem;
+						margin-top: 2rem;
 
 						& p {
 							display: none;
@@ -517,6 +581,10 @@
 						right: 17rem;
 						top: 1rem;
 						opacity: 20%;
+
+						@media (width < 769px) {
+							display: none;
+						}
 					}
 
 					& background-triangle2 {
@@ -524,17 +592,33 @@
 						right: 30rem;
 						top: 3.5rem;
 						opacity: 20%;
+
+						@media (width < 769px) {
+							display: none;
+						}
 					}
 					& background-triangle3 {
 						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
 						right: 14rem;
 						top: 3rem;
 						opacity: 30%;
+
+						@media (width < 769px) {
+							display: none;
+						}
 					}
 				}
 				& [alt='codewars banner'] {
 					margin-top: 1rem;
 					width: 100%;
+				}
+
+				& right-column-1,
+				right-column-2 {
+					@media (width < 769px) {
+						margin-top: 2rem;
+						width: 50%;
+					}
 				}
 			}
 
@@ -546,7 +630,7 @@
 				justify-content: space-between;
 				font-size: 0.7rem;
 
-				@media (width < 451px) {
+				@media (width < 769px) {
 					flex-direction: column;
 					justify-content: center;
 					align-items: center;

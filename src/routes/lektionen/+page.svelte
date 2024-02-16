@@ -117,10 +117,21 @@
 			border-bottom: 1px solid #2d39db57;
 			position: relative;
 
+			@media (width < 451px) {
+				flex-wrap: wrap;
+				gap: 0.7rem;
+				padding-bottom: 1rem;
+			}
+
 			& .search-icon {
 				position: absolute;
 				top: 8%;
 				left: 1%;
+
+				@media (width < 451px) {
+					top: 3%;
+					left: 1%;
+				}
 			}
 
 			& input {
@@ -137,6 +148,11 @@
 				&:focus-visible {
 					outline: none;
 				}
+
+				@media (width < 451px) {
+					width: 100%;
+					font-size: 0.7rem;
+				}
 			}
 
 			& select-filter {
@@ -150,6 +166,10 @@
 					border-bottom: 4px solid var(--bgContainer);
 					color: white;
 					padding-inline: 2rem;
+
+					@media (width < 451px) {
+						width: 100%;
+					}
 				}
 			}
 		}

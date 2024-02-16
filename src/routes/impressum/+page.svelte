@@ -54,9 +54,9 @@
 			font-size: 1.2rem;
 		}
 
-        & a {
-            color: var(--tertColor)
-        }
+		& a {
+			color: var(--tertColor);
+		}
 
 		& * {
 			margin: 1.5rem 0;

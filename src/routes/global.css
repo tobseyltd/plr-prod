@@ -38,6 +38,7 @@ body {
 }
 
 button {
+	width: 300px;
 	display: flex;
 	align-items: center;
 	padding: 0.6rem;
@@ -97,7 +98,7 @@ h3 {
 	&::after {
 		content: '';
 		position: absolute;
-		bottom: -15px;
+		bottom: -10px;
 		left: 0;
 		height: 7px;
 		width: 100%;

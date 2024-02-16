@@ -24,12 +24,9 @@
 				<img
 					src="./images/home-top-img.webp"
 					alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen"
-					width="823px"
-					height="666px"
 					srcset="
    					../../images/home-top-img.webp 823w"
-					sizes="(max-width: 480px) 823px,
-        			(min-width: 481px) 823px"
+					sizes="(max-width: 480px) 100vw, 823px"
 				/>
 			</right-side>
 		</hero-section>
@@ -113,13 +110,10 @@
 				<img
 					src="/images/web-development-service.svg"
 					loading="lazy"
-					width="550px"
-					height="550px"
 					alt="Web Entwicklung Illustration"
 					srcset="
    					../../images/web-development-service.svg 550w"
-					sizes="(max-width: 480px) 550px,
-        			(min-width: 481px) 550px"
+					sizes="(max-width: 480px) 100vw, 550px"
 				/>
 			</left-side>
 			<right-side>
@@ -276,13 +270,10 @@
 				<img
 					src="/images/man-launching-startup-blue.webp"
 					loading="lazy"
-					width="500px"
-					height="500px"
 					alt="Illustration eines Mannes, der eine Rakete in der Hand hält, bezeichnend für ein Startup Launch"
 					srcset="
    					../../images/man-launching-startup-blue.webp 500w"
-					sizes="(max-width: 480px) 500px,
-        			(min-width: 481px) 500px"
+					sizes="(max-width: 480px) 100vw, 500px"
 				/>
 				<background-triangle1 class="rotate"></background-triangle1>
 				<background-triangle2 class="rotate"></background-triangle2>
@@ -302,13 +293,11 @@
 
 		& hero-section {
 			container-type: inline-size;
-			width: var(--wrapperWidth);
 			display: flex;
 			margin: 0 auto;
 			background-position: top left;
 
-			@media (width < 451px) {
-				width: 94%;
+			@media (width < 769px) {
 				flex-direction: column-reverse;
 				gap: 2rem;
 			}
@@ -317,20 +306,25 @@
 				width: 35%;
 				position: relative;
 				display: flex;
-				flex-direction: column;
+				flex-wrap: wrap;
 				gap: 1rem;
 				align-self: center;
 				margin-right: 10%;
 
-				@media (width <451px) {
+				@media (width < 769px) {
 					width: 100%;
 					margin: 0 auto;
+					text-align: center;
+					justify-content: center;
 				}
 
 				& h1 {
 					@media (width <451px) {
 						font-size: 1.5rem;
 						line-height: 1.6rem;
+					}
+					@media (width <769px) {
+						width: 25ch;
 					}
 				}
 
@@ -344,17 +338,13 @@
 					}
 				}
 
-				& button {
-					width: 40%;
-				}
-
 				& a {
 					text-decoration: none;
 				}
 			}
 
 			& right-side {
-				@media (width <451px) {
+				@media (width < 769px) {
 					width: 100%;
 				}
 
@@ -370,24 +360,19 @@
 		display: block;
 		margin: 0 auto;
 
-		@media (width <451px) {
-			width: 94%;
-		}
-
 		& top-section {
 			display: flex;
 			justify-content: center;
 			margin: 0 auto;
-			width: var(--wrapperWidth);
 
-			@media (width < 451px) {
+			@media (width < 769px) {
 				width: 90%;
+				text-align: center;
 			}
 		}
 
 		& tech-grid {
 			container-type: inline-size;
-			width: var(--wrapperWidth);
 			padding: 2rem 0;
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
@@ -395,10 +380,14 @@
 			margin: 0 auto;
 			position: relative;
 
-			@media (width < 451px) {
+			@media (width < 769px) {
 				width: 100%;
 				grid-template-columns: 1fr;
 				padding-bottom: 0;
+			}
+
+			@media (width <769px) {
+				width: 80%;
 			}
 
 			& .style {
@@ -442,22 +431,16 @@
 		display: block;
 		margin: 0 auto;
 
-		@media (width <451px) {
-			width: 94%;
-		}
-
 		& info-section {
 			padding: 4rem 0;
 			display: flex;
 			margin: 0 auto;
-			width: var(--wrapperWidth);
 			position: relative;
 
-			@media (width < 451px) {
-				width: 90%;
-				flex-direction: column-reverse;
-				padding-top: 0;
-				padding-bottom: 2rem;
+			@media (width < 769px) {
+				flex-wrap: wrap;
+				gap: 2rem;
+				padding: 0;
 			}
 
 			& left-side {
@@ -466,7 +449,8 @@
 				padding: 1rem 0;
 				position: relative;
 
-				@media (width < 451px) {
+				@media (width < 769px) {
+					margin-top: 2rem;
 					width: 100%;
 					text-align: center;
 				}
@@ -520,10 +504,11 @@
 				padding: 3rem 0;
 				position: relative;
 
-				@media (width < 451px) {
+				@media (width < 769px) {
 					width: 100%;
 					margin: 0;
 					text-align: center;
+					margin-bottom: 2rem;
 				}
 
 				& h2 {
@@ -552,6 +537,10 @@
 
 				& button {
 					margin-top: 1rem;
+
+					@media (width < 769px) {
+						width: 100%;
+					}
 				}
 
 				& a {
@@ -570,17 +559,16 @@
 		margin: 0 auto;
 
 		@media (width <451px) {
-			width: 94%;
+			padding: 0;
 		}
 
 		& top-section {
+			width: 100%;
 			display: flex;
 			justify-content: center;
 			margin: 0 auto;
-			width: var(--wrapperWidth);
 
-			@media (width < 451px) {
-				width: 90%;
+			@media (width < 769px) {
 				margin-bottom: 1rem;
 			}
 		}
@@ -590,19 +578,21 @@
 			display: flex;
 			gap: 2rem;
 			margin: 0 auto;
-			width: var(--wrapperWidth);
 			position: relative;
 
-			@media (width < 451px) {
-				flex-direction: column;
+			@media (width < 769px) {
+				flex-wrap: wrap;
+				gap: 2.5rem;
 				width: 90%;
+				padding: 0;
+				margin-top: 1rem;
 			}
 
 			& section {
 				width: 33.33%;
 				text-align: center;
 
-				@media (width < 451px) {
+				@media (width < 769px) {
 					width: 100%;
 				}
 
@@ -616,31 +606,16 @@
 				}
 			}
 		}
-
-		& background-triangle1 {
-			/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-			right: 37rem;
-			top: 5rem;
-			opacity: 20%;
-		}
-
-		& background-triangle2 {
-			/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-			left: 20rem;
-			top: 25.5rem;
-			opacity: 40%;
-		}
-		& background-triangle3 {
-			/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-			right: 44rem;
-			bottom: 0;
-			opacity: 30%;
-		}
 	}
 
 	action-call-wrapper {
 		display: block;
 		margin: 3rem 0;
+
+		@media (width < 1025px) {
+			margin: 0;
+			padding-bottom: 2rem;
+		}
 
 		& action-call {
 			width: 50%;
@@ -655,6 +630,15 @@
 			border: 10px solid rgb(73, 66, 66);
 			border-style: double;
 
+			@media (width > 1024px) {
+				width: 90%;
+			}
+
+			@media (width < 1025px) {
+				width: 100%;
+				padding: 0 2rem;
+			}
+
 			@media (width < 451px) {
 				width: 90%;
 				flex-direction: column;
@@ -664,12 +648,28 @@
 			& left-side {
 				width: 70%;
 
+				@media (width < 451px) {
+					width: 90%;
+					flex-direction: column;
+					text-align: center;
+				}
+
 				& h2 {
 					width: 30ch;
 					/* text-align: center; */
 					text-shadow: 2px 2px #252746;
 					line-height: 1.7rem;
 					margin-bottom: 1rem;
+
+					@media (width < 1921px) {
+						width: 100%;
+					}
+
+					@media (width < 769px) {
+						width: 100%;
+						font-size: 1.3rem;
+						line-height: 1.2rem;
+					}
 
 					@media (width < 451px) {
 						width: 100%;
