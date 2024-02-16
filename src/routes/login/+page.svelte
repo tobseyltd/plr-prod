@@ -1,7 +1,8 @@
 <script lang="ts">
+	import type { PageData } from '../$types';
 	import LoginForm from './LoginForm.svelte';
 
-	export let data: LoginForm;
+	export let data: PageData & LoginForm;
 </script>
 
-<LoginForm data={data.loginForm} />
+<LoginForm supabase={data.supabase} data={data.loginForm} />

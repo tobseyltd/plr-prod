@@ -4,8 +4,10 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { type LoginSchema, loginSchema } from '../account/ZodSchema';
 	import SocialLogins from '../../lib/utils/SocialLogins.svelte';
+	import type { SupabaseClient } from '@supabase/supabase-js';
 
 	export let data: SuperValidated<Infer<LoginSchema>>;
+	export let supabase: SupabaseClient;
 	export let height: string = '60vh';
 
 	const { form, errors, enhance } = superForm(data, {
@@ -56,7 +58,7 @@
 			<a href="/neues-passwort">Passwort vergessen?</a>
 		</password-reset>
 		- oder -<br />
-		<SocialLogins buttonSlogan="einloggen" />
+		<SocialLogins {supabase} buttonSlogan="einloggen" />
 	</form>
 	- oder -<br />
 	<a href="/registrieren"><button class="button">Mitglied werden</button></a>

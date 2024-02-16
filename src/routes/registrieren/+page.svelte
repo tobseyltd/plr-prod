@@ -83,7 +83,7 @@
 			</dsgvo-box> -->
 		</form>
 		- oder -<br />
-		<SocialLogins />
+		<SocialLogins supabase={data.supabase} />
 	</register-form>
 </register-page-wrapper>
 
