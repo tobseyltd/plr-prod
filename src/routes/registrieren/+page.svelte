@@ -33,7 +33,7 @@
 <register-page-wrapper>
 	<register-form>
 		<h1>Registrieren</h1>
-		<form method="POST" use:enhance>
+		<form method="POST" action="?/registerWithEmail" use:enhance>
 			<input
 				type="text"
 				name="full_name"
@@ -82,13 +82,13 @@
 			</dsgvo-box> -->
 		</form>
 		- oder -<br />
-		<form id="github" method="POST" action="/?signupWithGithub">
+		<form id="github" method="POST" action="?/signupWithGithub">
 			<button type="submit"
 				><img width="40px" height="40px" src="/images/github-logo.svg" alt="" />Mit GitHub
 				registrieren</button
 			>
 		</form>
-		<form id="discord" method="POST" action="/?signupWithDiscord">
+		<form id="discord" method="POST" action="?/signupWithDiscord">
 			<button type="submit"
 				><img width="40px" height="40px" src="/images/discord-logo.svg" alt="" />Mit Discord
 				registrieren</button

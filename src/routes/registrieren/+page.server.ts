@@ -11,7 +11,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-	default: async (event) => {
+	registerWithEmail: async (event) => {
 		const form = await superValidate(event, zod(registerUserSchema));
 
 		if (!form.valid) {
