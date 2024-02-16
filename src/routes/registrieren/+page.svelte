@@ -5,16 +5,20 @@
 	import type { PageData } from './$types';
 	import { registerUserSchema } from './ZodSchemas';
 	import SocialLogins from '$lib/utils/SocialLogins.svelte';
+	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
 
 	export let data: PageData;
+
+	let loading: boolean = false;
+	$: loading;
 
 	const { form, errors, enhance } = superForm(data.registerForm, {
 		validators: zodClient(registerUserSchema),
 		resetForm: true,
 		onResult: ({ result }) => {
-			console.log(result);
+			loading = false;
 			switch (result.type) {
-				case 'success':
+				case 'redirect':
 					toast.success('Registriert! Bitte E-Mail bestätigen');
 					break;
 				case 'error':
@@ -29,6 +33,10 @@
 			return;
 		}
 	});
+
+	function handleLoadingSpinner() {
+		loading = true;
+	}
 </script>
 
 <register-page-wrapper>
@@ -75,7 +83,10 @@
 			{#if $errors.passwordConfirm}<span>{$errors.passwordConfirm}</span>
 			{/if}
 
-			<button type="submit">Registrieren</button>
+			<button on:click={handleLoadingSpinner} type="submit">
+				<LoadingSpinner {loading} /> <b>Registrieren</b>
+			</button>
+
 			<!-- 	<dsgvo-box>
 				<input type="checkbox" name="dsgvo" id="dsgvo" required />
 				<label for="dsgvo">Ich habe die Datenschutzbestimmungen gelesen und akzeptiere diese.</label
@@ -139,6 +150,10 @@
 
 				& button {
 					width: 350px;
+
+					& b {
+						padding: 0 0.5rem;
+					}
 				}
 			}
 

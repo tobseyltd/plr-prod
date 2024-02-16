@@ -5,7 +5,7 @@
 	import toast from 'svelte-french-toast';
 
 	export let buttonSlogan: string = 'registrieren';
-	export let supabase: SupabaseClient;
+	export let supabase: any;
 
 	const signInWithProvider = async (provider: Provider) => {
 		const { data, error } = await supabase.auth.signInWithOAuth({

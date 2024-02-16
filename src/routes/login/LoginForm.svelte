@@ -4,12 +4,12 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { type LoginSchema, loginSchema } from '../account/ZodSchema';
 	import SocialLogins from '../../lib/utils/SocialLogins.svelte';
-	import type { SupabaseClient } from '@supabase/supabase-js';
 
 	export let data: SuperValidated<Infer<LoginSchema>>;
-	export let supabase: SupabaseClient;
+	export let supabase: any;
 	export let height: string = '70vh';
 	export let borderTop: string = '1px solid #2d39db57';
+	export let register: boolean = false;
 
 	const { form, errors, enhance } = superForm(data, {
 		validators: zodClient(loginSchema),
@@ -61,8 +61,11 @@
 		- oder -<br />
 		<SocialLogins {supabase} buttonSlogan="einloggen" />
 	</form>
-	<!-- - oder -<br />
-	<a href="/registrieren"><button class="button">Mitglied werden</button></a> -->
+
+	{#if register}
+		- oder -<br />
+		<a href="/miglied-werden"><button class="button"> Mitglied werden</button></a>
+	{/if}
 </login-form>
 
 <style>
@@ -104,7 +107,7 @@
 
 			& password-reset {
 				width: 350px;
-				text-align: left;
+				text-align: center;
 				font-size: 0.8rem;
 				margin-top: 0.2rem;
 
