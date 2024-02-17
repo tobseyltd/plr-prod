@@ -55,10 +55,10 @@
 <style>
 	section {
 		position: relative;
-		visibility: hidden;
+		display: none;
 
 		@media (width < 769px) {
-			visibility: visible;
+			display: block;
 		}
 
 		& button {

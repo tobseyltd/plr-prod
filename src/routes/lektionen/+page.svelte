@@ -114,7 +114,6 @@
 			justify-content: space-between;
 			padding-bottom: 0.5rem;
 			border-bottom: 1px solid #2d39db57;
-			position: relative;
 
 			@media (width < 451px) {
 				flex-wrap: wrap;
@@ -123,9 +122,10 @@
 			}
 
 			& .search-icon {
+				display: none;
 				position: absolute;
-				top: 8%;
-				left: 1%;
+				top: 8.5%;
+				left: 20.5%;
 
 				@media (width < 451px) {
 					top: 3%;

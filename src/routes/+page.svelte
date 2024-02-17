@@ -291,7 +291,6 @@
 
 <style>
 	hero-wrapper {
-		container-type: inline-size;
 		margin: 3rem 0;
 		padding-bottom: 2rem;
 		width: 100%;
@@ -302,10 +301,8 @@
 		}
 
 		& hero-section {
-			container-type: inline-size;
 			display: flex;
 			margin: 0 auto;
-			background-position: top left;
 
 			@media (width < 769px) {
 				flex-direction: column-reverse;
@@ -360,7 +357,6 @@
 			& right-side {
 				@media (width < 769px) {
 					width: 100%;
-					overflow-y: visible;
 				}
 
 				& img {

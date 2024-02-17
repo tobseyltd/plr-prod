@@ -15,7 +15,7 @@
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
 
-	console.log(session)
+	console.log(session);
 
 	onMount(() => {
 		injectSpeedInsights();
@@ -90,7 +90,7 @@
 	</header-wrapper>
 </header>
 
-<main style="position: relative; z-index: -9;">
+<main>
 	<slot />
 </main>
 
@@ -329,6 +329,7 @@
 					width: 100%;
 					display: flex;
 					align-items: center;
+					justify-content: end;
 					gap: 2rem;
 
 					@media (width < 769px) {
