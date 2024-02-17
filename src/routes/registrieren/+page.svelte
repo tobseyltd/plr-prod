@@ -19,7 +19,9 @@
 			loading = false;
 			switch (result.type) {
 				case 'redirect':
-					toast.success('Registriert! Bitte E-Mail bestätigen');
+					toast.success('Bitte E-Mail Adresse bestätigen', {
+						style: 'font-size: 15px; width: auto;'
+					});
 					break;
 				case 'error':
 					toast.error('Error! Bitte versuche es später.');

@@ -2,7 +2,7 @@
 	import type { PageData } from '../$types';
 	import LoginForm from './LoginForm.svelte';
 
-	export let data: PageData & LoginForm;
+	export let data: any;
 </script>
 
 <LoginForm supabase={data.supabase} data={data.loginForm} />

@@ -70,7 +70,6 @@
 	account-page-wrapper {
 		display: block;
 		margin: 0 auto;
-		width: var(--wrapperWidth);
 		/* border-top: 1px solid #2d39db57; */
 		height: auto;
 
@@ -93,6 +92,27 @@
 				width: 60%;
 				padding: 2rem 5rem;
 				border-bottom: 1px solid #2d39db57;
+
+				@media (width > 768px) {
+					width: 70%;
+				}
+
+				@media (width < 769px) {
+					width: 100%;
+				}
+
+				@media (width < 451px) {
+					width: 100%;
+					padding: 2rem 0;
+				}
+
+				@media (width > 1339px) {
+					width: 50%;
+				}
+
+				@media (width > 1919px) {
+					width: 50%;
+				}
 
 				& h2 {
 					align-items: center;

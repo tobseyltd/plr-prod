@@ -8,11 +8,14 @@
 	import Tooltip from '$lib/utils/Tooltip.svelte';
 	import { Toaster } from 'svelte-french-toast';
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+	import DropdownMenu from '$lib/utils/DropdownMenu.svelte';
 
 	export let data: LayoutData;
 
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
+
+	console.log(session)
 
 	onMount(() => {
 		injectSpeedInsights();
@@ -82,11 +85,12 @@
 					{/if}
 				</ul>
 			</nav>
+			<DropdownMenu data={session} />
 		</right-side>
 	</header-wrapper>
 </header>
 
-<main>
+<main style="position: relative; z-index: -9;">
 	<slot />
 </main>
 
@@ -277,6 +281,7 @@
 			height: 8cqh;
 			margin: 0 auto;
 			display: flex;
+			position: relative;
 
 			@media (width < 450px) {
 				width: 90%;
@@ -318,15 +323,15 @@
 				width: 50%;
 				display: flex;
 				align-items: center;
+				justify-content: end;
 
 				& nav {
 					width: 100%;
 					display: flex;
 					align-items: center;
 					gap: 2rem;
-					justify-content: end;
 
-					@media (width < 450px) {
+					@media (width < 769px) {
 						display: none;
 					}
 

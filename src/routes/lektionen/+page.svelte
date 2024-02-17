@@ -108,7 +108,6 @@
 	lessons-section {
 		display: block;
 		margin: 0 auto;
-		width: var(--wrapperWidth);
 
 		& filter-section {
 			display: flex;

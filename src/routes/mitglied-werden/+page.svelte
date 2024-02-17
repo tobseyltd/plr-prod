@@ -101,7 +101,7 @@
 			</slogan-box>
 
 			<payment-icons>
-				<img src="/images/stripe.svg" width="50px" height="50px" alt="stripe payment icon" />
+				<!-- 	<img src="/images/stripe.svg" width="50px" height="50px" alt="stripe payment icon" /> -->
 				<img src="/images/paypal.svg" width="50px" height="50px" alt="paypal payment icon" />
 				<img src="/images/giropay.svg" width="50px" height="50px" alt="giropay payment icon" />
 				<img src="/images/klarna.svg" width="50px" height="50px" alt="klarna payment icon" />
@@ -209,7 +209,6 @@
 		flex-direction: column;
 		gap: 1.6rem;
 		margin: auto;
-		width: var(--wrapperWidth);
 		padding: 2rem 0;
 		justify-content: center;
 
@@ -280,9 +279,23 @@
 			margin-bottom: 2rem;
 			justify-content: center;
 
+			@media (width < 769px) {
+				gap: 1rem;
+			}
+
 			@media (width < 451px) {
 				flex-wrap: wrap;
+				gap: 2rem;
 			}
+
+			@media (width > 768px) {
+				gap: 1rem;
+			}
+			
+			@media (width > 1440px) {
+				gap: 2rem;
+			}
+
 
 			& subscription-card {
 				background-color: #3536508b;
@@ -294,18 +307,34 @@
 				box-shadow: 0px 20px 20px -17px var(--tertColor);
 				text-align: center;
 
+				@media (width < 769px) {
+					padding: 1.5rem;
+				}
+
 				@media (width < 451px) {
 					width: 100%;
+					padding: 1.5rem;
 				}
 
 				& ul {
 					margin: 2rem 0;
+					display: flex;
+					flex-direction: column;
+					text-align: left;
+
 					& li {
-						display: flex;
-						align-items: center;
-						gap: 0.7rem;
 						font-weight: 300;
 						color: var(--textAccent);
+						word-wrap: break-word;
+						float: left;
+						display: flex;
+						align-items: center;
+						gap: 0.8rem;
+
+						& span {
+							align-self: baseline;
+							padding-top: 0.1rem;
+						}
 					}
 				}
 
@@ -407,6 +436,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				flex-wrap: wrap;
 				gap: 0.5rem;
 			}
 		}

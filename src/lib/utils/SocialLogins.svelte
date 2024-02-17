@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { SupabaseClient, type Provider } from '@supabase/supabase-js';
+	import { type Provider } from '@supabase/supabase-js';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import toast from 'svelte-french-toast';
 

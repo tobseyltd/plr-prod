@@ -360,6 +360,7 @@
 			& right-side {
 				@media (width < 769px) {
 					width: 100%;
+					overflow-y: visible;
 				}
 
 				& img {
