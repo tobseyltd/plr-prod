@@ -950,7 +950,6 @@
 <style>
 	datenschutz-wrapper {
 		display: block;
-		width: 60%;
 		margin: 0 auto;
 
 		& * {

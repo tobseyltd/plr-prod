@@ -63,6 +63,7 @@
 
 		& button {
 			background-color: transparent;
+			border: none;
 		}
 
 		& menu-content-wrapper {

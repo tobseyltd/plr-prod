@@ -1,9 +1,8 @@
 <script lang="ts">
-	import toast from 'svelte-french-toast';
+	import toast, { Toast, Toaster } from 'svelte-french-toast';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import type { PageData } from '../../routes/$types';
-	import loginSchema from '../../routes/account/ZodSchema';
+	import { loginSchema } from '../../routes/account/ZodSchema';
 
 	export let data: any;
 	let { supabase, session, loginForm } = data;
@@ -14,14 +13,22 @@
 		resetForm: true,
 		onResult: ({ result }) => {
 			switch (result.type) {
-				case 'success':
-					toast.success('Success! Confirm your email to login.');
+				case 'redirect':
+					toast.success('Eingeloggt!', {
+						style: 'font-size: 12px; width: auto;'
+					});
 					break;
 				case 'error':
-					toast.error('Error creating your account!');
+					toast.error('Error creating your account!', {
+						position: 'bottom-right',
+						style: 'font-size: 15px; width: auto;'
+					});
 					break;
 				case 'failure':
-					toast.error('Check your details and try again!');
+					toast.error('Check your details and try again!', {
+						position: 'bottom-right',
+						style: 'font-size: 15px; width: auto;'
+					});
 					break;
 				default:
 					return;
@@ -31,6 +38,7 @@
 	});
 </script>
 
+<Toaster />
 <login-form>
 	<h1>Login</h1>
 	<form method="POST" action="/login" use:enhance>

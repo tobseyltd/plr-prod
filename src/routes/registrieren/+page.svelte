@@ -6,11 +6,11 @@
 	import { registerUserSchema } from './ZodSchemas';
 	import SocialLogins from '$lib/utils/SocialLogins.svelte';
 	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
+	import { toastSettings as options } from '$lib/toast-settings';
 
 	export let data: PageData;
 
 	let loading: boolean = false;
-	$: loading;
 
 	const { form, errors, enhance } = superForm(data.registerForm, {
 		validators: zodClient(registerUserSchema),
@@ -20,14 +20,21 @@
 			switch (result.type) {
 				case 'redirect':
 					toast.success('Bitte E-Mail Adresse bestätigen', {
+						position: 'bottom-right',
 						style: 'font-size: 15px; width: auto;'
 					});
 					break;
 				case 'error':
-					toast.error('Error! Bitte versuche es später.');
+					toast.error('Error! Bitte versuche es später.', {
+						position: 'bottom-right',
+						style: 'font-size: 15px; width: auto;'
+					});
 					break;
 				case 'failure':
-					toast.error('Check deine Angaben nochmals!');
+					toast.error('Check deine Angaben nochmals!', {
+						position: 'bottom-right',
+						style: 'font-size: 15px; width: auto;'
+					});
 					break;
 				default:
 					return;

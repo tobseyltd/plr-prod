@@ -229,7 +229,6 @@
 	agb-wrapper {
 		display: block;
 		margin: 0 auto;
-		width: 60%;
 
 		& h1 {
 			font-size: 1.5rem;
