@@ -3,8 +3,12 @@
 	import type { PageData } from './$types';
 	import { derived, writable } from 'svelte/store';
 	import MainLayout from '../../layouts/MainLayout.svelte';
+	import { onMount } from 'svelte';
 
 	export let data: PageData;
+
+	let lessonsPerPage = 5;
+	let lessonsToAddOnScroll = 5;
 
 	const searchInput = writable('');
 	const selectedCategory = writable('');
@@ -28,9 +32,25 @@
 				($selectedSkill === '' || lesson.skill === $selectedSkill)
 		);
 	}
+
+	function handleScroll() {
+		const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+		if (scrollTop + clientHeight >= scrollHeight - 100) {
+			lessonsPerPage += lessonsToAddOnScroll;
+		}
+	}
+
+	onMount(() => {
+		window.addEventListener('scroll', handleScroll);
+	});
 </script>
 
-<MainLayout title="Programmier / Coding Aufgaben & Challenges" description="" imageUrl="">
+<MainLayout
+	title="Programmier / Coding Aufgaben & Challenges"
+	description="Möchtest du Programmieren lernen oder dein Coding-Wissen erweitern? Tauche ein in die Welt des Codens mit unseren interaktiven Programmier-Challenges & Tutorials und lerne, wie du zum Meister des Codes wirst."
+	imageUrl=""
+>
 	<lessons-section>
 		<filter-section>
 			<Search size={20} strokeWidth={1.5} class="search-icon" />
@@ -40,7 +60,7 @@
 				type="search"
 				name=""
 				id=""
-				placeholder="Lektion suchen"
+				placeholder="Lektion suchen 🔎"
 			/>
 			<select-filter>
 				<select
@@ -72,13 +92,21 @@
 		</filter-section>
 
 		<grid-wrapper>
-			{#each $filteredLessons as lesson}
-				<lesson-card>
-					<img src={lesson.img} alt={lesson.title} loading="lazy" />
+			{#each $filteredLessons.slice(0, lessonsPerPage) as lesson}
+				<a href={`/lektionen/${lesson.ep}`}>
+					<lesson-card>
+						<img
+							width="640px"
+							height="480px"
+							src={lesson.img}
+							alt={lesson.title}
+							loading="lazy"
+							srcset={`${lesson.img} 640w`}
+							sizes="(max-width: 480px) 100vw, 640px"
+						/>
 
-					<a href={`/lektionen/ep-${lesson.ep}`}>
 						<lesson-info>
-							<h2>EP-{lesson.ep} : {lesson.title}</h2>
+							<h2>{lesson.ep?.toUpperCase()} : {lesson.title}</h2>
 							<info-box>
 								<likes-box>
 									<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
@@ -89,16 +117,16 @@
 									<span>( {lesson.comments?.length} )</span>
 								</comment-box>
 								<topic-box>
-									{lesson.skill}
+									<p>{lesson.skill}</p>
 								</topic-box>
 								<skill-box>
-									{lesson.topic}
+									<p>{lesson.topic}</p>
 								</skill-box>
 							</info-box>
-							<p>{lesson.description}</p>
+							<p>{lesson.description?.substring(0, 1000)}</p>
 						</lesson-info>
-					</a>
-				</lesson-card>
+					</lesson-card>
+				</a>
 			{/each}
 		</grid-wrapper>
 	</lessons-section>
@@ -142,7 +170,7 @@
 				border-bottom: 4px solid var(--bgContainer);
 				font-size: 0.6rem;
 				cursor: auto;
-				padding-inline-start: 2.2rem;
+				padding-inline: 0.6rem;
 
 				&:focus-visible {
 					outline: none;
@@ -177,73 +205,99 @@
 			display: grid;
 			grid-template-columns: 1fr;
 
-			& lesson-card {
-				display: flex;
-				gap: 10px;
-				overflow: hidden;
-				border-bottom: 1px solid #2d39db57;
-				padding: 1.5rem 0;
-
-				& img {
-					width: 30%;
-					height: auto;
-					border-radius: 20px;
-				}
-
-				& a {
-					text-decoration: none;
-					color: white;
-				}
-
-				& lesson-info {
-					& h2 {
-						margin-bottom: -0.5rem;
-					}
-
+			& a {
+				text-decoration: none;
+				color: white;
+				& lesson-card {
 					display: flex;
-					height: 100%;
-					flex-direction: column;
-					gap: 1rem;
-					padding: 1rem 1rem;
+					gap: 10px;
+					overflow: hidden;
+					border-bottom: 1px solid #2d39db57;
+					padding: 1.5rem 0;
 
-					& p {
-						color: var(--textAccent);
-						font-weight: 200;
+					@media (width < 769px) {
+						flex-direction: column;
 					}
 
-					& info-box {
-						display: flex;
-						gap: 2rem;
-					}
+					& img {
+						width: 30%;
+						height: auto;
+						border-radius: 20px;
 
-					& likes-box,
-					comment-box,
-					skill-box,
-					topic-box {
-						display: flex;
-						align-items: center;
-						gap: 0.4rem;
-						font-size: 0.75rem;
-
-						& .icon {
-							margin-top: -0.16rem;
+						@media (width < 769px) {
+							width: 100%;
 						}
 					}
 
-					& skill-box,
-					topic-box {
-						background-color: var(--bgContainer);
-						padding: 0.01rem 0.9rem;
-						border-radius: 20px;
-						width: auto;
-					}
+					& lesson-info {
+						display: flex;
+						height: 100%;
+						flex-direction: column;
+						gap: 1rem;
+						padding: 1rem 1rem;
 
-					& skill-box {
-						border: 1px solid var(--secondColor);
-					}
+						& h2 {
+							margin-bottom: -0.5rem;
+						}
 
-					& topic-box {
-						border: 1px solid var(--tertColor);
+						& p {
+							color: var(--textAccent);
+							font-weight: 200;
+
+							@media (width < 769px) {
+								text-align: justify;
+							}
+						}
+
+						& info-box {
+							display: flex;
+							gap: 2rem;
+
+							@media (width < 769px) {
+								order: 3;
+								flex-wrap: wrap;
+								justify-content: space-between;
+								gap: 0;
+							}
+						}
+
+						& likes-box,
+						comment-box,
+						skill-box,
+						topic-box {
+							width: auto;
+							display: flex;
+							align-items: center;
+							gap: 0.4rem;
+							font-size: 0.75rem;
+
+							& .icon {
+								margin-top: -0.16rem;
+							}
+						}
+
+						& skill-box,
+						topic-box {
+							background-color: var(--bgContainer);
+							padding: 0 0.9rem;
+							border-radius: 20px;
+							width: auto;
+							font-size: 0.7rem;
+							border-bottom: 2px solid var(--bgContainer);
+
+							& p {
+								padding-top: 0.1rem;
+								font-weight: 400;
+							}
+						}
+
+						/* & skill-box {
+							border: 1px solid var(--tertColor);
+						}
+
+						& topic-box {
+							border: 1px solid var(--secondColor);
+						} */
 					}
 				}
 			}

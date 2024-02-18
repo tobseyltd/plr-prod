@@ -143,7 +143,7 @@ export const actions: Actions = {
 
 		try {
 			const { data: billingCustomer, error: customerError } = await event.locals.supabase
-				.from('billing_customers')
+				.from('billing_subscriptions')
 				.select('id')
 				.eq('user_id', sessionId)
 				.limit(1)

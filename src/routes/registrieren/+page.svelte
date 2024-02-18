@@ -151,6 +151,11 @@
 					padding: 0 0.5rem;
 					border: none;
 					border-bottom: 3px solid var(--tertColor);
+					font-size: 0.7rem;
+
+					@media (width < 451px) {
+						width: 100%;
+					}
 				}
 
 				& span {
@@ -159,6 +164,10 @@
 
 				& button {
 					width: 350px;
+
+					@media (width < 451px) {
+						width: 100%;
+					}
 
 					& b {
 						padding: 0 0.5rem;

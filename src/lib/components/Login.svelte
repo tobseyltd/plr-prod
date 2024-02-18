@@ -1,5 +1,5 @@
 <script lang="ts">
-	import toast, { Toast, Toaster } from 'svelte-french-toast';
+	import toast from 'svelte-french-toast';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { loginSchema } from '../../routes/account/ZodSchema';
@@ -15,7 +15,7 @@
 			switch (result.type) {
 				case 'redirect':
 					toast.success('Eingeloggt!', {
-						style: 'font-size: 12px; width: auto;'
+						style: 'font-size: 15px; width: auto;'
 					});
 					break;
 				case 'error':
@@ -38,7 +38,6 @@
 	});
 </script>
 
-<Toaster />
 <login-form>
 	<h1>Login</h1>
 	<form method="POST" action="/login" use:enhance>

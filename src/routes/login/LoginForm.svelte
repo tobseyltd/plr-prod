@@ -10,10 +10,14 @@
 	export let height: string = '70vh';
 	export let borderTop: string = '1px solid #2d39db57';
 	export let register: boolean = false;
+	export let showHeader: boolean = true;
 
 	const { form, errors, enhance } = superForm(data, {
 		validators: zodClient(loginSchema),
 		resetForm: true,
+		onSubmit: (event) => {
+			event.action.searchParams.append('redirectedFrom', window.location.pathname);
+		},
 		onResult: ({ result }) => {
 			switch (result.type) {
 				case 'redirect':
@@ -34,8 +38,10 @@
 </script>
 
 <login-form style={`height: ${height}; border-top: ${borderTop};`}>
-	<h1>Login</h1>
-	<form method="POST" action="?/login" use:enhance>
+	{#if showHeader}
+		<h1>Login</h1>
+	{/if}
+	<form method="POST" action="/login?/login" use:enhance>
 		<input
 			type="email"
 			name="email"
@@ -95,6 +101,10 @@
 				padding: 0 0.5rem;
 				border: none;
 				border-bottom: 3px solid var(--tertColor);
+
+				@media (width < 451px) {
+					width: 100%;
+				}
 			}
 
 			& span {
@@ -103,6 +113,10 @@
 
 			& button {
 				width: 350px;
+
+				@media (width < 451px) {
+					width: 100%;
+				}
 			}
 
 			& password-reset {

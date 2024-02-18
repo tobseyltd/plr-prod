@@ -16,6 +16,7 @@ export const actions: Actions = {
 	login: async (event) => {
 		const redirectTo = event.url.searchParams.get('redirectedTo');
 		const provider = event.url.searchParams.get('provider') as Provider;
+		const redirectedFrom = event.url.searchParams.get('redirectedFrom');
 
 		if (provider) {
 			const { data: providerData, error: providerError } =
@@ -52,9 +53,11 @@ export const actions: Actions = {
 				});
 			}
 		}
+		if (redirectedFrom) {
+			redirect(302, redirectedFrom);
+		}
 
 		if (redirectTo) throw redirect(302, `/${redirectTo.slice(1)}`);
-
 		throw redirect(302, handleLoginRedirect(event));
 	}
 };

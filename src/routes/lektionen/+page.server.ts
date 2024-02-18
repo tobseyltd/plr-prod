@@ -5,7 +5,8 @@ export const load: PageServerLoad = async (event) => {
 	async function getLessons() {
 		const { data: lessons, error: dbError } = await event.locals.supabase
 			.from('lessons')
-			.select('*');
+			.select('*')
+			.order('created_at', { ascending: false });
 
 		if (dbError) {
 			throw error(500, 'Error fetching contacts, please try again later.');

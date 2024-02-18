@@ -15,8 +15,6 @@
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
 
-	console.log(session);
-
 	onMount(() => {
 		injectSpeedInsights();
 		const {
@@ -389,7 +387,7 @@
 	}
 
 	footer {
-		position: relative;
+		/* position: relative; */
 
 		& footer-wrapper {
 			display: block;
