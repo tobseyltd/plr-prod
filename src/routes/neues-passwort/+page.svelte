@@ -4,6 +4,7 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { emailSchema } from '../account/ZodSchema';
 	import type { PageData } from './$types';
+	import { toastSettings } from '$lib/toast-settings';
 
 	export let data: PageData;
 
@@ -12,14 +13,14 @@
 		resetForm: true,
 		onResult: ({ result }) => {
 			switch (result.type) {
-				case 'redirect':
-					toast.success('Ein Link wurde an deine E-Mail Adresse geschickt!');
+				case 'success':
+					toast.success('Link an E-Mail Adresse geschickt!', toastSettings);
 					break;
 				case 'error':
-					toast.error('Error! Versuche es später nochmal');
+					toast.error('Error! Versuche es später nochmal', toastSettings);
 					break;
 				case 'failure':
-					toast.error('Gib eine gültige E-Mail Adresse ein.');
+					toast.error('Gib eine gültige E-Mail Adresse ein.', toastSettings);
 					break;
 				default:
 					return;
@@ -31,7 +32,7 @@
 
 <password-reset-form>
 	<h1>Neues Passwort anfordern</h1>
-	<form method="POST" action="?/resetPassword" use:enhance>
+	<form method="POST" use:enhance>
 		<input
 			type="email"
 			name="email"

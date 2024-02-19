@@ -11,7 +11,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-	resetPassword: async (event) => {
+	default: async (event) => {
 		const form = await superValidate(event, zod(emailSchema));
 
 		if (!form.valid) {
@@ -28,6 +28,7 @@ export const actions: Actions = {
 		);
 
 		if (pwResetError) {
+			console.log(pwResetError.message);
 			throw error(500, pwResetError.message);
 		}
 	}

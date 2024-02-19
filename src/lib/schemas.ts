@@ -36,7 +36,7 @@ const stripeSubscriptionItemsSchema = z.object({
 	)
 });
 
-const unixTimestampToISOString = z.number().transform((n) => new Date(n * 1000).toISOString());
+export const unixTimestampToISOString = z.number().transform((n) => new Date(n * 1000).toISOString());
 
 export const stripeSubscriptionSchema = z
 	.object({

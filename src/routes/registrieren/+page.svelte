@@ -6,7 +6,7 @@
 	import { registerUserSchema } from './ZodSchemas';
 	import SocialLogins from '$lib/utils/SocialLogins.svelte';
 	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
-	import { toastSettings as options } from '$lib/toast-settings';
+	import { toastSettings } from '$lib/toast-settings';
 
 	export let data: PageData;
 
@@ -19,22 +19,13 @@
 			loading = false;
 			switch (result.type) {
 				case 'redirect':
-					toast.success('Bitte E-Mail Adresse bestätigen', {
-						position: 'bottom-right',
-						style: 'font-size: 15px; width: auto;'
-					});
+					toast.success('Bitte E-Mail Adresse bestätigen', toastSettings);
 					break;
 				case 'error':
-					toast.error('Error! Bitte versuche es später.', {
-						position: 'bottom-right',
-						style: 'font-size: 15px; width: auto;'
-					});
+					toast.error('Error! Bitte versuche es später.', toastSettings);
 					break;
 				case 'failure':
-					toast.error('Check deine Angaben nochmals!', {
-						position: 'bottom-right',
-						style: 'font-size: 15px; width: auto;'
-					});
+					toast.error('Check deine Angaben nochmals!', toastSettings);
 					break;
 				default:
 					return;

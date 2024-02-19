@@ -5,16 +5,51 @@
 	import Gist from '$lib/utils/Gist.svelte';
 	import { goto } from '$app/navigation';
 	import { ThumbsUp, MessageCircle, Paperclip } from 'lucide-svelte';
+	import Comments from './Comments.svelte';
+	import AddComment from './AddComment.svelte';
+	import Accordion from '$lib/utils/Accordion.svelte';
+	import toast from 'svelte-french-toast';
+	import { toastSettings } from '$lib/toast-settings';
 
 	export let data: PageData;
 
 	let showMemberContent = writable<boolean>(false);
 	let memberContentUnsubscribed = writable<boolean>(false);
+	let liked: boolean = false;
 
 	$: {
 		if (data.session) {
 			showMemberContent.set(data.tier === 'ABO' || data.paymentStatus === 'paid');
 			memberContentUnsubscribed.set(data.tier === 'Keine' || data.paymentStatus === undefined);
+		}
+	}
+
+	const channels = data.supabase
+		.channel('custom-update-channel')
+		.on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'lessons' }, (payload) => {
+			data.lesson.likes = payload.new.likes;
+		})
+		.subscribe();
+
+	async function handleLikeClick() {
+		liked = !liked;
+
+		if (liked) {
+			const { error: likeError } = await data.supabase
+				.from('lessons')
+				.update({ likes: data.lesson.likes! + 1 })
+				.eq('id', data.lesson.id)
+				.select();
+
+			if (likeError) toast.error(likeError.message, toastSettings);
+		} else {
+			const { error: dislikeError } = await data.supabase
+				.from('lessons')
+				.update({ likes: data.lesson.likes! - 1 })
+				.eq('id', data.lesson.id)
+				.select();
+
+			if (dislikeError) toast.error(dislikeError.message, toastSettings);
 		}
 	}
 </script>
@@ -23,14 +58,16 @@
 	<status-bar>
 		<button on:click={() => goto('/lektionen')}>Zurück</button>
 		<social-box>
-			<likes-box>
+			<likes-box tabindex="0" role="button" on:keydown={handleLikeClick} on:click={handleLikeClick}>
 				<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
 				<span>( {data.lesson.likes} )</span>
 			</likes-box>
-			<comment-box>
-				<MessageCircle size={20} strokeWidth={1.5} class="icon" />
-				<span>( {data.lesson.comments?.length} )</span>
-			</comment-box>
+			<a href="#kommentare">
+				<comment-box>
+					<MessageCircle size={20} strokeWidth={1.5} class="icon" />
+					<span>( {data.lesson.comments?.length} )</span>
+				</comment-box>
+			</a>
 		</social-box>
 	</status-bar>
 
@@ -76,6 +113,8 @@
 						<Gist gistUrl="https://gist.github.com/tobseyltd/2716b7cd45db9fc050c81a0bb3bc1015" />
 					</video-content>
 				{/if}
+				<!-- <AddComment {data} />
+				<Comments {data} /> -->
 			{/if}
 		</left-side>
 
@@ -95,6 +134,16 @@
 					>
 				</li>
 			</ul>
+			<Accordion>
+				<h3 slot="head">Kommentar verfassen</h3>
+				<AddComment slot="details" {data} />
+			</Accordion>
+			<Accordion>
+				<h2 slot="head" id="kommentare">
+					Kommentare <span>( {data.lesson.comments?.length} )</span>
+				</h2>
+				<Comments slot="details" {data} />
+			</Accordion>
 		</right-side>
 	</detail-page-content>
 
@@ -141,11 +190,21 @@
 				width: 100px;
 				background-color: transparent;
 				padding: 0;
+
+				&:hover {
+					border-color: var(--tertColor);
+				}
 			}
 
 			& social-box {
 				display: flex;
 				gap: 1rem;
+
+				& a {
+					text-decoration: none;
+					color: white;
+				}
+
 				& likes-box,
 				comment-box {
 					background-color: var(--bgContainer);
@@ -154,7 +213,13 @@
 					display: flex;
 					align-items: center;
 					gap: 0.4rem;
-					font-size: .8rem;;
+					font-size: 0.8rem;
+					cursor: pointer;
+					border-bottom: 2px solid #2d39db57;
+
+					&:hover {
+						border-color: var(--tertColor);
+					}
 
 					& span {
 						padding-top: 0.13rem;
@@ -173,7 +238,7 @@
 			}
 
 			& left-side {
-				width: 80%;
+				width: 60%;
 				position: relative;
 				margin-right: 50px;
 				margin-bottom: 2rem;
@@ -232,8 +297,8 @@
 			}
 
 			& right-side {
-				width: 20%;
-				padding-left: 20px;
+				width: 40%;
+				padding-left: 80px;
 
 				@media (width < 769px) {
 					width: 100%;

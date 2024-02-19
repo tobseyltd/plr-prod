@@ -128,6 +128,11 @@
 					</lesson-card>
 				</a>
 			{/each}
+			{#if $filteredLessons.length === 0}
+				<div style="display: flex; align-items: center; justify-content: center;">
+					<h4>Nichts gefunden</h4>
+				</div>
+			{/if}
 		</grid-wrapper>
 	</lessons-section>
 </MainLayout>
@@ -204,6 +209,7 @@
 		& grid-wrapper {
 			display: grid;
 			grid-template-columns: 1fr;
+			min-height: 60vh;
 
 			& a {
 				text-decoration: none;
@@ -291,13 +297,13 @@
 							}
 						}
 
-						/* & skill-box {
-							border: 1px solid var(--tertColor);
+						& skill-box {
+							border-bottom: 1px solid var(--tertColor);
 						}
 
 						& topic-box {
-							border: 1px solid var(--secondColor);
-						} */
+							border-bottom: 1px solid var(--secondColor);
+						}
 					}
 				}
 			}
