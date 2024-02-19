@@ -6,6 +6,7 @@
 
 	export let data: any;
 	let { supabase, lesson } = data;
+	$: ({ lesson } = data);
 
 	let liked: boolean = false;
 	let disliked: boolean = false;
@@ -25,17 +26,6 @@
 		return new Date(year, month - 1, day);
 	}
 
-	const channels = supabase
-		.channel('custom-update-channel')
-		.on(
-			'postgres_changes',
-			{ event: 'UPDATE', schema: 'public', table: 'lessons' },
-			(payload: any) => {
-				lesson.comments = payload.new.comments;
-			}
-		)
-		.subscribe();
-
 	async function handleLikeClick(index: number) {
 		liked = !liked;
 
@@ -44,6 +34,8 @@
 				i === index ? comment.likes++ : comment;
 				return comment;
 			});
+
+			lesson.comments = updatedComments;
 
 			const { error } = await supabase
 				.from('lessons')
@@ -57,6 +49,8 @@
 				i === index ? comment.likes-- : comment;
 				return comment;
 			});
+
+			lesson.comments = updatedComments;
 
 			const { error } = await supabase
 				.from('lessons')
@@ -77,6 +71,8 @@
 				return comment;
 			});
 
+			lesson.comments = updatedComments;
+
 			const { error } = await supabase
 				.from('lessons')
 				.update({ comments: updatedComments })
@@ -89,6 +85,8 @@
 				i === index ? comment.dislikes-- : comment;
 				return comment;
 			});
+
+			lesson.comments = updatedComments;
 
 			const { error } = await supabase
 				.from('lessons')
@@ -113,7 +111,6 @@
 </script>
 
 <comments-wrapper>
-	
 	{#if sortedComments.length !== 0}
 		{#each sortedComments.slice(0, showComments) as comment, index}
 			<comment-box>
@@ -145,7 +142,6 @@
 				</like-bar>
 			</comment-box>
 		{/each}
-
 	{/if}
 
 	{#if lesson.comments.length > initialCommentCount}

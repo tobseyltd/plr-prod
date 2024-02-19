@@ -84,7 +84,8 @@
 			{/if}
 
 			<button on:click={handleLoadingSpinner} type="submit">
-				<LoadingSpinner {loading} /> <b>Registrieren</b>
+				<b>Registrieren </b>
+				<LoadingSpinner {loading} />
 			</button>
 
 			<!-- 	<dsgvo-box>
@@ -161,7 +162,7 @@
 					}
 
 					& b {
-						padding: 0 0.5rem;
+						margin-right: 0.4rem;
 					}
 				}
 			}

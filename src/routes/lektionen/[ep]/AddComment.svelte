@@ -56,8 +56,8 @@
 				placeholder="Was gibts zu sagen?"
 			></textarea>
 		</newcomment-box>
-		<button on:click={handleNewComment} disabled={!inputValue}
-			><LoadingSpinner {loading} /> Kommentieren</button
+		<button on:click={handleNewComment} disabled={!inputValue}>
+			<span>Kommentieren</span> <LoadingSpinner {loading} /></button
 		>
 	{:else}
 		<p>Nur registrierte Nutzer können kommentieren</p>
@@ -91,6 +91,10 @@
 
 			&:disabled {
 				background-color: var(--bgContainer);
+			}
+
+			& span {
+				margin-right: 0.5rem;
 			}
 		}
 	}

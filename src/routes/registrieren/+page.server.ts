@@ -3,6 +3,7 @@ import { setError, superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
 import { registerUserSchema } from './ZodSchemas';
 import { fail, redirect } from '@sveltejs/kit';
+import { randomString } from '$lib/helpers';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -28,7 +29,7 @@ export const actions: Actions = {
 			password: form.data.password,
 			options: {
 				data: {
-					full_name: form.data.full_name ?? ''
+					full_name: form.data.full_name ?? `Mitglied #${randomString()}`
 				}
 			}
 		});

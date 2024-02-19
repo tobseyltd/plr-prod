@@ -26,9 +26,17 @@
 
 	const channels = data.supabase
 		.channel('custom-update-channel')
-		.on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'lessons' }, (payload) => {
-			data.lesson.likes = payload.new.likes;
-		})
+		.on(
+			'postgres_changes',
+			{ event: 'UPDATE', schema: 'public', table: 'lessons', filter: `id=eq.${data.lesson.id}` },
+			(payload) => {
+				console.log(payload);
+				if (payload.new.comments) {
+					data.lesson.comments = payload.new.comments;
+				}
+				data.lesson.likes = payload.new.likes;
+			}
+		)
 		.subscribe();
 
 	async function handleLikeClick() {
