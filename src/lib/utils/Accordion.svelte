@@ -31,7 +31,7 @@
 
 <style>
 	div.accordion {
-		margin: 1rem 0;
+		margin: 0;
 	}
 
 	div.header {
@@ -44,7 +44,7 @@
 		margin-right: 5px;
 	}
 
-	div[role="button"] {
+	div[role='button'] {
 		cursor: pointer;
 	}
 

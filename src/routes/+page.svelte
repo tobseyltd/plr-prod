@@ -24,8 +24,8 @@
 				<img
 					src="./images/home-top-img.webp"
 					alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen"
-					width="823"
-					height="666"
+					width="823px"
+					height="666px"
 					srcset="
    					../../images/home-top-img.webp 823w"
 					sizes="(max-width: 480px) 100vw, 823px"

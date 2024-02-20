@@ -30,7 +30,6 @@
 			'postgres_changes',
 			{ event: 'UPDATE', schema: 'public', table: 'lessons', filter: `id=eq.${data.lesson.id}` },
 			(payload) => {
-				console.log(payload);
 				if (payload.new.comments) {
 					data.lesson.comments = payload.new.comments;
 				}
@@ -133,12 +132,12 @@
 					<a
 						href="/files/Handbuch_Frontend_Entwickler_2_of_4_v2.pdf"
 						target="_blank"
-						rel="noopener noreferrer"><Paperclip strokeWidth={1.5} /> Handbuch</a
+						rel="noopener noreferrer"><Paperclip strokeWidth={1.5} size={20} /> Handbuch</a
 					>
 				</li>
 				<li>
 					<a href="/files/monaspace-v1.000.zip" target="_blank" rel="noopener noreferrer"
-						><Paperclip strokeWidth={1.5} /> <span>Schriftart</span></a
+						><Paperclip strokeWidth={1.5} size={20} /> <span>Schriftart</span></a
 					>
 				</li>
 			</ul>
@@ -147,9 +146,9 @@
 				<AddComment slot="details" {data} />
 			</Accordion>
 			<Accordion>
-				<h2 slot="head" id="kommentare">
+				<h3 slot="head" id="kommentare">
 					Kommentare <span>( {data.lesson.comments?.length} )</span>
-				</h2>
+				</h3>
 				<Comments slot="details" {data} />
 			</Accordion>
 		</right-side>
@@ -157,8 +156,8 @@
 
 	{#if $memberContentUnsubscribed}
 		<no-abo-logged
-			>Du hast kein aktives ABO. <a href="/mitglied-werden"><b>Jetzt kaufen!</b></a></no-abo-logged
-		>
+			>Du hast kein aktives ABO. <a href="/mitglied-werden"><b>Jetzt kaufen!</b></a>
+		</no-abo-logged>
 	{:else if !$showMemberContent}
 		<login-form>
 			<p>Einloggen oder <a href="/mitglied-werden">Mitglied werden</a></p>
@@ -182,7 +181,7 @@
 		overflow: hidden;
 
 		& p:not(video-content p) {
-			border-bottom: 1px solid #2d39db57;
+			border-bottom: 1px solid var(--blueAccent);
 			padding-bottom: 1rem;
 			color: var(--textAccent);
 		}
@@ -190,17 +189,18 @@
 		& status-bar {
 			display: flex;
 			justify-content: space-between;
-			border-bottom: 1px solid #2d39db57;
+			border-bottom: 1px solid var(--blueAccent);
 			margin-bottom: 1.5rem;
 			padding-bottom: 1rem;
 
 			& button {
 				width: 100px;
-				background-color: transparent;
+				background-color: var(--bgContainer);
+				border-bottom: 2px solid var(--blueAccent);
 				padding: 0;
 
 				&:hover {
-					border-color: var(--tertColor);
+					border: 2px solid var(--bgContainer);
 				}
 			}
 
@@ -223,9 +223,9 @@
 					gap: 0.4rem;
 					font-size: 0.8rem;
 					cursor: pointer;
-					border-bottom: 2px solid #2d39db57;
+					border-bottom: 2px solid var(--blueAccent);
 
-					&:hover {
+					&:hover:not(comment-box) {
 						border-color: var(--tertColor);
 					}
 
@@ -238,7 +238,6 @@
 
 		& detail-page-content {
 			margin-top: 1rem;
-			margin-bottom: 2rem;
 			display: flex;
 
 			@media (width < 769px) {
@@ -249,7 +248,7 @@
 				width: 60%;
 				position: relative;
 				margin-right: 50px;
-				margin-bottom: 2rem;
+				margin-bottom: 1rem;
 
 				@media (width < 769px) {
 					width: 100%;
@@ -273,7 +272,7 @@
 				}
 
 				& video-content {
-					border-bottom: 1px solid #2d39db57;
+					border-bottom: 1px solid var(--blueAccent);
 
 					& p {
 						padding: 1.5rem 2rem;
@@ -310,8 +309,12 @@
 
 				@media (width < 769px) {
 					width: 100%;
-					margin: 2rem 0;
-					/* display: none; */
+					margin: 1rem 0;
+					padding: 0;
+				}
+				& h3 span {
+					font-size: 1rem;
+					font-weight: 600;
 				}
 
 				& ul {
@@ -336,13 +339,24 @@
 			}
 		}
 
+		& no-abo-logged {
+			position: relative;
+
+			@media (width < 769px) {
+				margin-top: -1.8rem;
+			}
+		}
+
 		& login-form {
 			float: left;
-			margin-top: -1rem;
-			margin-bottom: 1rem;
+			margin-bottom: 2rem;
+
+			@media (width < 451px) {
+				width: 100%;
+			}
 
 			& p {
-				margin: 1rem 0;
+				margin: 2rem 0;
 
 				& a {
 					color: var(--secondColor);
@@ -352,15 +366,6 @@
 
 		& p a {
 			color: var(--secondColor);
-		}
-
-		& no-abo-logged {
-			position: absolute;
-			margin-top: -3rem;
-
-			@media (width < 769px) {
-				margin-top: -1.8rem;
-			}
 		}
 	}
 </style>

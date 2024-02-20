@@ -9,6 +9,7 @@
 	--wrapperWidth: 60cqi;
 	--mainBorder: 1px solid rgba(128, 128, 128, 0.305);
 	--textAccent: rgba(239, 238, 238, 0.732);
+	--blueAccent: #2d39db57;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -44,10 +45,10 @@ button {
 	border: none;
 	border-radius: 10px;
 	background-color: var(--tertColor);
+	border: var(--mainBorder);
 	font-size: 0.7rem;
 	font-weight: 700;
 	color: white;
-	border: var(--mainBorder);
 	cursor: pointer;
 	text-shadow: 0 0 5px black;
 	justify-content: center;

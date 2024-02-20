@@ -70,7 +70,6 @@
 	account-page-wrapper {
 		display: block;
 		margin: 0 auto;
-		/* border-top: 1px solid #2d39db57; */
 		height: auto;
 
 		& account-page-content {
@@ -91,7 +90,7 @@
 				text-align: start;
 				width: 60%;
 				padding: 2rem 5rem;
-				border-bottom: 1px solid #2d39db57;
+				border-bottom: 1px solid var(--blueAccent);
 
 				@media (width > 768px) {
 					width: 70%;

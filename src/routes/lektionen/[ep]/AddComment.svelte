@@ -2,6 +2,7 @@
 	import { toastSettings } from '$lib/toast-settings';
 	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
 	import toast from 'svelte-french-toast';
+	import { randomString } from '$lib/helpers';
 
 	export let data: any;
 
@@ -13,6 +14,7 @@
 	async function handleNewComment() {
 		loading = true;
 		const newComment = {
+			id: randomString(),
 			user_id: session.user.id,
 			full_name: session.user.user_metadata.full_name,
 			likes: 0,

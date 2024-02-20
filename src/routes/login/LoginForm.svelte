@@ -8,7 +8,7 @@
 	export let data: SuperValidated<Infer<LoginSchema>>;
 	export let supabase: any;
 	export let height: string = '70vh';
-	export let borderTop: string = '1px solid #2d39db57';
+	export let borderTop: string = '1px solid var(--blueAccent)';
 	export let register: boolean = false;
 	export let showHeader: boolean = true;
 
@@ -76,6 +76,7 @@
 
 <style>
 	login-form {
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
@@ -128,6 +129,10 @@
 				& a {
 					color: white;
 				}
+
+				@media (width < 451px) {
+					width: 100%;
+				}
 			}
 		}
 
@@ -135,6 +140,10 @@
 			display: inline-block;
 			width: 350px;
 			align-self: center;
+
+			@media (width < 451px) {
+				width: 100%;
+			}
 		}
 	}
 </style>

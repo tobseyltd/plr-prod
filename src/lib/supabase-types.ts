@@ -57,6 +57,57 @@ export interface Database {
 					}
 				];
 			};
+			billing_onetime: {
+				Row: {
+					created: string;
+					customer_id: string;
+					id: string;
+					metadata: Json | null;
+					mode: Database['public']['Enums']['payment_mode'];
+					payment_intent: string | null;
+					payment_status: Database['public']['Enums']['payment_status'];
+					status: Database['public']['Enums']['checkout_status'];
+					user_id: string;
+				};
+				Insert: {
+					created: string;
+					customer_id: string;
+					id: string;
+					metadata?: Json | null;
+					mode: Database['public']['Enums']['payment_mode'];
+					payment_intent?: string | null;
+					payment_status: Database['public']['Enums']['payment_status'];
+					status: Database['public']['Enums']['checkout_status'];
+					user_id: string;
+				};
+				Update: {
+					created?: string;
+					customer_id?: string;
+					id?: string;
+					metadata?: Json | null;
+					mode?: Database['public']['Enums']['payment_mode'];
+					payment_intent?: string | null;
+					payment_status?: Database['public']['Enums']['payment_status'];
+					status?: Database['public']['Enums']['checkout_status'];
+					user_id?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'billing_onetime_customer_id_fkey';
+						columns: ['customer_id'];
+						isOneToOne: false;
+						referencedRelation: 'billing_customers';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'billing_onetime_user_id_fkey';
+						columns: ['user_id'];
+						isOneToOne: false;
+						referencedRelation: 'users';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			billing_products: {
 				Row: {
 					active: boolean;
@@ -157,7 +208,7 @@ export interface Database {
 					files: Json[] | null;
 					id: string;
 					img: string | null;
-					likes: number | null;
+					likes: number;
 					skill: string | null;
 					title: string | null;
 					topic: string | null;
@@ -174,7 +225,7 @@ export interface Database {
 					files?: Json[] | null;
 					id?: string;
 					img?: string | null;
-					likes?: number | null;
+					likes?: number;
 					skill?: string | null;
 					title?: string | null;
 					topic?: string | null;
@@ -191,7 +242,7 @@ export interface Database {
 					files?: Json[] | null;
 					id?: string;
 					img?: string | null;
-					likes?: number | null;
+					likes?: number;
 					skill?: string | null;
 					title?: string | null;
 					topic?: string | null;
@@ -205,21 +256,18 @@ export interface Database {
 			profiles: {
 				Row: {
 					created_at: string;
-					email: string | null;
 					full_name: string | null;
 					id: string;
 					updated_at: string;
 				};
 				Insert: {
 					created_at?: string;
-					email?: string | null;
 					full_name?: string | null;
 					id: string;
 					updated_at?: string;
 				};
 				Update: {
 					created_at?: string;
-					email?: string | null;
 					full_name?: string | null;
 					id?: string;
 					updated_at?: string;
@@ -242,6 +290,9 @@ export interface Database {
 			[_ in never]: never;
 		};
 		Enums: {
+			checkout_status: 'complete' | 'open' | 'no_payment_required';
+			payment_mode: 'payment' | 'setup' | 'subscription';
+			payment_status: 'paid' | 'unpaid';
 			subscription_status:
 				| 'trialing'
 				| 'active'

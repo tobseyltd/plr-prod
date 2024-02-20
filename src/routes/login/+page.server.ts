@@ -54,10 +54,15 @@ export const actions: Actions = {
 			}
 		}
 		if (redirectedFrom) {
+			if (redirectedFrom === '/login') {
+				redirect(302, '/account');
+			}
 			redirect(302, redirectedFrom);
 		}
 
-		if (redirectTo) throw redirect(302, `/${redirectTo.slice(1)}`);
+		if (redirectTo) {
+			throw redirect(302, `/${redirectTo.slice(1)}`);
+		}
 		throw redirect(302, handleLoginRedirect(event));
 	}
 };

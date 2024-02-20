@@ -104,7 +104,7 @@
 		display: block;
 		margin: 0 auto;
 		width: var(--wrapperWidth);
-		border-top: 1px solid #2d39db57;
+		border-top: 1px solid var(--blueAccent);
 		height: 80vh;
 		width: 100%;
 

@@ -95,15 +95,17 @@
 			{#each $filteredLessons.slice(0, lessonsPerPage) as lesson}
 				<a href={`/lektionen/${lesson.ep}`}>
 					<lesson-card>
-						<img
-							width="640px"
-							height="480px"
-							src={lesson.img}
-							alt={lesson.title}
-							loading="lazy"
-							srcset={`${lesson.img} 640w`}
-							sizes="(max-width: 480px) 100vw, 640px"
-						/>
+						<left-side>
+							<img
+								width="640px"
+								height="480px"
+								src={lesson.img}
+								alt={lesson.title}
+								loading="lazy"
+								srcset={`${lesson.img} 640w`}
+								sizes="(max-width: 480px) 100vw, 640px"
+							/>
+						</left-side>
 
 						<lesson-info>
 							<h2>{lesson.ep?.toUpperCase()} : {lesson.title}</h2>
@@ -129,9 +131,9 @@
 				</a>
 			{/each}
 			{#if $filteredLessons.length === 0}
-				<div style="display: flex; align-items: center; justify-content: center;">
+				<not-found>
 					<h4>Nichts gefunden</h4>
-				</div>
+				</not-found>
 			{/if}
 		</grid-wrapper>
 	</lessons-section>
@@ -146,7 +148,7 @@
 			display: flex;
 			justify-content: space-between;
 			padding-bottom: 0.5rem;
-			border-bottom: 1px solid #2d39db57;
+			border-bottom: 1px solid var(--blueAccent);
 
 			@media (width < 451px) {
 				flex-wrap: wrap;
@@ -218,24 +220,30 @@
 					display: flex;
 					gap: 10px;
 					overflow: hidden;
-					border-bottom: 1px solid #2d39db57;
+					border-bottom: 1px solid var(--blueAccent);
 					padding: 1.5rem 0;
 
 					@media (width < 769px) {
 						flex-direction: column;
 					}
 
-					& img {
+					& left-side {
 						width: 30%;
-						height: auto;
-						border-radius: 20px;
 
-						@media (width < 769px) {
+						& img {
 							width: 100%;
+							height: auto;
+							border-radius: 20px;
+							/* object-fit: cover; */
+
+							@media (width < 769px) {
+								width: 100%;
+							}
 						}
 					}
 
 					& lesson-info {
+						width: 70%;
 						display: flex;
 						height: 100%;
 						flex-direction: column;
@@ -289,23 +297,21 @@
 							border-radius: 20px;
 							width: auto;
 							font-size: 0.7rem;
-							border-bottom: 2px solid var(--bgContainer);
+							border-bottom: 3px solid var(--blueAccent);
 
 							& p {
 								padding-top: 0.1rem;
 								font-weight: 400;
 							}
 						}
-
-						& skill-box {
-							border-bottom: 1px solid var(--tertColor);
-						}
-
-						& topic-box {
-							border-bottom: 1px solid var(--secondColor);
-						}
 					}
 				}
+			}
+
+			& not-found {
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 		}
 	}

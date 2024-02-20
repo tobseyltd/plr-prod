@@ -415,7 +415,7 @@
 			}
 
 			& top-footer {
-				border-top: 1px solid #2d39db57;
+				border-top: 1px solid var(--blueAccent);
 				padding: 2rem 0;
 				display: flex;
 				margin: 0 auto;
@@ -508,7 +508,7 @@
 				margin: 0 auto;
 				text-align: start;
 				padding: 3rem 0;
-				border-top: 1px solid #2d39db57;
+				border-top: 1px solid var(--blueAccent);
 				width: 100%;
 
 				@media (width < 769px) {
@@ -626,7 +626,7 @@
 			}
 
 			& bottom-footer {
-				border-top: 1px solid #2d39db57;
+				border-top: 1px solid var(--blueAccent);
 				padding: 1rem 0;
 				margin: 0 auto;
 				display: flex;
