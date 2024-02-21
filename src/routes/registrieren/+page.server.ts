@@ -35,15 +35,7 @@ export const actions: Actions = {
 		});
 
 		if (authError) {
-			if (authError.status === 409) {
-				return setError(
-					form,
-					'email',
-					authError.message === 'User already registered'
-						? 'Diese E-Mail Adresse gibt es bereits'
-						: authError.message
-				);
-			}
+			return setError(form, 'email', authError.message);
 		}
 
 		return {
