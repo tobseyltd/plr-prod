@@ -1,10 +1,6 @@
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
 	import type { PageData } from './$types';
-	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { loginSchema } from './ZodSchema';
-	import toast, { Toaster } from 'svelte-french-toast';
-	import { ReceiptEuro, UserRound, UserRoundX } from 'lucide-svelte';
+	import { ReceiptEuro, UserRoundX } from 'lucide-svelte';
 	import ProfileForm from './PofileForm.svelte';
 	import EmaiLForm from './EmaiLForm.svelte';
 	import PasswordForm from './PasswordForm.svelte';
@@ -23,7 +19,6 @@
 	}
 </script>
 
-<Toaster />
 <account-page-wrapper>
 	{#if data.session}
 		<account-page-content>

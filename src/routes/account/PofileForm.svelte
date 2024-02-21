@@ -3,7 +3,8 @@
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { profileSchema, type ProfileSchema } from './ZodSchema';
-	import toast, { Toaster } from 'svelte-french-toast';
+	import toast from 'svelte-french-toast';
+	import { toastSettings } from '$lib/toast-settings';
 
 	export let data: SuperValidated<Infer<ProfileSchema>>;
 
@@ -11,20 +12,13 @@
 		validators: zodClient(profileSchema),
 		onUpdated(event) {
 			$form.full_name = event.form.data.full_name;
-			
-			event.form.valid &&
-				toast.success('Name geändert!', {
-					position: 'bottom-right'
-				});
-			!event.form.valid && toast.error('Irgenwas lief schief!'),
-				{
-					position: 'bottom-right'
-				};
+
+			event.form.valid && toast.success('Name geändert!', toastSettings);
+			!event.form.valid && toast.error('Irgenwas lief schief!', toastSettings);
 		}
 	});
 </script>
 
-<Toaster />
 <personal-details>
 	<h2>
 		<span><CircleUserRound size={22} strokeWidth={1.5} /></span> Persönliche Details
