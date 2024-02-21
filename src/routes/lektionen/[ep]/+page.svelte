@@ -345,6 +345,9 @@
 			@media (width < 769px) {
 				margin-top: -1.8rem;
 			}
+			@media (width > 1920px) {
+				margin-top: -1.8rem;
+			}
 		}
 
 		& login-form {
@@ -355,8 +358,17 @@
 				width: 100%;
 			}
 
+			@media (width > 1920px) {
+				margin-top: -1.8rem;
+			}
+
 			& p {
 				margin: 2rem 0;
+
+				@media (width < 1441px) {
+					margin: 0;
+					margin-bottom: 3rem;
+				}
 
 				& a {
 					color: var(--secondColor);
