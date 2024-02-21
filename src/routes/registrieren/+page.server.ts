@@ -39,7 +39,7 @@ export const actions: Actions = {
 				form,
 				'email',
 				authError.message === 'User already registered'
-					? 'Diese E-Mail Adresse gibt es bereits'
+					? 'Diese E-Mail Adresse gibt es bereits.'
 					: authError.message
 			);
 		}
