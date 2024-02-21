@@ -2,7 +2,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { setError, superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
 import { registerUserSchema } from './ZodSchemas';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { randomString } from '$lib/helpers';
 
 export const load: PageServerLoad = async () => {
@@ -43,8 +43,6 @@ export const actions: Actions = {
 					: authError.message
 			);
 		}
-
-		redirect(302, '/account');
 
 		return {
 			form

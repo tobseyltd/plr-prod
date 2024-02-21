@@ -7,6 +7,7 @@
 	import SocialLogins from '$lib/utils/SocialLogins.svelte';
 	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
 	import { toastSettings } from '$lib/toast-settings';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -20,6 +21,7 @@
 			switch (result.type) {
 				case 'redirect':
 					toast.success('Bitte E-Mail Adresse bestätigen', toastSettings);
+					goto('/account');
 					break;
 				case 'error':
 					toast.error('Error! Bitte versuche es später.', toastSettings);
