@@ -35,6 +35,7 @@ export const actions: Actions = {
 		});
 
 		if (authError) {
+			console.log(authError.message);
 			return setError(
 				form,
 				'email',

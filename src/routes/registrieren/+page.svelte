@@ -21,6 +21,7 @@
 			switch (result.type) {
 				case 'redirect':
 					toast.success('Bitte E-Mail Adresse bestätigen', toastSettings);
+					goto('/account');
 					break;
 				case 'error':
 					toast.error('Error! Bitte versuche es später.', toastSettings);
