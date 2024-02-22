@@ -24,7 +24,7 @@ export const actions: Actions = {
 			return setError(form, 'passwordConfirm', 'Passwörter stimmen nicht überein!');
 		}
 
-		const { error: authError } = await event.locals.supabase.auth.signUp({
+		const { data, error: authError } = await event.locals.supabase.auth.signUp({
 			email: form.data.email,
 			password: form.data.password,
 			options: {
@@ -33,9 +33,15 @@ export const actions: Actions = {
 				}
 			}
 		});
-
+		console.log(data);
 		if (authError) {
-			return setError(form, 'email', authError.message);
+			return setError(
+				form,
+				'email',
+				authError.message === 'User already registered'
+					? 'Diese E-Mail Adresse gitb es bereits'
+					: authError.message
+			);
 		}
 
 		return {
