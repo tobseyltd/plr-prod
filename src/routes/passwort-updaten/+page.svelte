@@ -1,16 +1,20 @@
 <script lang="ts">
+	import { toastSettings } from '$lib/toast-settings';
+	import { AlertOctagon } from 'lucide-svelte';
 	import toast from 'svelte-french-toast';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { passwordSchema } from '../account/ZodSchema';
 	import type { PageData } from './$types';
-	import { toastSettings } from '$lib/toast-settings';
-	import { AlertOctagon } from 'lucide-svelte';
-	import { resetSchema } from './ZodSchemas';
+	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
-	const { form, errors, enhance } = superForm(data.resetForm, {
-		validators: zodClient(resetSchema),
+	let loading = false;
+
+	const { form, errors, enhance } = superForm(data.resetPwForm, {
+		validators: zodClient(passwordSchema),
 		resetForm: true,
 
 		onResult: ({ result }) => {
@@ -28,25 +32,48 @@
 					return;
 			}
 			return;
+		},
+		onUpdated() {
+			goto('/account');
 		}
 	});
+
+	function handleLoadingSpinner() {
+		loading = true;
+	}
 </script>
 
 <password-reset-form>
-	<h1>Neues Passwort anfordern</h1>
+	<h1>Neues Passwort setzen</h1>
 	<form method="POST" use:enhance>
 		<input
-			type="email"
-			name="email"
-			id="email"
-			placeholder="E-Mail Adresse"
-			autocomplete="email"
-			bind:value={$form.email}
+			type="password"
+			name="password"
+			id="password"
+			placeholder="Passwort"
+			autocomplete="new-password"
+			bind:value={$form.password}
 		/>
-		{#if $errors.email}<span><AlertOctagon color="yellow" size={20} /> {$errors.email}</span>
+		{#if $errors.password}<span><AlertOctagon color="yellow" size={20} /> {$errors.password}</span>
 		{/if}
 
-		<button type="submit">Passwort zurücksetzen</button>
+		<input
+			type="password"
+			name="passwordConfirm"
+			id="passwordConfirm"
+			placeholder="Passwort bestätigen"
+			autocomplete="new-password"
+			bind:value={$form.passwordConfirm}
+		/>
+		{#if $errors.passwordConfirm}<span
+				><AlertOctagon color="yellow" size={20} /> {$errors.passwordConfirm}</span
+			>
+		{/if}
+
+		<button on:click={handleLoadingSpinner} type="submit">
+			<b>Registrieren </b>
+			<LoadingSpinner {loading} />
+		</button>
 	</form>
 </password-reset-form>
 
@@ -82,6 +109,9 @@
 
 			& span {
 				color: red;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 
 			& button {

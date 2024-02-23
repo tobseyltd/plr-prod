@@ -2,17 +2,17 @@ import { superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
 import { error, fail } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
-import { emailSchema } from '../account/ZodSchema';
+import { resetSchema } from './ZodSchemas';
 
 export const load: PageServerLoad = async () => {
 	return {
-		resetForm: await superValidate(zod(emailSchema))
+		resetForm: await superValidate(zod(resetSchema))
 	};
 };
 
 export const actions: Actions = {
 	default: async (event) => {
-		const form = await superValidate(event, zod(emailSchema));
+		const form = await superValidate(event, zod(resetSchema));
 
 		if (!form.valid) {
 			return fail(400, {
@@ -23,7 +23,7 @@ export const actions: Actions = {
 		const { data, error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
 			form.data.email,
 			{
-				redirectTo: 'https://www.programmieren-lernen.rocks'
+				redirectTo: 'https://www.programmieren-lernen.rocks/passwort-updaten'
 			}
 		);
 		console.log(data);
