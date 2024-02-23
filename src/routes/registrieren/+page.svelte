@@ -9,6 +9,7 @@
 	import { toastSettings } from '$lib/toast-settings';
 	import { goto } from '$app/navigation';
 	import { AlertOctagon } from 'lucide-svelte';
+	import { redirect } from '@sveltejs/kit';
 
 	export let data: PageData;
 
@@ -20,11 +21,9 @@
 
 		onResult: ({ result }) => {
 			loading = false;
-
 			switch (result.type) {
 				case 'success':
 					toast.success('Bitte E-Mail Adresse bestätigen', toastSettings);
-					goto('/account');
 					break;
 				case 'error':
 					toast.error('Error! Bitte versuche es später.', toastSettings);
@@ -36,6 +35,10 @@
 					return;
 			}
 			return;
+		},
+		onUpdated() {
+			goto('/account');
+
 		}
 	});
 

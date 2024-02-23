@@ -20,13 +20,13 @@ export const actions: Actions = {
 			});
 		}
 
-		const { error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
+		const { data, error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
 			form.data.email,
 			{
 				redirectTo: '/account'
 			}
 		);
-
+		console.log(data);
 		if (pwResetError) {
 			console.log(pwResetError.message);
 			throw error(500, pwResetError.message);

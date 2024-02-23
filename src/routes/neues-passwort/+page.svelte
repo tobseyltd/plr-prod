@@ -5,12 +5,16 @@
 	import { emailSchema } from '../account/ZodSchema';
 	import type { PageData } from './$types';
 	import { toastSettings } from '$lib/toast-settings';
+	import { AlertOctagon } from 'lucide-svelte';
 
 	export let data: PageData;
 
 	const { form, errors, enhance } = superForm(data.resetForm, {
 		validators: zodClient(emailSchema),
 		resetForm: true,
+		onError(event) {
+			console.log(event);
+		},
 		onResult: ({ result }) => {
 			switch (result.type) {
 				case 'success':
@@ -38,9 +42,11 @@
 			name="email"
 			id="email"
 			placeholder="E-Mail Adresse"
+			autocomplete="email"
 			bind:value={$form.email}
 		/>
-		{#if $errors.email}<span>{$errors.email}</span>{/if}
+		{#if $errors.email}<span><AlertOctagon color="yellow" size={20} /> {$errors.email}</span>
+		{/if}
 
 		<button type="submit">Passwort zurücksetzen</button>
 	</form>

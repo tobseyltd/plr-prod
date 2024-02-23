@@ -42,7 +42,6 @@ export const actions: Actions = {
 					: authError.message
 			);
 		}
-
 		return {
 			form
 		};
