@@ -18,15 +18,16 @@
 		resetForm: true,
 
 		onResult: ({ result }) => {
+            loading = false;
 			switch (result.type) {
 				case 'success':
-					toast.success('Link an E-Mail Adresse geschickt!', toastSettings);
+					toast.success('Passwort geändert!', toastSettings);
 					break;
 				case 'error':
 					toast.error('Error! Versuche es später nochmal', toastSettings);
 					break;
 				case 'failure':
-					toast.error('Gib eine gültige E-Mail Adresse ein.', toastSettings);
+					toast.error('Gib ein gültiges Passwort ein..', toastSettings);
 					break;
 				default:
 					return;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CircleUserRound } from 'lucide-svelte';
+	import { AlertOctagon, CircleUserRound } from 'lucide-svelte';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { profileSchema, type ProfileSchema } from './ZodSchema';
@@ -8,6 +8,8 @@
 
 	export let data: SuperValidated<Infer<ProfileSchema>>;
 
+	let loading = false;
+
 	const { form, errors, enhance } = superForm(data, {
 		validators: zodClient(profileSchema),
 		onUpdated(event) {
@@ -15,8 +17,29 @@
 
 			event.form.valid && toast.success('Name geändert!', toastSettings);
 			!event.form.valid && toast.error('Irgenwas lief schief!', toastSettings);
+		},
+		onResult: ({ result }) => {
+			loading = false;
+			switch (result.type) {
+				case 'success':
+					toast.success('Nutzername geändert.', toastSettings);
+					break;
+				case 'error':
+					toast.error('Error! Versuche es später nochmal', toastSettings);
+					break;
+				case 'failure':
+					toast.error('Gig einen gültigen Nutzernamen ein.', toastSettings);
+					break;
+				default:
+					return;
+			}
+			return;
 		}
 	});
+
+	function handleLoadingSpinner() {
+		loading = true;
+	}
 </script>
 
 <personal-details>
@@ -31,9 +54,22 @@
 		<label for="full_name">
 			<span>Vor- & Nachame</span>
 			<input type="text" name="full_name" id="full_name" bind:value={$form.full_name} />
-			{#if $errors.full_name}<span>{$errors.full_name}</span>{/if}
+			{#if $errors.full_name}<span
+					><AlertOctagon color="yellow" size={20} /> {$errors.full_name}</span
+				>{/if}
 		</label>
 
-		<button type="submit">Name Ändern</button>
+		<button type="submit" on:click={handleLoadingSpinner}>Name Ändern</button>
 	</form>
 </personal-details>
+
+<style>
+	input {
+		& span {
+			color: red;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+</style>
