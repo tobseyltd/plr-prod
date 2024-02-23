@@ -52,18 +52,16 @@
 		<right-side>
 			<nav>
 				<ul>
-					<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 					<li>
 						<a href="/lektionen"> Lektionen </a>
 					</li>
-
 					<li>
 						<a href="/mitglied-werden"> Mitgliedschaft </a>
 					</li>
 					<li>
 						<Tooltip tooltip="Konto">
 							<span
-								role="link"
+								role="button"
 								tabindex="0"
 								aria-label="account"
 								on:keydown={() => goto('/account')}

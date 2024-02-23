@@ -7,7 +7,6 @@
 </tool-tip>
 
 <style>
-	/*This would all go into the global.css file*/
 	[data-tooltip] {
 		position: relative;
 		z-index: 2;

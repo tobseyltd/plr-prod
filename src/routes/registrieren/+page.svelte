@@ -8,6 +8,7 @@
 	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
 	import { toastSettings } from '$lib/toast-settings';
 	import { goto } from '$app/navigation';
+	import { AlertOctagon } from 'lucide-svelte';
 
 	export let data: PageData;
 
@@ -16,8 +17,10 @@
 	const { form, errors, enhance } = superForm(data.registerForm, {
 		validators: zodClient(registerUserSchema),
 		resetForm: true,
+
 		onResult: ({ result }) => {
 			loading = false;
+
 			switch (result.type) {
 				case 'redirect':
 					toast.success('Bitte E-Mail Adresse bestätigen', toastSettings);
@@ -49,10 +52,13 @@
 				type="text"
 				name="full_name"
 				id="full_name"
+				autocomplete="username"
 				placeholder="Name, z.B. Max Mustermann"
 				bind:value={$form.full_name}
 			/>
-			{#if $errors.full_name}<span>{$errors.full_name}</span>
+			{#if $errors.full_name}<span
+					><AlertOctagon color="yellow" size={20} /> {$errors.full_name}</span
+				>
 			{/if}
 
 			<input
@@ -60,9 +66,10 @@
 				name="email"
 				id="email"
 				placeholder="E-Mail Adresse"
+				autocomplete="email"
 				bind:value={$form.email}
 			/>
-			{#if $errors.email}<span>{$errors.email}</span>
+			{#if $errors.email}<span><AlertOctagon color="yellow" size={20} /> {$errors.email}</span>
 			{/if}
 
 			<input
@@ -70,9 +77,11 @@
 				name="password"
 				id="password"
 				placeholder="Passwort"
+				autocomplete="new-password"
 				bind:value={$form.password}
 			/>
-			{#if $errors.password}<span>{$errors.password}</span>
+			{#if $errors.password}<span><AlertOctagon color="yellow" size={20} /> {$errors.password}</span
+				>
 			{/if}
 
 			<input
@@ -80,9 +89,12 @@
 				name="passwordConfirm"
 				id="passwordConfirm"
 				placeholder="Passwort bestätigen"
+				autocomplete="new-password"
 				bind:value={$form.passwordConfirm}
 			/>
-			{#if $errors.passwordConfirm}<span>{$errors.passwordConfirm}</span>
+			{#if $errors.passwordConfirm}<span
+					><AlertOctagon color="yellow" size={20} /> {$errors.passwordConfirm}</span
+				>
 			{/if}
 
 			<button on:click={handleLoadingSpinner} type="submit">
@@ -103,16 +115,13 @@
 
 <style>
 	register-page-wrapper {
-		display: block;
-		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		width: var(--wrapperWidth);
 		border-top: 1px solid var(--blueAccent);
 		height: 80vh;
 		width: 100%;
-
-		@media (width < 769px) {
-			height: 50vh;
-		}
 
 		& account-page-content {
 			padding-top: 1rem;
@@ -128,7 +137,7 @@
 			flex-direction: column;
 			text-align: center;
 			gap: 1rem;
-			height: 100%;
+			height: auto;
 
 			& form {
 				width: 100%;
@@ -153,7 +162,13 @@
 				}
 
 				& span {
-					color: red;
+					color: rgb(222, 20, 20);
+					width: 100%;
+					font-size: 18px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					gap: 0.4rem;
 				}
 
 				& button {

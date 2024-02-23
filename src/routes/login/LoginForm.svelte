@@ -4,6 +4,8 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { type LoginSchema, loginSchema } from '../account/ZodSchema';
 	import SocialLogins from '../../lib/utils/SocialLogins.svelte';
+	import { AlertOctagon } from 'lucide-svelte';
+	import { toastSettings } from '$lib/toast-settings';
 
 	export let data: SuperValidated<Infer<LoginSchema>>;
 	export let supabase: any;
@@ -21,13 +23,13 @@
 		onResult: ({ result }) => {
 			switch (result.type) {
 				case 'redirect':
-					toast.success('Eingeloggt!');
+					toast.success('Eingeloggt!', toastSettings);
 					break;
 				case 'error':
-					toast.error('Error creating your account!');
+					toast.error('Das hat nicht geklappt!', toastSettings);
 					break;
 				case 'failure':
-					toast.error('Check your details and try again!');
+					toast.error('Überprüfe deine Angaben nochmal!', toastSettings);
 					break;
 				default:
 					return;
@@ -46,19 +48,31 @@
 			type="email"
 			name="email"
 			id="email"
+			autocomplete="email"
 			placeholder="E-Mail Adresse"
 			bind:value={$form.email}
 		/>
-		{#if $errors.email}<span>{$errors.email}</span>{/if}
+		{#if $errors.email}
+			<span>
+				<AlertOctagon color="yellow" size={20} />
+				{$errors.email}
+			</span>
+		{/if}
 
 		<input
 			type="password"
 			name="password"
 			id="password"
 			placeholder="Passwort"
+			autocomplete="current-password"
 			bind:value={$form.password}
 		/>
-		{#if $errors.password}<span>{$errors.password}</span>{/if}
+		{#if $errors.password}
+			<span>
+				<AlertOctagon color="yellow" size={20} />
+				{$errors.password}
+			</span>
+		{/if}
 
 		<button type="submit">Einloggen</button>
 		<password-reset>
@@ -109,7 +123,13 @@
 			}
 
 			& span {
-				color: red;
+				color: rgb(222, 20, 20);
+				width: 100%;
+				font-size: 18px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.3rem;
 			}
 
 			& button {
