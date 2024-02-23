@@ -22,7 +22,7 @@
 			loading = false;
 
 			switch (result.type) {
-				case 'redirect':
+				case 'success':
 					toast.success('Bitte E-Mail Adresse bestätigen', toastSettings);
 					goto('/account');
 					break;
@@ -102,11 +102,13 @@
 				<LoadingSpinner {loading} />
 			</button>
 
-			<!-- 	<dsgvo-box>
+			<dsgvo-box>
 				<input type="checkbox" name="dsgvo" id="dsgvo" required />
-				<label for="dsgvo">Ich habe die Datenschutzbestimmungen gelesen und akzeptiere diese.</label
+				<label for="dsgvo"
+					>Ich habe die <a href="/datenschutz">Datenschutzbestimmungen</a> gelesen und erkläre mich mit
+					diesen einverstanden.</label
 				>
-			</dsgvo-box> -->
+			</dsgvo-box>
 		</form>
 		- oder -<br />
 		<SocialLogins supabase={data.supabase} />
@@ -114,6 +116,10 @@
 </register-page-wrapper>
 
 <style>
+	:global(*) {
+		line-height: 1rem !important;
+	}
+
 	register-page-wrapper {
 		display: flex;
 		flex-direction: column;
@@ -180,6 +186,17 @@
 
 					& b {
 						margin-right: 0.4rem;
+					}
+				}
+
+				& dsgvo-box {
+					max-width: 350px;
+					text-align: left;
+					font-size: 15.5px;
+					margin: 0.3rem 0;
+
+					& a {
+						color: var(--tertColor);
 					}
 				}
 			}

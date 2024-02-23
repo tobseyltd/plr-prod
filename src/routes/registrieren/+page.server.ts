@@ -33,7 +33,6 @@ export const actions: Actions = {
 				}
 			}
 		});
-		console.log(authError);
 		if (authError) {
 			return setError(
 				form,
