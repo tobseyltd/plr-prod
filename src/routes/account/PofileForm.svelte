@@ -14,8 +14,6 @@
 		validators: zodClient(profileSchema),
 		onUpdated(event) {
 			$form.full_name = event.form.data.full_name;
-
-		
 		},
 		onResult: ({ result }) => {
 			loading = false;

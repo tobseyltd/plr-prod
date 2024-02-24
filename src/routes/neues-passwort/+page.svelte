@@ -42,7 +42,7 @@
 <password-reset-form>
 	<h1>Neues Passwort anfordern</h1>
 
-	<form method="POST">
+	<form method="POST" use:enhance>
 		<input
 			type="email"
 			name="email"
