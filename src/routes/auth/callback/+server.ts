@@ -14,8 +14,6 @@ export const GET = async (event) => {
 		if (!error) {
 			throw redirect(303, `/${next.slice(1)}`);
 		}
-
-		redirect(308, '/account');
 	}
 
 	// return the user to an error page with instructions

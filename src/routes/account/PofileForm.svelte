@@ -62,3 +62,12 @@
 		</button>
 	</form>
 </personal-details>
+
+<style>
+	.error {
+		color: red;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+</style>

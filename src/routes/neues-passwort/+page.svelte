@@ -40,7 +40,7 @@
 </script>
 
 <password-reset-form>
-	<h1>Neues Passwort anfordern</h1>
+	<h1>Magic Link anfordern</h1>
 
 	<form method="POST" use:enhance>
 		<input
@@ -60,7 +60,7 @@
 		{/if}
 
 		<button type="submit" on:click={handleLoadingSpinner}>
-			<LoadingSpinner {loading} /> Passwort zurücksetzen
+			<LoadingSpinner {loading} /> Absenden
 		</button>
 	</form>
 </password-reset-form>

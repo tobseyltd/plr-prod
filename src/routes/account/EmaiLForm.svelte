@@ -64,12 +64,10 @@
 </email-details>
 
 <style>
-	input {
-		& span {
-			color: red;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
+	.error {
+		color: red;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

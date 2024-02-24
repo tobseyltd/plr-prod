@@ -20,7 +20,7 @@ export const actions: Actions = {
 			});
 		}
 
-		const { error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
+		/* const { error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
 			form.data.email,
 			{
 				redirectTo: 'https://www.programmieren-lernen.rocks/passwort-updaten'
@@ -29,6 +29,18 @@ export const actions: Actions = {
 
 		if (pwResetError) {
 			throw error(500, pwResetError.message);
+		} */
+
+		const { error: magicLinkError } = await event.locals.supabase.auth.signInWithOtp({
+			email: form.data.email,
+			options: {
+				shouldCreateUser: false,
+				emailRedirectTo: 'https:/www..programmieren-lernen.rocks/account'
+			}
+		});
+
+		if (magicLinkError) {
+			throw error(500, magicLinkError.message);
 		}
 
 		return { form };
