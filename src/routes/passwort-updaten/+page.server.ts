@@ -24,14 +24,15 @@ export const actions: Actions = {
 			return setError(form, 'passwordConfirm', 'Passwörter stimmen nicht überein!');
 		}
 
-		const { data, error: PasswordError } = await event.locals.supabase.auth.updateUser({
+		const { error: PasswordError } = await event.locals.supabase.auth.updateUser({
 			password: form.data.passwordConfirm
 		});
 
-		console.log(data);
 		if (PasswordError) {
 			console.log(PasswordError.message);
 			throw error(500, PasswordError.message);
 		}
+
+		return { form };
 	}
 };

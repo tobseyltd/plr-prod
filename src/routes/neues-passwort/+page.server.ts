@@ -3,7 +3,6 @@ import type { Actions, PageServerLoad } from './$types';
 import { error, fail } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
 import { resetSchema } from './ZodSchemas';
-import { supabaseAdmin } from '$lib/server/supabase-admin';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -21,11 +20,20 @@ export const actions: Actions = {
 			});
 		}
 
-		const { error: pwResetError } = await supabaseAdmin.auth.resetPasswordForEmail(form.data.email);
+		console.log(form);
+
+		const { error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
+			form.data.email,
+			{
+				redirectTo: '/passwort-updaten'
+			}
+		);
 
 		if (pwResetError) {
 			console.log(pwResetError.message);
 			throw error(500, pwResetError.message);
 		}
+
+		return { form };
 	}
 };
