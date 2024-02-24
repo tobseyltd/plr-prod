@@ -15,8 +15,7 @@
 		onUpdated(event) {
 			$form.full_name = event.form.data.full_name;
 
-			event.form.valid && toast.success('Name geändert!', toastSettings);
-			!event.form.valid && toast.error('Irgenwas lief schief!', toastSettings);
+		
 		},
 		onResult: ({ result }) => {
 			loading = false;

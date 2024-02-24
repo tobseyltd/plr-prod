@@ -12,12 +12,14 @@
 
 	const { form, errors, enhance } = superForm(data, {
 		validators: zodClient(emailSchema),
-
+		onUpdated(event) {
+			$form.email = event.form.data.email;
+		},
 		onResult: ({ result }) => {
 			loading = false;
 			switch (result.type) {
 				case 'success':
-					toast.success('E-Mail Adresse geändert.', toastSettings);
+					toast.success('Neue E-Mail Adresse bestätigen', toastSettings);
 					break;
 				case 'error':
 					toast.error('Error! Versuche es später nochmal', toastSettings);
