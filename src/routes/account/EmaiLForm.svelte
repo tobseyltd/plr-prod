@@ -50,7 +50,7 @@
 			<input type="text" name="email" id="email" bind:value={$form.email} />
 
 			{#if $errors.email}
-				<span>
+				<span class="error">
 					<AlertOctagon color="yellow" size={20} />
 					{$errors.email}
 				</span>

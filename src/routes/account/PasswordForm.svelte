@@ -46,7 +46,7 @@
 	<form action="?/updatePassword" method="POST" use:enhance>
 		<label for="password">
 			<span>Neues Passwort</span>
-			
+
 			<input
 				autocomplete="current-password"
 				type="password"
@@ -57,7 +57,7 @@
 			/>
 
 			{#if $errors.password}
-				<span>
+				<span class="error">
 					<AlertOctagon color="yellow" size={20} />
 					{$errors.password}
 				</span>

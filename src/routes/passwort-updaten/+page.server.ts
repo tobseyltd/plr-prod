@@ -4,7 +4,13 @@ import { error, fail, redirect } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
 import { passwordSchema } from '../account/ZodSchema';
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async (event) => {
+	const session = await event.locals.getSession();
+
+	if (!session) {
+		redirect(308, '/neues-passwort');
+	}
+
 	return {
 		resetPwForm: await superValidate(zod(passwordSchema))
 	};
@@ -12,12 +18,6 @@ export const load: PageServerLoad = async () => {
 
 export const actions: Actions = {
 	default: async (event) => {
-		const session = await event.locals.getSession();
-
-		if (!session) {
-			redirect(308, '/neues-passwort');
-		}
-
 		const form = await superValidate(event, zod(passwordSchema));
 
 		if (!form.valid) {

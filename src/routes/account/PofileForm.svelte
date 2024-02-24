@@ -50,7 +50,7 @@
 
 			<input type="text" name="full_name" id="full_name" bind:value={$form.full_name} />
 			{#if $errors.full_name}
-				<span>
+				<span class="error">
 					<AlertOctagon color="yellow" size={20} />
 					{$errors.full_name}
 				</span>
@@ -62,14 +62,3 @@
 		</button>
 	</form>
 </personal-details>
-
-<style>
-	input {
-		& span {
-			color: red;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-	}
-</style>
