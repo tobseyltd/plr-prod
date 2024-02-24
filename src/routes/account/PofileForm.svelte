@@ -5,9 +5,9 @@
 	import { profileSchema, type ProfileSchema } from './ZodSchema';
 	import toast from 'svelte-french-toast';
 	import { toastSettings } from '$lib/toast-settings';
+	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
 
 	export let data: SuperValidated<Infer<ProfileSchema>>;
-
 	let loading = false;
 
 	const { form, errors, enhance } = superForm(data, {
@@ -43,23 +43,26 @@
 </script>
 
 <personal-details>
-	<h2>
-		<span><CircleUserRound size={22} strokeWidth={1.5} /></span> Persönliche Details
-	</h2>
-
+	<h2><span><CircleUserRound size={22} strokeWidth={1.5} /></span> Persönliche Details</h2>
 	<p>Ändere deine persönlichen Account-Details</p>
 	<br />
 
 	<form action="?/updateProfile" method="POST" use:enhance>
 		<label for="full_name">
 			<span>Vor- & Nachame</span>
+
 			<input type="text" name="full_name" id="full_name" bind:value={$form.full_name} />
-			{#if $errors.full_name}<span
-					><AlertOctagon color="yellow" size={20} /> {$errors.full_name}</span
-				>{/if}
+			{#if $errors.full_name}
+				<span>
+					<AlertOctagon color="yellow" size={20} />
+					{$errors.full_name}
+				</span>
+			{/if}
 		</label>
 
-		<button type="submit" on:click={handleLoadingSpinner}>Name Ändern</button>
+		<button type="submit" on:click={handleLoadingSpinner}>
+			<LoadingSpinner {loading} /> Name Ändern
+		</button>
 	</form>
 </personal-details>
 

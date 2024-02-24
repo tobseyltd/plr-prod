@@ -9,10 +9,8 @@
 	import { toastSettings } from '$lib/toast-settings';
 	import { goto } from '$app/navigation';
 	import { AlertOctagon } from 'lucide-svelte';
-	import { redirect } from '@sveltejs/kit';
 
 	export let data: PageData;
-
 	let loading: boolean = false;
 
 	const { form, errors, enhance } = superForm(data.registerForm, {
@@ -38,7 +36,6 @@
 		},
 		onUpdated() {
 			goto('/account');
-
 		}
 	});
 
@@ -50,6 +47,7 @@
 <register-page-wrapper>
 	<register-form>
 		<h1>Registrieren</h1>
+
 		<form method="POST" use:enhance>
 			<input
 				type="text"
@@ -59,9 +57,12 @@
 				placeholder="Name, z.B. Max Mustermann"
 				bind:value={$form.full_name}
 			/>
-			{#if $errors.full_name}<span
-					><AlertOctagon color="yellow" size={20} /> {$errors.full_name}</span
-				>
+
+			{#if $errors.full_name}
+				<span>
+					<AlertOctagon color="yellow" size={20} />
+					{$errors.full_name}
+				</span>
 			{/if}
 
 			<input
@@ -72,7 +73,12 @@
 				autocomplete="email"
 				bind:value={$form.email}
 			/>
-			{#if $errors.email}<span><AlertOctagon color="yellow" size={20} /> {$errors.email}</span>
+
+			{#if $errors.email}
+				<span>
+					<AlertOctagon color="yellow" size={20} />
+					{$errors.email}
+				</span>
 			{/if}
 
 			<input
@@ -83,8 +89,12 @@
 				autocomplete="new-password"
 				bind:value={$form.password}
 			/>
-			{#if $errors.password}<span><AlertOctagon color="yellow" size={20} /> {$errors.password}</span
-				>
+
+			{#if $errors.password}
+				<span>
+					<AlertOctagon color="yellow" size={20} />
+					{$errors.password}
+				</span>
 			{/if}
 
 			<input
@@ -95,9 +105,12 @@
 				autocomplete="new-password"
 				bind:value={$form.passwordConfirm}
 			/>
-			{#if $errors.passwordConfirm}<span
-					><AlertOctagon color="yellow" size={20} /> {$errors.passwordConfirm}</span
-				>
+
+			{#if $errors.passwordConfirm}
+				<span>
+					<AlertOctagon color="yellow" size={20} />
+					{$errors.passwordConfirm}
+				</span>
 			{/if}
 
 			<button on:click={handleLoadingSpinner} type="submit">
@@ -107,12 +120,13 @@
 
 			<dsgvo-box>
 				<input type="checkbox" name="dsgvo" id="dsgvo" required />
-				<label for="dsgvo"
-					>Ich habe die <a href="/datenschutz">Datenschutzbestimmungen</a> gelesen und erkläre mich mit
-					diesen einverstanden.</label
-				>
+				<label for="dsgvo">
+					Ich habe die <a href="/datenschutz">Datenschutzbestimmungen</a> gelesen und erkläre mich mit
+					diesen einverstanden.
+				</label>
 			</dsgvo-box>
 		</form>
+		
 		- oder -<br />
 		<SocialLogins supabase={data.supabase} />
 	</register-form>

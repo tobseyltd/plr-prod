@@ -60,21 +60,18 @@
 					</li>
 					<li>
 						<Tooltip tooltip="Konto">
-							<span
-								role="button"
-								tabindex="0"
-								aria-label="account"
-								on:keydown={() => goto('/account')}
-								on:click={() => goto('/account')}
-								><CircleUserRound size={30} strokeWidth={1.2} style="cursor: pointer" /></span
-							>
+							<button aria-label="Go to Account" on:click={() => goto('/account')}
+								><CircleUserRound size={30} strokeWidth={1.2} style="cursor: pointer" />
+							</button>
 						</Tooltip>
 					</li>
 					{#if session}
 						<li>
 							<form action="/logout" method="POST">
 								<Tooltip tooltip="Logout">
-									<button class="logout" type="submit"><LogOut size={20} /></button>
+									<button aria-label="Logout" class="logout" type="submit"
+										><LogOut size={20} /></button
+									>
 								</Tooltip>
 							</form>
 						</li>
@@ -325,9 +322,20 @@
 
 						& li {
 							margin: 0;
+
 							& a {
 								text-decoration: none;
 								color: white;
+							}
+
+							& [data-tooltip]:before {
+								bottom: -120%;
+								left: 50%;
+								margin-bottom: 5px;
+							}
+
+							& [data-tooltip]:after {
+								display: none;
 							}
 
 							& span {
@@ -337,6 +345,14 @@
 
 							& button {
 								padding: 0.3rem 0.5rem;
+								margin-top: -0.1rem;
+
+								&:not(.logout) {
+									background-color: transparent;
+									border: none;
+									padding: 0.3rem 0rem;
+									margin-top: -0.2rem;
+								}
 							}
 						}
 					}

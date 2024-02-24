@@ -6,14 +6,17 @@
 	import { toastSettings } from '$lib/toast-settings';
 	import { AlertOctagon } from 'lucide-svelte';
 	import { resetSchema } from './ZodSchemas';
+	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
 
 	export let data: PageData;
+	let loading = false;
 
 	const { form, errors, enhance } = superForm(data.resetForm, {
 		validators: zodClient(resetSchema),
 		resetForm: true,
 
 		onResult: ({ result }) => {
+			loading = false;
 			switch (result.type) {
 				case 'success':
 					toast.success('Link an E-Mail Adresse geschickt!', toastSettings);
@@ -30,10 +33,15 @@
 			return;
 		}
 	});
+
+	function handleLoadingSpinner() {
+		loading = true;
+	}
 </script>
 
 <password-reset-form>
 	<h1>Neues Passwort anfordern</h1>
+
 	<form method="POST">
 		<input
 			type="email"
@@ -43,10 +51,17 @@
 			autocomplete="email"
 			bind:value={$form.email}
 		/>
-		{#if $errors.email}<span><AlertOctagon color="yellow" size={20} /> {$errors.email}</span>
+
+		{#if $errors.email}
+			<span>
+				<AlertOctagon color="yellow" size={20} />
+				{$errors.email}
+			</span>
 		{/if}
 
-		<button type="submit">Passwort zurücksetzen</button>
+		<button type="submit" on:click={handleLoadingSpinner}>
+			<LoadingSpinner {loading} /> Passwort zurücksetzen
+		</button>
 	</form>
 </password-reset-form>
 

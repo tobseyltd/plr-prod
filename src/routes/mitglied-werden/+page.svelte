@@ -7,10 +7,11 @@
 	import MainLayout from '../../layouts/MainLayout.svelte';
 
 	export let data: PageData;
-	const activeButton = writable(0);
 
 	let { session, prices, interval, tier, paymentStatus } = data;
 	$: ({ prices, interval } = data);
+
+	const activeButton = writable(0);
 
 	const buttons = [
 		{ label: 'Monatlich', path: '/mitglied-werden', type: 'first' },
@@ -33,10 +34,10 @@
 			<h1>All-Access Mitgliedschaft</h1>
 			<p>
 				Werde ein gefragter Entwickler mit dem Zugriff auf alle Coding Lektionen, Challenges,
-				Experten Blog und Community. Wachse an deinen Aufgaben und bekomme einen <span
-					class="underline">Job in der IT</span
-				> ohne Probleme.
+				Experten Blog und Community. Wachse an deinen Aufgaben und bekomme einen
+				<span class="underline">Job in der IT </span> ohne Probleme.
 			</p>
+
 			<button-group>
 				{#each buttons as button, index}
 					<button
@@ -48,6 +49,7 @@
 					</button>
 				{/each}
 			</button-group>
+
 			Spare Jetzt 20% auf das Jahresabo!
 		</top-slogan>
 
@@ -57,7 +59,9 @@
 					<b>{price.product.name}</b>
 					<p>
 						<br />
-						<span>{price.unit_amount.toLocaleString('de-DE', { minimumFractionDigits: 2 })} </span>
+						<span>
+							{price.unit_amount.toLocaleString('de-DE', { minimumFractionDigits: 2 })}
+						</span>
 						€ {price.unit_amount < 200 ? (interval === 'month' ? '/ Monat' : ' / Jahr') : ''}
 						<br />
 					</p>
@@ -72,12 +76,14 @@
 							</li>
 						{/each}
 					</ul>
+
 					{#if tier === 'ABO' || paymentStatus === 'paid'}
 						<Tooltip tooltip="Mitgliedschaft aktiv, verwalte diese in deinem Account">
 							<button class="button" disabled>{price.product.call_to_action} </button>
 						</Tooltip>
 					{:else}
 						<button
+							class="button"
 							on:click={() => {
 								if (session) {
 									goto(`/api/stripe/checkout?id=${price.id}`);
@@ -85,8 +91,8 @@
 									goto('/registrieren');
 								}
 							}}
-							class="button"
-							>{price.product.call_to_action}
+						>
+							{price.product.call_to_action}
 						</button>
 					{/if}
 					<br />
@@ -105,12 +111,14 @@
 				<img src="/images/paypal.svg" width="50px" height="50px" alt="paypal payment icon" />
 				<img src="/images/giropay.svg" width="50px" height="50px" alt="giropay payment icon" />
 				<img src="/images/klarna.svg" width="50px" height="50px" alt="klarna payment icon" />
+
 				<img
 					src="/images/mastercard.svg"
 					width="50px"
 					height="50px"
 					alt="mastercard payment icon"
 				/>
+
 				<img src="/images/visa.svg" width="50px" height="50px" alt="visa payment icon" />
 			</payment-icons>
 		</payment-box>
@@ -119,8 +127,10 @@
 			<background-triangle1 class="rotate"></background-triangle1>
 			<background-triangle2 class="rotate"></background-triangle2>
 			<background-triangle3 class="rotate"></background-triangle3>
+
 			<p>Praktisch orientiert</p>
 			<h2>Was du lernen wirst</h2>
+
 			<ul>
 				<li>
 					<span>
@@ -158,6 +168,7 @@
 				</li>
 			</ul>
 		</subscription-content-1>
+
 		<subscription-content-2>
 			<p>Zielgruppe</p>
 			<h2>Für wen ist es geeignet?</h2>
@@ -291,11 +302,10 @@
 			@media (width > 768px) {
 				gap: 1rem;
 			}
-			
+
 			@media (width > 1440px) {
 				gap: 2rem;
 			}
-
 
 			& subscription-card {
 				background-color: #3536508b;

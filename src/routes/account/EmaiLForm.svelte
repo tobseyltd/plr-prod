@@ -5,9 +5,9 @@
 	import { emailSchema, type EmailSchema } from './ZodSchema';
 	import toast from 'svelte-french-toast';
 	import { toastSettings } from '$lib/toast-settings';
+	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
 
 	export let data: SuperValidated<Infer<EmailSchema>>;
-
 	let loading = false;
 
 	const { form, errors, enhance } = superForm(data, {
@@ -38,18 +38,26 @@
 </script>
 
 <email-details>
-	<h2>
-		<span><Mail size={22} strokeWidth={1.5} /></span> E-Mail Adresse
-	</h2>
+	<h2><span><Mail size={22} strokeWidth={1.5} /></span> E-Mail Adresse</h2>
 	<p>Ändere deine E-Mail Adresse hier</p>
 	<br />
+
 	<form action="?/updateEmail" method="POST" use:enhance>
 		<label for="email">
 			<span>E-Mail</span>
 			<input type="text" name="email" id="email" bind:value={$form.email} />
-			{#if $errors.email}<span><AlertOctagon color="yellow" size={20} /> {$errors.email}</span>{/if}
+
+			{#if $errors.email}
+				<span>
+					<AlertOctagon color="yellow" size={20} />
+					{$errors.email}
+				</span>
+			{/if}
 		</label>
-		<button type="submit" on:click={handleLoadingSpinner}>E-Mail Ändern</button>
+
+		<button type="submit" on:click={handleLoadingSpinner}>
+			<LoadingSpinner {loading} /> E-Mail ändern
+		</button>
 	</form>
 </email-details>
 

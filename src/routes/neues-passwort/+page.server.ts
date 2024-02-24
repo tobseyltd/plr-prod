@@ -20,13 +20,12 @@ export const actions: Actions = {
 			});
 		}
 
-		const { data, error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
+		const { error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
 			form.data.email,
 			{
 				redirectTo: 'https://www.programmieren-lernen.rocks/passwort-updaten'
 			}
 		);
-		console.log(data);
 		if (pwResetError) {
 			console.log(pwResetError.message);
 			throw error(500, pwResetError.message);

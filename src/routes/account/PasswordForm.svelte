@@ -5,9 +5,9 @@
 	import { passwordSchema, type PasswordSchema } from './ZodSchema';
 	import { toastSettings } from '$lib/toast-settings';
 	import toast from 'svelte-french-toast';
+	import LoadingSpinner from '$lib/utils/LoadingSpinner.svelte';
 
 	export let data: SuperValidated<Infer<PasswordSchema>>;
-
 	let loading = false;
 
 	const { form, errors, enhance } = superForm(data, {
@@ -39,14 +39,14 @@
 </script>
 
 <password-details>
-	<h2>
-		<span><AsteriskSquare size={20} strokeWidth={1.5} /> </span> Passwort
-	</h2>
+	<h2><span><AsteriskSquare size={20} strokeWidth={1.5} /> </span> Passwort</h2>
 	<p>Ändere dein Account Passwort</p>
 	<br />
+
 	<form action="?/updatePassword" method="POST" use:enhance>
 		<label for="password">
 			<span>Neues Passwort</span>
+			
 			<input
 				autocomplete="current-password"
 				type="password"
@@ -55,11 +55,18 @@
 				placeholder="Passwort eingeben"
 				bind:value={$form.password}
 			/>
-			{#if $errors.password}<span><AlertOctagon color="yellow" size={20} /> {$errors.password}</span
-				>{/if}
+
+			{#if $errors.password}
+				<span>
+					<AlertOctagon color="yellow" size={20} />
+					{$errors.password}
+				</span>
+			{/if}
+
 			<br />
 			<br />
 		</label>
+
 		<label for="passwordConfirm">
 			<span>Passwort bestätigen</span>
 			<input
@@ -70,10 +77,17 @@
 				placeholder="Passwort wiederholen"
 				bind:value={$form.passwordConfirm}
 			/>
-			{#if $errors.passwordConfirm}<span
-					><AlertOctagon color="yellow" size={20} /> {$errors.passwordConfirm}</span
-				>{/if}
-			<button type="submit" on:click={handleLoadingSpinner}>Passwort Ändern</button>
+
+			{#if $errors.passwordConfirm}
+				<span>
+					<AlertOctagon color="yellow" size={20} />
+					{$errors.passwordConfirm}
+				</span>
+			{/if}
+
+			<button type="submit" on:click={handleLoadingSpinner}>
+				<LoadingSpinner {loading} /> Passwort Ändern
+			</button>
 		</label>
 	</form>
 </password-details>

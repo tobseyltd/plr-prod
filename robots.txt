@@ -8,3 +8,4 @@ Disallow: /agb
 Disallow: /logout
 Disallow: /login
 Disallow: /neues-passwort
+Disallow: /password-updaten

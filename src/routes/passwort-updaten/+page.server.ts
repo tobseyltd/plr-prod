@@ -19,6 +19,7 @@ export const actions: Actions = {
 				form
 			});
 		}
+
 		if (form.data.password !== form.data.passwordConfirm) {
 			return setError(form, 'passwordConfirm', 'Passwörter stimmen nicht überein!');
 		}

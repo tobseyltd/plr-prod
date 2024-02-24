@@ -10,7 +10,6 @@
 	import { goto } from '$app/navigation';
 
 	export let data: PageData;
-
 	let loading = false;
 
 	const { form, errors, enhance } = superForm(data.resetPwForm, {
@@ -18,7 +17,7 @@
 		resetForm: true,
 
 		onResult: ({ result }) => {
-            loading = false;
+			loading = false;
 			switch (result.type) {
 				case 'success':
 					toast.success('Passwort geändert!', toastSettings);
@@ -55,7 +54,12 @@
 			autocomplete="new-password"
 			bind:value={$form.password}
 		/>
-		{#if $errors.password}<span><AlertOctagon color="yellow" size={20} /> {$errors.password}</span>
+
+		{#if $errors.password}
+			<span>
+				<AlertOctagon color="yellow" size={20} />
+				{$errors.password}
+			</span>
 		{/if}
 
 		<input
@@ -66,9 +70,12 @@
 			autocomplete="new-password"
 			bind:value={$form.passwordConfirm}
 		/>
-		{#if $errors.passwordConfirm}<span
-				><AlertOctagon color="yellow" size={20} /> {$errors.passwordConfirm}</span
-			>
+
+		{#if $errors.passwordConfirm}
+			<span>
+				<AlertOctagon color="yellow" size={20} />
+				{$errors.passwordConfirm}
+			</span>
 		{/if}
 
 		<button on:click={handleLoadingSpinner} type="submit">

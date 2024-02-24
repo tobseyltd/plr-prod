@@ -571,7 +571,7 @@
 		box-sizing: border-box;
 		position: absolute;
 		z-index: 1000;
-		top: .9rem;
+		top: 0.9rem;
 		right: 1rem;
 		margin: 0;
 		padding: 0;
