@@ -79,7 +79,7 @@
 		{/if}
 
 		<button on:click={handleLoadingSpinner} type="submit">
-			<b>Registrieren </b>
+			<b>Absenden </b>
 			<LoadingSpinner {loading} />
 		</button>
 	</form>
