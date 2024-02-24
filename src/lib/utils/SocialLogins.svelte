@@ -9,7 +9,10 @@
 
 	const signInWithProvider = async (provider: Provider) => {
 		const { data, error } = await supabase.auth.signInWithOAuth({
-			provider: provider
+			provider: provider,
+			options: {
+				redirectTo: `https://www.programmieren-lernen.rocks/auth/callback`
+			}
 		});
 
 		if (error) {
@@ -36,17 +39,20 @@
 </script>
 
 <form method="POST" use:enhance={submitSocialLogin}>
-	<button id="github" formaction="/login?/login&provider=github"
-		><img width="35px" height="35px" src="/images/github-logo.svg" alt="" />Mit GitHub {buttonSlogan}</button
-	>
-	<button id="discord" formaction="/login?/login&provider=discord"
-		><img width="35px" height="35px" src="/images/discord-logo.svg" alt="" />Mit Discord
-		{buttonSlogan}</button
-	>
-	<button id="google" formaction="/login?/login&provider=google"
-		><img width="30px" height="30px" src="/images/google-logo.svg" alt="" />Mit Google
-		{buttonSlogan}</button
-	>
+	<button id="github" formaction="/login?/login&provider=github">
+		<img width="35px" height="35px" src="/images/github-logo.svg" alt="" />
+		Mit GitHub {buttonSlogan}
+	</button>
+
+	<button id="discord" formaction="/login?/login&provider=discord">
+		<img width="35px" height="35px" src="/images/discord-logo.svg" alt="" />
+		Mit Discord {buttonSlogan}
+	</button>
+
+	<button id="google" formaction="/login?/login&provider=google">
+		<img width="30px" height="30px" src="/images/google-logo.svg" alt="" />
+		Mit Google {buttonSlogan}
+	</button>
 </form>
 
 <style>

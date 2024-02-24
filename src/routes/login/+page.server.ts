@@ -21,7 +21,10 @@ export const actions: Actions = {
 		if (provider) {
 			const { data: providerData, error: providerError } =
 				await event.locals.supabase.auth.signInWithOAuth({
-					provider: 'github'
+					provider: provider,
+					options: {
+						redirectTo: `https://www.programmieren-lernen.rocks/auth/callback`
+					}
 				});
 
 			if (providerError) {

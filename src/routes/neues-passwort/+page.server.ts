@@ -20,17 +20,11 @@ export const actions: Actions = {
 			});
 		}
 
-		console.log(form);
-
 		const { error: pwResetError } = await event.locals.supabase.auth.resetPasswordForEmail(
-			form.data.email,
-			{
-				redirectTo: '/passwort-updaten'
-			}
+			form.data.email
 		);
 
 		if (pwResetError) {
-			console.log(pwResetError.message);
 			throw error(500, pwResetError.message);
 		}
 

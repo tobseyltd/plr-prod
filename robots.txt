@@ -9,3 +9,5 @@ Disallow: /logout
 Disallow: /login
 Disallow: /neues-passwort
 Disallow: /password-updaten
+Disallow: /auth
+Disallow: /api
