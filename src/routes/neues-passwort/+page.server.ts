@@ -35,7 +35,7 @@ export const actions: Actions = {
 			email: form.data.email,
 			options: {
 				shouldCreateUser: false,
-				emailRedirectTo: 'https:/www..programmieren-lernen.rocks/account'
+				emailRedirectTo: 'https:/www.programmieren-lernen.rocks/account'
 			}
 		});
 
