@@ -38,7 +38,7 @@
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"stripe-event-types": "^3.1.0",
-		"supabase": "^1.136.3",
+		"supabase": "^1.145.4",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
 		"sveltekit-superforms": "2.0.0-alpha.45",

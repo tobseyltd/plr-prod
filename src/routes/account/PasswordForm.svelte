@@ -79,7 +79,7 @@
 			/>
 
 			{#if $errors.passwordConfirm}
-				<span>
+				<span class="error">
 					<AlertOctagon color="yellow" size={20} />
 					{$errors.passwordConfirm}
 				</span>
@@ -98,5 +98,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		gap: 0.3rem;
 	}
 </style>

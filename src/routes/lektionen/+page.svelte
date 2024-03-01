@@ -93,7 +93,7 @@
 
 		<grid-wrapper>
 			{#each $filteredLessons.slice(0, lessonsPerPage) as lesson}
-				<a href={`/lektionen/${lesson.ep}`}>
+				<a href={`/lektionen/${lesson.ep?.toLocaleLowerCase()}`}>
 					<lesson-card>
 						<left-side>
 							<img

@@ -1,6 +1,6 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
-export interface Database {
+export type Database = {
 	graphql_public: {
 		Tables: {
 			[_ in never]: never;
@@ -208,14 +208,18 @@ export interface Database {
 					files: Json[] | null;
 					id: string;
 					img: string | null;
-					likes: number;
+					likes: number | null;
+					quiz: Json[];
 					skill: string | null;
 					title: string | null;
 					topic: string | null;
 					updated_at: string;
 					video1: string | null;
+					video1_content: string | null;
 					video2: string | null;
+					video2_content: string | null;
 					video3: string | null;
+					video3_content: string | null;
 				};
 				Insert: {
 					comments?: Json[] | null;
@@ -225,14 +229,18 @@ export interface Database {
 					files?: Json[] | null;
 					id?: string;
 					img?: string | null;
-					likes?: number;
+					likes?: number | null;
+					quiz?: Json[];
 					skill?: string | null;
 					title?: string | null;
 					topic?: string | null;
 					updated_at?: string;
 					video1?: string | null;
+					video1_content?: string | null;
 					video2?: string | null;
+					video2_content?: string | null;
 					video3?: string | null;
+					video3_content?: string | null;
 				};
 				Update: {
 					comments?: Json[] | null;
@@ -242,14 +250,18 @@ export interface Database {
 					files?: Json[] | null;
 					id?: string;
 					img?: string | null;
-					likes?: number;
+					likes?: number | null;
+					quiz?: Json[];
 					skill?: string | null;
 					title?: string | null;
 					topic?: string | null;
 					updated_at?: string;
 					video1?: string | null;
+					video1_content?: string | null;
 					video2?: string | null;
+					video2_content?: string | null;
 					video3?: string | null;
+					video3_content?: string | null;
 				};
 				Relationships: [];
 			};
@@ -486,7 +498,7 @@ export interface Database {
 			[_ in never]: never;
 		};
 	};
-}
+};
 
 export type Tables<
 	PublicTableNameOrOptions extends

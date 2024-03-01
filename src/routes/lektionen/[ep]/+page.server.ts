@@ -14,7 +14,7 @@ export const load: PageServerLoad = async (event) => {
 		const { error: contactError, data: contact } = await event.locals.supabase
 			.from('lessons')
 			.select('*')
-			.eq('ep', ep)
+			.eq('ep', ep.toLocaleUpperCase())
 			.limit(1)
 			.maybeSingle();
 

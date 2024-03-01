@@ -15,7 +15,47 @@
 
 	let showMemberContent = writable<boolean>(false);
 	let memberContentUnsubscribed = writable<boolean>(false);
+	let questions = writable<any>([...data.lesson.quiz]);
+
 	let liked: boolean = false;
+	let score = 0;
+	let quizBtnDisabled = false;
+	let actualQuestion = 1;
+
+	function checkAnswer(event: any, question: any) {
+		const choice = event.target.children[0].innerText.toUpperCase();
+		quizBtnDisabled = true;
+
+		let updatedQuestion = { ...question }; // Create a shallow copy of the question object
+
+		if (choice === question.answer.toUpperCase()) {
+			score++;
+			updatedQuestion.isRight = 'correct';
+			event.target.style.borderColor = 'green';
+		} else {
+			updatedQuestion.isRight = 'incorrect';
+			event.target.style.borderColor = 'red';
+		}
+
+		// Update the questions array with the new question object
+		questions.update((questionsValue) => {
+			const updatedQuestions = questionsValue.map((q: any) => {
+				if (q === question) {
+					return updatedQuestion;
+				}
+				return q;
+			});
+			return updatedQuestions;
+		});
+	}
+
+	async function finishQuiz() {
+		const { error } = await data.supabase
+			.from('lessons')
+			.update({ quiz: $questions })
+			.eq('id', data.lesson.id)
+			.select();
+	}
 
 	$: {
 		if (data.session) {
@@ -82,42 +122,79 @@
 	<detail-page-content>
 		<left-side>
 			<p>{data.lesson.description}</p>
+			<section>
+				<b>⚠️ Wichtig:</b>
+				<br />
+				<br />
+				<ul>
+					<li>👉 Schaue immer zuerst das Video ein Mal komplett an.</li>
+					<li>👉 Versuche nachzuvollziehen und zu verstehen, was ich in dem Video zeige.</li>
+					<li>👉 Beginne dann mit dem Nachbau des Web Projekts aus dem Tutorial.</li>
+					<li>👉 Nimm ein ähnliches Projekt und code es mit dem neu erlangten Wissen nach.</li>
+				</ul>
+				<br />
+				🔥 Oder komm in die programmieren-lernen.rocks Community und erhalte zusätzlichen Deep Dive Content
+				zu dieser Lektion und eine Bonus Challenge, die auf dem Wissen dieses Tutorials aufbaut.
+			</section>
 			<h3>Part 1 - Free Coding Lektion</h3>
 
 			<video-wrapper>
 				{@html data.lesson.video1}
 			</video-wrapper>
+			<video-content>
+				<article>
+					{#if data.lesson.video1_content}
+						{#each data.lesson.video1_content.split(/(<Gist.*?\/?>)/) as part}
+							{#if part.startsWith('<Gist')}
+								<!-- Extract the gistUrl from the part -->
+								<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
+							{:else}
+								<!-- Render non-Gist content -->
+								{@html part}
+							{/if}
+						{/each}
+					{/if}
+				</article>
+			</video-content>
 			<h3>Part 2 - Members Coding Lektion</h3>
 
-			{#if $showMemberContent}
-				{#if data.lesson.video2}
+			{#if !$showMemberContent}
+				{#if data.lesson.video2 && data.lesson.video2_content}
 					<video-wrapper>
 						{@html data.lesson.video2}
 					</video-wrapper>
 					<video-content>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. A qui repellat, quis nisi
-							libero adipisci molestias porro mollitia consectetur omnis praesentium ad velit minus
-							harum itaque magni. Dignissimos, autem pariatur.
-						</p>
-						<blockquote>stripe listen --forward-to localhost:5173/api/stripe/webhook</blockquote>
-						<Gist gistUrl="https://gist.github.com/tobseyltd/2716b7cd45db9fc050c81a0bb3bc1015" />
+						<article>
+							{#each data.lesson.video2_content.split(/(<Gist.*?\/?>)/) as part}
+								{#if part.startsWith('<Gist') && part !== null}
+									<!-- Extract the gistUrl from the part -->
+									<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
+								{:else}
+									<!-- Render non-Gist content -->
+									{@html part}
+								{/if}
+							{/each}
+						</article>
 					</video-content>
 				{/if}
 
-				{#if data.lesson.video3}
+				{#if data.lesson.video3 && data.lesson.video3_content}
 					<h3>Part 3 - Members Coding Lektion</h3>
 					<video-wrapper>
 						{@html data.lesson.video3}
 					</video-wrapper>
 					<video-content>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. A qui repellat, quis nisi
-							libero adipisci molestias porro mollitia consectetur omnis praesentium ad velit minus
-							harum itaque magni. Dignissimos, autem pariatur.
-						</p>
-						<blockquote>stripe listen --forward-to localhost:5173/api/stripe/webhook</blockquote>
-						<Gist gistUrl="https://gist.github.com/tobseyltd/2716b7cd45db9fc050c81a0bb3bc1015" />
+						<article>
+							{#each data.lesson.video3_content.split(/(<Gist.*?\/?>)/) as part}
+								{#if part.startsWith('<Gist')}
+									<!-- Extract the gistUrl from the part -->
+									<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
+								{:else}
+									<!-- Render non-Gist content -->
+									{@html part}
+								{/if}
+							{/each}
+						</article>
 					</video-content>
 				{/if}
 				<!-- <AddComment {data} />
@@ -141,6 +218,68 @@
 					>
 				</li>
 			</ul>
+			<Accordion>
+				<h3 slot="head">Quiz <span>( {data.lesson.quiz.length} Fragen )</span></h3>
+				<quiz-wrapper slot="details">
+					{#each $questions as question, id}
+						{#if id === actualQuestion - 1}
+							<span class="question">
+								{question?.question}
+							</span>
+
+							{#each question?.answers as answer, id (answer.answer)}
+								<button
+									disabled={quizBtnDisabled}
+									on:click={(event) => checkAnswer(event, question)}
+									><strong>{answer.answer.toUpperCase()}</strong>: {answer.value}</button
+								>
+							{/each}
+							<answer-box>
+								{#if question?.isRight === 'correct'}
+									<b style="color: green">Korrekte Antwort 👍</b>
+								{:else if question?.isRight === 'incorrect'}
+									<b style="color: red;">Leider falsch 👎, korrekte Antwort: {question?.answer}</b>
+								{/if}
+							</answer-box>
+							<button
+								type="submit"
+								disabled={!quizBtnDisabled}
+								on:click={() => {
+									actualQuestion++;
+									quizBtnDisabled = false;
+								}}
+								>{actualQuestion === $questions.length
+									? 'Quiz abschließen'
+									: 'Nächste Frage'}</button
+							>
+							{#if actualQuestion === $questions.length}
+								- oder -
+								<br />
+								<button
+									class="do-it-again"
+									disabled={!quizBtnDisabled}
+									on:click={() => {
+										quizBtnDisabled = false;
+										questions.set([...data.lesson.quiz]);
+										actualQuestion = 1;
+									}}
+								>
+									Quiz erneut machen</button
+								>
+							{/if}
+						{/if}
+					{/each}
+					{#if actualQuestion > $questions.length}
+						<score-box>
+							<strong
+								>Ergebnis: {score} von {$questions.length} richtig {score > $questions.length - 2
+									? '🥳'
+									: '🫨'}</strong
+							>
+						</score-box>
+					{/if}
+				</quiz-wrapper>
+			</Accordion>
 			<Accordion>
 				<h3 slot="head">Kommentar verfassen</h3>
 				<AddComment slot="details" {data} />
@@ -255,6 +394,25 @@
 					margin: 0;
 				}
 
+				& section {
+					padding: 1rem 0;
+					border-bottom: 1px solid var(--blueAccent);
+					color: var(--textAccent);
+
+					& b {
+						text-decoration: underline;
+					}
+
+					& ul {
+						list-style-type: none;
+
+						& li {
+							margin: 0;
+							color: var(--textAccent);
+						}
+					}
+				}
+
 				& video-wrapper {
 					display: block;
 					position: relative;
@@ -272,14 +430,16 @@
 				}
 
 				& video-content {
-					border-bottom: 1px solid var(--blueAccent);
+					& article {
+						border-bottom: 1px solid var(--blueAccent);
 
-					& p {
-						padding: 1.5rem 2rem;
+						& p {
+							padding: 1.5rem 2rem;
 
-						@media (width < 451px) {
-							padding: 0.7rem 0.5rem;
-							text-align: justify;
+							@media (width < 451px) {
+								padding: 0.7rem 0.5rem;
+								text-align: justify;
+							}
 						}
 					}
 
@@ -312,8 +472,9 @@
 					margin: 1rem 0;
 					padding: 0;
 				}
+
 				& h3 span {
-					font-size: 1rem;
+					font-size: 0.8rem;
 					font-weight: 600;
 				}
 
@@ -334,6 +495,58 @@
 								color: var(--tertColor);
 							}
 						}
+					}
+				}
+
+				& quiz-wrapper {
+					display: block;
+					text-align: center;
+
+					& button {
+						width: 100%;
+						margin: 0.5rem 0;
+						background-color: var(--bgContainer);
+
+						&:hover {
+							border-color: var(--mainBorder);
+						}
+					}
+
+					& button[type='submit'] {
+						margin-top: 1rem;
+						background-color: var(--tertColor);
+
+						&:disabled {
+							background-color: var(--bgContainer);
+							border-color: transparent;
+							cursor: not-allowed;
+						}
+					}
+
+					& button.do-it-again {
+						background-color: var(--secondColor);
+						&:disabled {
+							background-color: var(--bgContainer);
+							border-color: transparent;
+							cursor: not-allowed;
+						}
+					}
+
+					& answer-box {
+						display: block;
+						width: 100%;
+						text-align: center;
+						font-size: 0.8rem;
+					}
+
+					& score-box {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						background-color: var(--bgContainer);
+						height: 200px;
+						width: 100%;
+						border-radius: 10px;
 					}
 				}
 			}
