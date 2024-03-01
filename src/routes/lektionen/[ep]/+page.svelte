@@ -10,6 +10,7 @@
 	import Accordion from '$lib/utils/Accordion.svelte';
 	import toast from 'svelte-french-toast';
 	import { toastSettings } from '$lib/toast-settings';
+	import MainLayout from '../../../layouts/MainLayout.svelte';
 
 	export let data: PageData;
 
@@ -101,91 +102,59 @@
 	}
 </script>
 
-<detail-page-wrapper>
-	<status-bar>
-		<button on:click={() => goto('/lektionen')}>Zurück</button>
-		<social-box>
-			<likes-box tabindex="0" role="button" on:keydown={handleLikeClick} on:click={handleLikeClick}>
-				<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
-				<span>( {data.lesson.likes} )</span>
-			</likes-box>
-			<a href="#kommentare">
-				<comment-box>
-					<MessageCircle size={20} strokeWidth={1.5} class="icon" />
-					<span>( {data.lesson.comments?.length} )</span>
-				</comment-box>
-			</a>
-		</social-box>
-	</status-bar>
+<MainLayout
+	title={`${data.lesson.ep} - ${data.lesson.title}`}
+	description={`${data.lesson.description}`}
+	imageUrl={`${data.lesson.img}`}
+>
+	<detail-page-wrapper>
+		<status-bar>
+			<button on:click={() => goto('/lektionen')}>Zurück</button>
+			<social-box>
+				<likes-box
+					tabindex="0"
+					role="button"
+					on:keydown={handleLikeClick}
+					on:click={handleLikeClick}
+				>
+					<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
+					<span>( {data.lesson.likes} )</span>
+				</likes-box>
+				<a href="#kommentare">
+					<comment-box>
+						<MessageCircle size={20} strokeWidth={1.5} class="icon" />
+						<span>( {data.lesson.comments?.length} )</span>
+					</comment-box>
+				</a>
+			</social-box>
+		</status-bar>
 
-	<h1>{data.lesson.ep?.toUpperCase()} : {data.lesson.title}</h1>
-	<detail-page-content>
-		<left-side>
-			<p>{data.lesson.description}</p>
-			<section>
-				<b>⚠️ Wichtig:</b>
-				<br />
-				<br />
-				<ul>
-					<li>👉 Schaue immer zuerst das Video ein Mal komplett an.</li>
-					<li>👉 Versuche nachzuvollziehen und zu verstehen, was ich in dem Video zeige.</li>
-					<li>👉 Beginne dann mit dem Nachbau des Web Projekts aus dem Tutorial.</li>
-					<li>👉 Nimm ein ähnliches Projekt und code es mit dem neu erlangten Wissen nach.</li>
-				</ul>
-				<br />
-				🔥 Oder komm in die programmieren-lernen.rocks Community und erhalte zusätzlichen Deep Dive Content
-				zu dieser Lektion und eine Bonus Challenge, die auf dem Wissen dieses Tutorials aufbaut.
-			</section>
-			<h3>Part 1 - Free Coding Lektion</h3>
+		<detail-page-content>
+			<left-side>
+				<h1>{data.lesson.ep?.toUpperCase()} | {data.lesson.title}</h1>
+				<p>{data.lesson.description}</p>
+				<section>
+					<h2>⚠️ Wichtige Infos:</h2>
+					<br />
+					<ul>
+						<li>👉 Schaue immer zuerst das Video ein Mal komplett an.</li>
+						<li>👉 Versuche nachzuvollziehen und zu verstehen, was ich in dem Video zeige.</li>
+						<li>👉 Beginne dann mit dem Nachbau des Web Projekts aus dem Tutorial.</li>
+						<li>👉 Nimm ein ähnliches Projekt und code es mit dem neu erlangten Wissen nach.</li>
+					</ul>
+					<br />
+					🔥 Oder komm in die programmieren-lernen.rocks Community und erhalte zusätzlichen Deep Dive
+					Content zu dieser Lektion und eine Bonus Challenge, die auf dem Wissen dieses Tutorials aufbaut.
+				</section>
+				<h3>Part 1 - Free Coding Lektion</h3>
 
-			<video-wrapper>
-				{@html data.lesson.video1}
-			</video-wrapper>
-			<video-content>
-				<article>
-					{#if data.lesson.video1_content}
-						{#each data.lesson.video1_content.split(/(<Gist.*?\/?>)/) as part}
-							{#if part.startsWith('<Gist')}
-								<!-- Extract the gistUrl from the part -->
-								<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
-							{:else}
-								<!-- Render non-Gist content -->
-								{@html part}
-							{/if}
-						{/each}
-					{/if}
-				</article>
-			</video-content>
-			<h3>Part 2 - Members Coding Lektion</h3>
-
-			{#if !$showMemberContent}
-				{#if data.lesson.video2 && data.lesson.video2_content}
-					<video-wrapper>
-						{@html data.lesson.video2}
-					</video-wrapper>
-					<video-content>
-						<article>
-							{#each data.lesson.video2_content.split(/(<Gist.*?\/?>)/) as part}
-								{#if part.startsWith('<Gist') && part !== null}
-									<!-- Extract the gistUrl from the part -->
-									<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
-								{:else}
-									<!-- Render non-Gist content -->
-									{@html part}
-								{/if}
-							{/each}
-						</article>
-					</video-content>
-				{/if}
-
-				{#if data.lesson.video3 && data.lesson.video3_content}
-					<h3>Part 3 - Members Coding Lektion</h3>
-					<video-wrapper>
-						{@html data.lesson.video3}
-					</video-wrapper>
-					<video-content>
-						<article>
-							{#each data.lesson.video3_content.split(/(<Gist.*?\/?>)/) as part}
+				<video-wrapper>
+					{@html data.lesson.video1}
+				</video-wrapper>
+				<video-content>
+					<article>
+						{#if data.lesson.video1_content}
+							{#each data.lesson.video1_content.split(/(<Gist.*?\/?>)/) as part}
 								{#if part.startsWith('<Gist')}
 									<!-- Extract the gistUrl from the part -->
 									<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
@@ -194,122 +163,165 @@
 									{@html part}
 								{/if}
 							{/each}
-						</article>
-					</video-content>
-				{/if}
-				<!-- <AddComment {data} />
+						{/if}
+					</article>
+				</video-content>
+				<h3>Part 2 - Members Coding Lektion</h3>
+
+				{#if $showMemberContent}
+					{#if data.lesson.video2 && data.lesson.video2_content}
+						<video-wrapper>
+							{@html data.lesson.video2}
+						</video-wrapper>
+						<video-content>
+							<article>
+								{#each data.lesson.video2_content.split(/(<Gist.*?\/?>)/) as part}
+									{#if part.startsWith('<Gist') && part !== null}
+										<!-- Extract the gistUrl from the part -->
+										<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
+									{:else}
+										<!-- Render non-Gist content -->
+										{@html part}
+									{/if}
+								{/each}
+							</article>
+						</video-content>
+					{/if}
+
+					{#if data.lesson.video3 && data.lesson.video3_content}
+						<h3>Part 3 - Members Coding Lektion</h3>
+						<video-wrapper>
+							{@html data.lesson.video3}
+						</video-wrapper>
+						<video-content>
+							<article>
+								{#each data.lesson.video3_content.split(/(<Gist.*?\/?>)/) as part}
+									{#if part.startsWith('<Gist')}
+										<!-- Extract the gistUrl from the part -->
+										<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
+									{:else}
+										<!-- Render non-Gist content -->
+										{@html part}
+									{/if}
+								{/each}
+							</article>
+						</video-content>
+					{/if}
+					<!-- <AddComment {data} />
 				<Comments {data} /> -->
-			{/if}
-		</left-side>
+				{/if}
+			</left-side>
 
-		<right-side>
-			<h2>Dateien</h2>
-			<ul>
-				<li>
-					<a
-						href="/files/Handbuch_Frontend_Entwickler_2_of_4_v2.pdf"
-						target="_blank"
-						rel="noopener noreferrer"><Paperclip strokeWidth={1.5} size={20} /> Handbuch</a
-					>
-				</li>
-				<li>
-					<a href="/files/monaspace-v1.000.zip" target="_blank" rel="noopener noreferrer"
-						><Paperclip strokeWidth={1.5} size={20} /> <span>Schriftart</span></a
-					>
-				</li>
-			</ul>
-			<Accordion>
-				<h3 slot="head">Quiz <span>( {data.lesson.quiz.length} Fragen )</span></h3>
-				<quiz-wrapper slot="details">
-					{#each $questions as question, id}
-						{#if id === actualQuestion - 1}
-							<span class="question">
-								{question?.question}
-							</span>
+			<right-side>
+				<h2>Dateien</h2>
+				<ul>
+					<li>
+						<a
+							href="/files/Handbuch_Frontend_Entwickler_2_of_4_v2.pdf"
+							target="_blank"
+							rel="noopener noreferrer"><Paperclip strokeWidth={1.5} size={20} /> Handbuch</a
+						>
+					</li>
+					<li>
+						<a href="/files/monaspace-v1.000.zip" target="_blank" rel="noopener noreferrer"
+							><Paperclip strokeWidth={1.5} size={20} /> <span>Schriftart</span></a
+						>
+					</li>
+				</ul>
+				<Accordion>
+					<h3 slot="head">Quiz <span>( {data.lesson.quiz.length} Fragen )</span></h3>
+					<quiz-wrapper slot="details">
+						{#each $questions as question, id}
+							{#if id === actualQuestion - 1}
+								<span class="question">
+									{question?.question}
+								</span>
 
-							{#each question?.answers as answer, id (answer.answer)}
+								{#each question?.answers as answer, id (answer.answer)}
+									<button
+										disabled={quizBtnDisabled}
+										on:click={(event) => checkAnswer(event, question)}
+										><strong>{answer.answer.toUpperCase()}</strong>: {answer.value}</button
+									>
+								{/each}
+								<answer-box>
+									{#if question?.isRight === 'correct'}
+										<b style="color: green">Korrekte Antwort 👍</b>
+									{:else if question?.isRight === 'incorrect'}
+										<b style="color: red;">Leider falsch 👎, korrekte Antwort: {question?.answer}</b
+										>
+									{/if}
+								</answer-box>
 								<button
-									disabled={quizBtnDisabled}
-									on:click={(event) => checkAnswer(event, question)}
-									><strong>{answer.answer.toUpperCase()}</strong>: {answer.value}</button
-								>
-							{/each}
-							<answer-box>
-								{#if question?.isRight === 'correct'}
-									<b style="color: green">Korrekte Antwort 👍</b>
-								{:else if question?.isRight === 'incorrect'}
-									<b style="color: red;">Leider falsch 👎, korrekte Antwort: {question?.answer}</b>
-								{/if}
-							</answer-box>
-							<button
-								type="submit"
-								disabled={!quizBtnDisabled}
-								on:click={() => {
-									actualQuestion++;
-									quizBtnDisabled = false;
-								}}
-								>{actualQuestion === $questions.length
-									? 'Quiz abschließen'
-									: 'Nächste Frage'}</button
-							>
-							{#if actualQuestion === $questions.length}
-								- oder -
-								<br />
-								<button
-									class="do-it-again"
+									type="submit"
 									disabled={!quizBtnDisabled}
 									on:click={() => {
+										actualQuestion++;
 										quizBtnDisabled = false;
-										questions.set([...data.lesson.quiz]);
-										actualQuestion = 1;
 									}}
+									>{actualQuestion === $questions.length
+										? 'Quiz abschließen'
+										: 'Nächste Frage'}</button
 								>
-									Quiz erneut machen</button
-								>
+								{#if actualQuestion === $questions.length}
+									- oder -
+									<br />
+									<button
+										class="do-it-again"
+										disabled={!quizBtnDisabled}
+										on:click={() => {
+											quizBtnDisabled = false;
+											questions.set([...data.lesson.quiz]);
+											actualQuestion = 1;
+										}}
+									>
+										Quiz erneut machen</button
+									>
+								{/if}
 							{/if}
+						{/each}
+						{#if actualQuestion > $questions.length}
+							<score-box>
+								<strong
+									>Ergebnis: {score} von {$questions.length} richtig {score > $questions.length - 2
+										? '🥳'
+										: '🫨'}</strong
+								>
+							</score-box>
 						{/if}
-					{/each}
-					{#if actualQuestion > $questions.length}
-						<score-box>
-							<strong
-								>Ergebnis: {score} von {$questions.length} richtig {score > $questions.length - 2
-									? '🥳'
-									: '🫨'}</strong
-							>
-						</score-box>
-					{/if}
-				</quiz-wrapper>
-			</Accordion>
-			<Accordion>
-				<h3 slot="head">Kommentar verfassen</h3>
-				<AddComment slot="details" {data} />
-			</Accordion>
-			<Accordion>
-				<h3 slot="head" id="kommentare">
-					Kommentare <span>( {data.lesson.comments?.length} )</span>
-				</h3>
-				<Comments slot="details" {data} />
-			</Accordion>
-		</right-side>
-	</detail-page-content>
+					</quiz-wrapper>
+				</Accordion>
+				<Accordion>
+					<h3 slot="head">Kommentar verfassen</h3>
+					<AddComment slot="details" {data} />
+				</Accordion>
+				<Accordion>
+					<h3 slot="head" id="kommentare">
+						Kommentare <span>( {data.lesson.comments?.length} )</span>
+					</h3>
+					<Comments slot="details" {data} />
+				</Accordion>
+			</right-side>
+		</detail-page-content>
 
-	{#if $memberContentUnsubscribed}
-		<no-abo-logged
-			>Du hast kein aktives ABO. <a href="/mitglied-werden"><b>Jetzt kaufen!</b></a>
-		</no-abo-logged>
-	{:else if !$showMemberContent}
-		<login-form>
-			<p>Einloggen oder <a href="/mitglied-werden">Mitglied werden</a></p>
-			<LoginForm
-				data={data.loginForm}
-				supabase={data.supabase}
-				height="30vh"
-				showHeader={false}
-				borderTop="none"
-			/>
-		</login-form>
-	{/if}
-</detail-page-wrapper>
+		{#if $memberContentUnsubscribed}
+			<no-abo-logged
+				>Du hast kein aktives ABO. <a href="/mitglied-werden"><b>Jetzt kaufen!</b></a>
+			</no-abo-logged>
+		{:else if !$showMemberContent}
+			<login-form>
+				<p>Einloggen oder <a href="/mitglied-werden">Mitglied werden</a></p>
+				<LoginForm
+					data={data.loginForm}
+					supabase={data.supabase}
+					height="30vh"
+					showHeader={false}
+					borderTop="none"
+				/>
+			</login-form>
+		{/if}
+	</detail-page-wrapper>
+</MainLayout>
 
 <style>
 	detail-page-wrapper {
@@ -318,6 +330,20 @@
 		padding: 0.5rem 0;
 		min-height: 80vh;
 		overflow: hidden;
+
+		& h1 {
+			font-size: 1.5rem;
+			margin: 0.5rem 0;
+			line-height: 1.4rem;
+		}
+
+		& h2 {
+			font-size: 1.2rem;
+		}
+
+		& h3 {
+			font-size: 1.1rem;
+		}
 
 		& p:not(video-content p) {
 			border-bottom: 1px solid var(--blueAccent);
@@ -395,9 +421,8 @@
 				}
 
 				& section {
-					padding: 1rem 0;
+					padding: 1.5rem 0;
 					border-bottom: 1px solid var(--blueAccent);
-					color: var(--textAccent);
 
 					& b {
 						text-decoration: underline;
@@ -466,6 +491,7 @@
 			& right-side {
 				width: 40%;
 				padding-left: 80px;
+				margin: 1rem 0;
 
 				@media (width < 769px) {
 					width: 100%;

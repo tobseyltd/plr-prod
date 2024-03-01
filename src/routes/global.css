@@ -8,7 +8,7 @@
 	--mainBackground: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, #252746 35%, #252746 100%);
 	--wrapperWidth: 60cqi;
 	--mainBorder: 1px solid rgba(128, 128, 128, 0.305);
-	--textAccent: rgba(239, 238, 238, 0.732);
+	--textAccent: #efeeeeeb;
 	--blueAccent: #2d39db57;
 
 	font-synthesis: none;
