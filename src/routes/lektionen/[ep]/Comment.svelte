@@ -119,7 +119,7 @@
 		gap: 0.2rem;
 		margin-bottom: 1rem;
 		background-color: var(--bgContainer);
-		padding: 1rem;
+		padding: .7rem 1rem;
 		border-radius: 10px;
 		border-bottom: 4px solid var(--blueAccent);
 
@@ -127,8 +127,13 @@
 			display: flex;
 			justify-content: space-between;
 			width: 100%;
+
 			& span {
 				font-size: 0.7rem;
+			}
+
+			& b {
+				font-size: 0.9rem;
 			}
 		}
 

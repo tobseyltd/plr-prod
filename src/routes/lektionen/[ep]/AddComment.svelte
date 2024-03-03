@@ -13,6 +13,7 @@
 
 	async function handleNewComment() {
 		loading = true;
+
 		const newComment = {
 			id: randomString(),
 			user_id: session.user.id,
@@ -26,7 +27,6 @@
 				day: '2-digit'
 			})
 		};
-
 		const newCommentsArray = [newComment, ...lesson.comments];
 
 		const { error: newCommentError } = await supabase
@@ -34,7 +34,6 @@
 			.update({ comments: newCommentsArray })
 			.eq('id', lesson.id)
 			.select();
-
 		if (newCommentError) toast.error(newCommentError.message, toastSettings);
 
 		toast.success('Kommentar hinzugefügt', toastSettings);

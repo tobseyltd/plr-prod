@@ -639,7 +639,7 @@
 		}
 
 		@media (width > 1920px) {
-			width: 60%;
+			width: 55%;
 		}
 	}
 </style>

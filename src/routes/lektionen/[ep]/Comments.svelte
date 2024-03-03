@@ -5,10 +5,12 @@
 	import Comment from './Comment.svelte';
 
 	export let data: any;
+
 	let { supabase, lesson } = data;
 	$: ({ lesson } = data);
 
 	const initialCommentCount = 2;
+	let moreButtonDisabled = false;
 	let showComments = initialCommentCount;
 
 	$: sortedComments = lesson.comments.toSorted((a: any, b: any) => {
@@ -25,6 +27,9 @@
 
 	function handleShowMoreClick() {
 		showComments += 3;
+		if (showComments > sortedComments.length) {
+			moreButtonDisabled = true;
+		}
 	}
 
 	function handleShowLessClick() {
@@ -51,7 +56,7 @@
 			<button on:click={handleShowMoreClick}>Zeige weitere Kommentare</button>
 
 			{#if showComments > initialCommentCount}
-				<button class="more" on:click={handleShowMoreClick}>+</button>
+				<button disabled={moreButtonDisabled} class="more" on:click={handleShowMoreClick}>+</button>
 			{/if}
 		</button-box>
 	{/if}

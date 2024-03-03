@@ -114,13 +114,16 @@
 									<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
 									<span>( {lesson.likes} )</span>
 								</likes-box>
+
 								<comment-box>
 									<MessageCircle size={20} strokeWidth={1.5} class="icon" />
 									<span>( {lesson.comments?.length} )</span>
 								</comment-box>
+
 								<topic-box>
 									<p>{lesson.skill}</p>
 								</topic-box>
+
 								<skill-box>
 									<p>{lesson.topic}</p>
 								</skill-box>
@@ -216,6 +219,7 @@
 			& a {
 				text-decoration: none;
 				color: white;
+
 				& lesson-card {
 					display: flex;
 					gap: 10px;
@@ -230,12 +234,8 @@
 
 					& left-side {
 						display: flex;
-						width: 30%;
+						width: 50%;
 						align-items: center;
-
-						@media (width < 1921px) {
-							width: 45%;
-						}
 
 						@media (width < 769px) {
 							width: 100%;

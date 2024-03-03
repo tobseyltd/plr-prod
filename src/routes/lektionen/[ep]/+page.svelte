@@ -11,6 +11,10 @@
 	import toast from 'svelte-french-toast';
 	import { toastSettings } from '$lib/toast-settings';
 	import MainLayout from '../../../layouts/MainLayout.svelte';
+	import ShareButtons from '$lib/components/ShareButtons/index.svelte';
+	import { page } from '$app/stores';
+	import { onDestroy } from 'svelte';
+	import type { Page } from '@sveltejs/kit';
 
 	export let data: PageData;
 
@@ -22,6 +26,7 @@
 	let score = 0;
 	let quizBtnDisabled = false;
 	let actualQuestion = 1;
+	let currentPage: Page;
 
 	function checkAnswer(event: any, question: any) {
 		const choice = event.target.children[0].innerText.toUpperCase();
@@ -79,6 +84,15 @@
 		)
 		.subscribe();
 
+	const unsubscribe = page.subscribe((value) => {
+		currentPage = value;
+	});
+
+	// Unsubscribe when the component is destroyed to avoid memory leaks
+	onDestroy(() => {
+		unsubscribe();
+	});
+
 	async function handleLikeClick() {
 		liked = !liked;
 
@@ -110,6 +124,7 @@
 	<detail-page-wrapper>
 		<status-bar>
 			<button on:click={() => goto('/lektionen')}>Zurück</button>
+
 			<social-box>
 				<likes-box
 					tabindex="0"
@@ -134,17 +149,25 @@
 				<h1>{data.lesson.ep?.toUpperCase()} | {data.lesson.title}</h1>
 				<p>{data.lesson.description}</p>
 				<section>
-					<h2>⚠️ Wichtige Infos:</h2>
-					<br />
-					<ul>
-						<li>👉 Schaue immer zuerst das Video ein Mal komplett an.</li>
-						<li>👉 Versuche nachzuvollziehen und zu verstehen, was ich in dem Video zeige.</li>
-						<li>👉 Beginne dann mit dem Nachbau des Web Projekts aus dem Tutorial.</li>
-						<li>👉 Nimm ein ähnliches Projekt und code es mit dem neu erlangten Wissen nach.</li>
-					</ul>
-					<br />
-					🔥 Oder komm in die programmieren-lernen.rocks Community und erhalte zusätzlichen Deep Dive
-					Content zu dieser Lektion und eine Bonus Challenge, die auf dem Wissen dieses Tutorials aufbaut.
+					<Accordion open>
+						<h2 slot="head">⚠️ Wichtige Infos:</h2>
+						<div slot="details">
+							<br />
+							<ul>
+								<li>👉 Schaue immer zuerst das Video ein Mal komplett an.</li>
+								<li>👉 Versuche nachzuvollziehen und zu verstehen, was ich in dem Video zeige.</li>
+								<li>👉 Beginne dann mit dem Nachbau des Web Projekts aus dem Tutorial.</li>
+								<li>👉 Überprüfe dein Wissen indem du das Quiz absolvierst.</li>
+								<li>
+									👉 Nimm ein ähnliches Projekt und code es mit dem neu erlangten Wissen nach.
+								</li>
+							</ul>
+							<br />
+							🔥 Oder komm in die programmieren-lernen.rocks Community und erhalte zusätzlichen Deep
+							Dive Content zu dieser Lektion und eine Bonus Challenge, die auf dem Wissen dieses Tutorials
+							aufbaut.
+						</div>
+					</Accordion>
 				</section>
 				<h3>Part 1 - Free Coding Lektion</h3>
 
@@ -157,7 +180,7 @@
 							{#each data.lesson.video1_content.split(/(<Gist.*?\/?>)/) as part}
 								{#if part.startsWith('<Gist')}
 									<!-- Extract the gistUrl from the part -->
-									<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
+									<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)?.[1]} />
 								{:else}
 									<!-- Render non-Gist content -->
 									{@html part}
@@ -178,7 +201,7 @@
 								{#each data.lesson.video2_content.split(/(<Gist.*?\/?>)/) as part}
 									{#if part.startsWith('<Gist') && part !== null}
 										<!-- Extract the gistUrl from the part -->
-										<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
+										<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)?.[1]} />
 									{:else}
 										<!-- Render non-Gist content -->
 										{@html part}
@@ -197,10 +220,8 @@
 							<article>
 								{#each data.lesson.video3_content.split(/(<Gist.*?\/?>)/) as part}
 									{#if part.startsWith('<Gist')}
-										<!-- Extract the gistUrl from the part -->
-										<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)[1]} />
+										<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)?.[1]} />
 									{:else}
-										<!-- Render non-Gist content -->
 										{@html part}
 									{/if}
 								{/each}
@@ -213,6 +234,22 @@
 			</left-side>
 
 			<right-side>
+				{#if $memberContentUnsubscribed}
+					<no-abo-logged
+						>Du hast kein aktives ABO. <a href="/mitglied-werden"><b>Jetzt kaufen!</b></a>
+					</no-abo-logged>
+				{:else if !$showMemberContent}
+					<login-form>
+						<p>Einloggen oder <a href="/mitglied-werden">Mitglied werden</a></p>
+						<LoginForm
+							data={data.loginForm}
+							supabase={data.supabase}
+							height="30vh"
+							showHeader={false}
+							borderTop="none"
+						/>
+					</login-form>
+				{/if}
 				<h2>Dateien</h2>
 				<ul>
 					<li>
@@ -233,9 +270,9 @@
 					<quiz-wrapper slot="details">
 						{#each $questions as question, id}
 							{#if id === actualQuestion - 1}
-								<span class="question">
+								<div class="question">
 									{question?.question}
-								</span>
+								</div>
 
 								{#each question?.answers as answer, id (answer.answer)}
 									<button
@@ -301,25 +338,15 @@
 					</h3>
 					<Comments slot="details" {data} />
 				</Accordion>
+
+				<share-box>
+					<ShareButtons
+						slug={currentPage.url.pathname}
+						title={`${data.lesson.ep} - ${data.lesson.title}`}
+					/>
+				</share-box>
 			</right-side>
 		</detail-page-content>
-
-		{#if $memberContentUnsubscribed}
-			<no-abo-logged
-				>Du hast kein aktives ABO. <a href="/mitglied-werden"><b>Jetzt kaufen!</b></a>
-			</no-abo-logged>
-		{:else if !$showMemberContent}
-			<login-form>
-				<p>Einloggen oder <a href="/mitglied-werden">Mitglied werden</a></p>
-				<LoginForm
-					data={data.loginForm}
-					supabase={data.supabase}
-					height="30vh"
-					showHeader={false}
-					borderTop="none"
-				/>
-			</login-form>
-		{/if}
 	</detail-page-wrapper>
 </MainLayout>
 
@@ -338,11 +365,12 @@
 		}
 
 		& h2 {
-			font-size: 1.2rem;
+			font-size: 1.1rem;
 		}
 
 		& h3 {
-			font-size: 1.1rem;
+			font-size: 1.05rem;
+			padding: 0.6rem 0;
 		}
 
 		& p:not(video-content p) {
@@ -414,10 +442,14 @@
 				position: relative;
 				margin-right: 50px;
 				margin-bottom: 1rem;
+				background-color: var(--bgContainer);
+				padding: 2rem;
+				border-radius: 10px;
 
 				@media (width < 769px) {
 					width: 100%;
 					margin: 0;
+					padding: 1rem;
 				}
 
 				& section {
@@ -433,6 +465,7 @@
 
 						& li {
 							margin: 0;
+							font-size: 0.9rem;
 							color: var(--textAccent);
 						}
 					}
@@ -490,13 +523,20 @@
 
 			& right-side {
 				width: 40%;
-				padding-left: 80px;
+				padding-left: 120px;
 				margin: 1rem 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.6rem;
+
+				@media (width < 1440px) {
+					padding-left: 0px;
+				}
 
 				@media (width < 769px) {
 					width: 100%;
 					margin: 1rem 0;
-					padding: 0;
+					padding: 0 1rem;
 				}
 
 				& h3 span {
@@ -527,6 +567,10 @@
 				& quiz-wrapper {
 					display: block;
 					text-align: center;
+
+					& div.question {
+						text-align: left !important;
+					}
 
 					& button {
 						width: 100%;
@@ -575,42 +619,35 @@
 						border-radius: 10px;
 					}
 				}
-			}
-		}
 
-		& no-abo-logged {
-			position: relative;
-
-			@media (width < 769px) {
-				margin-top: -1.8rem;
-			}
-			@media (width > 1920px) {
-				margin-top: -1.8rem;
-			}
-		}
-
-		& login-form {
-			float: left;
-			margin-bottom: 2rem;
-
-			@media (width < 451px) {
-				width: 100%;
-			}
-
-			@media (width > 1920px) {
-				margin-top: -1.8rem;
-			}
-
-			& p {
-				margin: 2rem 0;
-
-				@media (width < 1441px) {
-					margin: 0;
-					margin-bottom: 3rem;
+				& no-abo-logged {
+					order: 2;
+					margin-top: 2rem;
 				}
 
-				& a {
-					color: var(--secondColor);
+				& login-form {
+					order: 2;
+					margin-top: 0.5rem;
+					padding-top: 2rem;
+					border-top: 1px solid var(--blueAccent);
+
+					@media (width < 451px) {
+						width: 100%;
+					}
+
+					& p {
+						border: none;
+						padding: 0;
+						text-align: center;
+
+						@media (width < 1441px) {
+							margin: 0;
+						}
+
+						& a {
+							color: var(--secondColor);
+						}
+					}
 				}
 			}
 		}
