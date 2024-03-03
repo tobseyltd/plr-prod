@@ -97,7 +97,7 @@
 			on:keydown={() => handleLikeClick(comment.id)}
 			on:click={() => handleLikeClick(comment.id)}
 		>
-			<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
+			<ThumbsUp size={18} strokeWidth={1.5} class="icon" />
 			<span>( {comment.likes} )</span>
 		</likes-box>
 		<dislike-box
@@ -106,7 +106,7 @@
 			on:keydown={() => handleDisLikeClick(comment.id)}
 			on:click={() => handleDisLikeClick(comment.id)}
 		>
-			<ThumbsDown size={20} strokeWidth={1.5} />
+			<ThumbsDown size={18} strokeWidth={1.5} />
 			<span>( {comment.dislikes} )</span>
 		</dislike-box>
 	</like-bar>
@@ -119,9 +119,9 @@
 		gap: 0.2rem;
 		margin-bottom: 1rem;
 		background-color: var(--bgContainer);
-		padding: .7rem 1rem;
+		padding: 0.7rem 1rem;
 		border-radius: 10px;
-		border-bottom: 4px solid var(--blueAccent);
+		border-bottom: 2px solid var(--blueAccent);
 
 		& top-bar {
 			display: flex;
@@ -143,6 +143,8 @@
 			justify-content: start;
 			padding: 0.5rem 0;
 			font-size: 0.9rem;
+			line-height: 1.1rem;
+			font-weight: 300;
 		}
 
 		& like-bar {
@@ -158,7 +160,7 @@
 				display: flex;
 				align-items: center;
 				gap: 0.3rem;
-				font-size: 0.8rem;
+				font-size: 0.7rem;
 				cursor: pointer;
 
 				& span {

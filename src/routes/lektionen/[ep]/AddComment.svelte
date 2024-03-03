@@ -89,9 +89,11 @@
 		& button {
 			margin-top: 1rem;
 			width: 100%;
+			padding: 0.4rem 0;
 
 			&:disabled {
 				background-color: var(--bgContainer);
+				cursor: not-allowed;
 			}
 
 			& span {

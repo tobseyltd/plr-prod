@@ -655,6 +655,7 @@
 						height: 200px;
 						width: 100%;
 						border-radius: 10px;
+						border: 1px solid var(--secondColor)
 					}
 				}
 
