@@ -132,12 +132,12 @@
 					on:keydown={handleLikeClick}
 					on:click={handleLikeClick}
 				>
-					<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
+					<ThumbsUp size={18} strokeWidth={1.5} class="icon" />
 					<span>( {data.lesson.likes} )</span>
 				</likes-box>
 				<a href="#kommentare">
 					<comment-box>
-						<MessageCircle size={20} strokeWidth={1.5} class="icon" />
+						<MessageCircle size={18} strokeWidth={1.5} class="icon" />
 						<span>( {data.lesson.comments?.length} )</span>
 					</comment-box>
 				</a>
@@ -146,8 +146,20 @@
 
 		<detail-page-content>
 			<left-side>
+				<skill-topic-box>
+					<topic-box>
+						{data.lesson.skill}
+					</topic-box>
+
+					<skill-box>
+						{data.lesson.topic}
+					</skill-box>
+				</skill-topic-box>
+
+				<img src={`../.${data.lesson.img}`} alt="" />
 				<h1>{data.lesson.ep?.toUpperCase()} | {data.lesson.title}</h1>
 				<p>{data.lesson.description}</p>
+
 				<section>
 					<Accordion open>
 						<h2 slot="head">⚠️ Wichtige Infos:</h2>
@@ -389,8 +401,8 @@
 			& button {
 				width: 100px;
 				background-color: var(--bgContainer);
-				border-bottom: 2px solid var(--blueAccent);
 				padding: 0;
+				font-size: 0.6rem;
 
 				&:hover {
 					border: 2px solid var(--bgContainer);
@@ -409,14 +421,13 @@
 				& likes-box,
 				comment-box {
 					background-color: var(--bgContainer);
-					padding: 0.2rem 0.7rem;
+					padding: 0.1rem 0.5rem;
 					border-radius: 10px;
 					display: flex;
 					align-items: center;
 					gap: 0.4rem;
-					font-size: 0.8rem;
+					font-size: 0.7rem;
 					cursor: pointer;
-					border-bottom: 2px solid var(--blueAccent);
 
 					&:hover:not(comment-box) {
 						border-color: var(--tertColor);
@@ -445,6 +456,33 @@
 				background-color: var(--bgContainer);
 				padding: 2rem;
 				border-radius: 10px;
+
+				& skill-topic-box {
+					display: flex;
+					justify-content: start;
+					gap: 0.5rem;
+
+					& skill-box,
+					topic-box {
+						display: flex;
+						align-items: center;
+						gap: 0.4rem;
+						background-color: var(--blueAccent);
+						padding: 0 0.9rem;
+						border-radius: 10px;
+						width: auto;
+						font-size: 0.6rem;
+						/* border-top: 0.5px solid var(--secondColor); */
+						margin-bottom: 0.5rem;
+					}
+				}
+
+				& img {
+					width: 100%;
+					border-radius: 10px;
+					margin-bottom: 1rem;
+					overflow: hidden;
+				}
 
 				@media (width < 769px) {
 					width: 100%;

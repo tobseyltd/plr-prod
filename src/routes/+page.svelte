@@ -5,7 +5,7 @@
 <MainLayout
 	title="Programmieren lernen - Dein Coding Mentor"
 	description="Sicherlich interessieren Sie sich dafür, wie Sie das Programmieren lernen können. Wir bieten Ihnen hier die Möglichkeit, das Coden zu erlernen und Ihre Fähigkeiten in den Bereichen HTML, CSS und JavaScript zu verbessern. Egal, ob Sie ein Anfänger sind oder bereits Erfahrung haben, unsere Lehrmaterialien und Kurse werden Ihnen helfen, Ihre Programmierkenntnisse auf das nächste Level zu bringen. Beginnen Sie noch heute und tauchen Sie ein in die faszinierende Welt des Codens!"
-	imageUrl=""
+	imageUrl="../../images/social-share-image.jpg"
 >
 	<hero-wrapper>
 		<hero-section>
