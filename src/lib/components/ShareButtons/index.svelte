@@ -30,13 +30,14 @@
 	const url = `${siteUrl}${slug}`;
 </script>
 
-<aside aria-label="Share buttons" class="container">
+<section aria-label="Share buttons">
 	<share-wrapper>
 		Teilen: <button-box>
 			{#if webShareAPISupported}
-				<button on:click={handleWebShare}
-					><span class="screen-reader-text">Share</span><ShareIcon width={48} /></button
-				>
+				<button on:click={handleWebShare}>
+					<span class="screen-reader-text">Share</span>
+					<ShareIcon width={48} />
+				</button>
 			{:else}
 				<Twitter {url} {title} />
 				<Facebook {url} />
@@ -45,7 +46,7 @@
 			{/if}
 		</button-box>
 	</share-wrapper>
-</aside>
+</section>
 
 <style>
 	share-wrapper {
@@ -62,7 +63,7 @@
 			justify-content: space-between;
 
 			& button {
-				padding: .35rem;
+				padding: 0.35rem;
 			}
 		}
 	}

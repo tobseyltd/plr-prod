@@ -4,7 +4,7 @@
 	import type { PageData } from './$types';
 	import Gist from '$lib/utils/Gist.svelte';
 	import { goto } from '$app/navigation';
-	import { ThumbsUp, MessageCircle, Paperclip } from 'lucide-svelte';
+	import { ThumbsUp, MessageCircle, ExternalLink, Github } from 'lucide-svelte';
 	import Comments from './Comments.svelte';
 	import AddComment from './AddComment.svelte';
 	import Accordion from '$lib/utils/Accordion.svelte';
@@ -27,6 +27,27 @@
 	let quizBtnDisabled = false;
 	let actualQuestion = 1;
 	let currentPage: Page;
+
+	interface Link {
+		icon: string;
+		link: string;
+		title: string;
+	}
+
+	const linkMap: any = {
+		"Github": Github,
+		"Website": ExternalLink
+	};
+
+
+	const links = data.lesson.files?.map((link: Link) => {
+		const iconComponent = linkMap[link.icon];
+
+		return {
+			...link,
+			icon: iconComponent
+		};
+	});
 
 	function checkAnswer(event: any, question: any) {
 		const choice = event.target.children[0].innerText.toUpperCase();
@@ -263,18 +284,14 @@
 				{/if}
 				<h2>Links</h2>
 				<ul>
-					<li>
-						<a
-							href="/files/Handbuch_Frontend_Entwickler_2_of_4_v2.pdf"
-							target="_blank"
-							rel="noopener noreferrer"><Paperclip strokeWidth={1.5} size={20} /> Handbuch</a
-						>
-					</li>
-					<li>
-						<a href="/files/monaspace-v1.000.zip" target="_blank" rel="noopener noreferrer"
-							><Paperclip strokeWidth={1.5} size={20} /> <span>Schriftart</span></a
-						>
-					</li>
+					{#each links as link}
+						<li>
+							<a href={link.link} target="_blank" rel="noopener noreferrer">
+								<svelte:component this={link.icon} strokeWidth={1.5} size={20} />
+								<span style="padding-top: 3px;"> {link.title}</span>
+							</a>
+						</li>
+					{/each}
 				</ul>
 				<Accordion>
 					<h3 slot="head">Quiz <span>( {data.lesson.quiz.length} Fragen )</span></h3>
