@@ -32,8 +32,7 @@
 		const choice = event.target.children[0].innerText.toUpperCase();
 		quizBtnDisabled = true;
 
-		let updatedQuestion = { ...question }; // Create a shallow copy of the question object
-
+		let updatedQuestion = { ...question };
 		if (choice === question.answer.toUpperCase()) {
 			score++;
 			updatedQuestion.isRight = 'correct';
@@ -157,7 +156,7 @@
 				</skill-topic-box>
 
 				<img src={`../.${data.lesson.img}`} alt="" />
-				<h1>{data.lesson.ep?.toUpperCase()} | {data.lesson.title}</h1>
+				<h1>EP-{data.lesson.ep?.toUpperCase()} | {data.lesson.title}</h1>
 				<p>{data.lesson.description}</p>
 
 				<section>
@@ -245,7 +244,7 @@
 				{/if}
 			</left-side>
 
-			<right-side>
+			<aside>
 				{#if $memberContentUnsubscribed}
 					<no-abo-logged
 						>Du hast kein aktives ABO. <a href="/mitglied-werden"><b>Jetzt kaufen!</b></a>
@@ -262,7 +261,7 @@
 						/>
 					</login-form>
 				{/if}
-				<h2>Dateien</h2>
+				<h2>Links</h2>
 				<ul>
 					<li>
 						<a
@@ -312,7 +311,7 @@
 										? 'Quiz abschließen'
 										: 'Nächste Frage'}</button
 								>
-								{#if actualQuestion === $questions.length}
+								<!-- 	{#if actualQuestion === $questions.length}
 									- oder -
 									<br />
 									<button
@@ -326,7 +325,7 @@
 									>
 										Quiz erneut machen</button
 									>
-								{/if}
+								{/if} -->
 							{/if}
 						{/each}
 						{#if actualQuestion > $questions.length}
@@ -337,6 +336,17 @@
 										: '🫨'}</strong
 								>
 							</score-box>
+							<button
+								class="do-it-again"
+								on:click={() => {
+									quizBtnDisabled = false;
+									questions.set([...data.lesson.quiz]);
+									actualQuestion = 1;
+									score = 0;
+								}}
+							>
+								Quiz erneut machen
+							</button>
 						{/if}
 					</quiz-wrapper>
 				</Accordion>
@@ -357,7 +367,7 @@
 						title={`${data.lesson.ep} - ${data.lesson.title}`}
 					/>
 				</share-box>
-			</right-side>
+			</aside>
 		</detail-page-content>
 	</detail-page-wrapper>
 </MainLayout>
@@ -559,7 +569,7 @@
 				}
 			}
 
-			& right-side {
+			& aside {
 				width: 40%;
 				padding-left: 120px;
 				margin: 1rem 0;
@@ -655,7 +665,7 @@
 						height: 200px;
 						width: 100%;
 						border-radius: 10px;
-						border: 1px solid var(--secondColor)
+						border: 1px solid var(--secondColor);
 					}
 				}
 

@@ -117,7 +117,7 @@
 				<ul>
 					<li><a href="/impressum">Impressum</a></li>
 					<li><a href="/datenschutz">Datenschutz</a></li>
-					<li><a href="/agb">Geschäftsbedingungen</a></li>
+					<!-- <li><a href="/agb">Geschäftsbedingungen</a></li> -->
 				</ul>
 			</left-column-1>
 
@@ -126,7 +126,6 @@
 				<ul>
 					<li><a href="/lektionen">Lektionen</a></li>
 					<li><Tooltip tooltip="Bald!">Coding Blog</Tooltip></li>
-					<li><Tooltip tooltip="Bald!">Online Shop</Tooltip></li>
 				</ul>
 			</left-column-2>
 
@@ -209,35 +208,25 @@
 				<ul>
 					<li><Tooltip tooltip="Bald!">Dozententätigkeit</Tooltip></li>
 					<li><Tooltip tooltip="Bald!">Web Entwickler</Tooltip></li>
-					<li><Tooltip tooltip="Bald!">Coaching</Tooltip></li>
+
 					<li></li>
 					<li></li>
 				</ul>
 			</right-column-1>
 			<right-column-2>
-				<p><b>Remote Kurs</b></p>
+				<p><b>Shopping</b></p>
 				<ul>
-					<li>
-						<a
-							href="https://bergemann-hoehne.com/fullstack-developer/"
-							target="_blank"
-							rel="noopener noreferrer"
-							>Teilnahme
-						</a>
-					</li>
-					<li>
-						<a href="https://bergemann-hoehne.com/" target="_blank" rel="noopener noreferrer"
-							>Bergemann & Höhne
-						</a>
-					</li>
-					<li>
+					<li><Tooltip tooltip="Bald!">Online Shop</Tooltip></li>
+
+					<li><Tooltip tooltip="Bald!">Coaching</Tooltip></li>
+				<!-- 	<li>
 						<a
 							href="https://bergemann-hoehne.com/wp-content/uploads/2023/10/Flyer-FullStack-w.pdf"
 							target="_blank"
 							rel="noopener noreferrer"
 							>Informationen
 						</a>
-					</li>
+					</li> -->
 					<li></li>
 					<li></li>
 				</ul>

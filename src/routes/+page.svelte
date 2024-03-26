@@ -54,7 +54,7 @@
 					<p>
 						Erlerne die aktuellste Syntax und schreibe Html Code wie ein Profi. Du kannst mir
 						glauben, es gibt nur sehr wenige Entwickler da draußen, die semantisch korrektes und
-						leicht leserliches HTML schreiben. Heb dich ab, mit Leichtigkeit!
+						leicht leserliches sowie verständliches HTML schreiben. Heb dich ab, mit Leichtigkeit!
 					</p>
 				</section>
 			</grid-item-1>
@@ -72,7 +72,7 @@
 					</picture>
 					<h3>CSS</h3>
 					<p>
-						CSS hat sich in den letzten Jahren schon fast zu einer Programmiersprache entwickelt.
+						CSS hat sich in den letzten Jahren schon fast zu einer Programmier-sprache entwickelt.
 						Auch hier ist es heutzutage ziemlich einfach sich von anderen Entwicklern abzuheben.
 						Nesting, Variablen, Funktionen, das alles macht CSS zu einem sehr mächtigen Werkzeug.
 						Meistere es und du wirst zum gefragten Professional.
@@ -128,13 +128,10 @@
 					Backend-Entwicklung, erfahre, wie man Benutzeroberflächen (UI's) erstellt, und beherrsche
 					die Programmiersprachen und Frameworks, die das moderne Web antreiben.
 				</p>
-				<h3>Persönliches Coaching & Remote Kurs.</h3>
+				<h3>Persönliches Coaching & Discord Community.</h3>
 				<p>
 					Du kannst außerdem ein Einzelcoaching bzw. Code Review buchen. Zusätzlich hast du die
-					Möglichkeit an einem Fullstack Developer Kurs teilzunehmen, der über 12 Monate geht, und
-					alle Aspekte der Web Entwicklung abdeckt. Das Beste: Ich bin dort Dozent und der Kurs kann
-					sowohl über einen Bildungsgutschein finanziert werden als auch über eine Finanzierung für
-					Selbstzahler.
+					Möglichkeit der Discord Community  beizutreten und dich mit anderen Anfängern auszutauschen. Das Beste: Ich war freiberuflicher Dozent für Frontend Weiterbildungen und stehe Dir immer gerne zur Seite bei Fragen.<br />
 					<b><em>Sprich mich einfach an!</em></b>
 				</p>
 				<button>Ich will mehr wissen</button>

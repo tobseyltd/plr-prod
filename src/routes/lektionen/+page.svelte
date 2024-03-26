@@ -60,7 +60,7 @@
 				type="search"
 				name=""
 				id=""
-				placeholder="Lektion suchen 🔎"
+				placeholder="🔍 Lektion suchen"
 			/>
 			<select-filter>
 				<select
@@ -93,7 +93,7 @@
 
 		<grid-wrapper>
 			{#each $filteredLessons.slice(0, lessonsPerPage) as lesson}
-				<a href={`/lektionen/${lesson.ep?.toLocaleLowerCase()}`}>
+				<a href={`/lektionen/ep-${lesson.ep?.toLocaleLowerCase()}`}>
 					<lesson-card>
 						<left-side>
 							<img
@@ -182,30 +182,47 @@
 				cursor: auto;
 				padding-inline: 0.6rem;
 
+				&::placeholder {
+					color: var(--textAccent);
+					font-size: 0.65rem;
+				}
+
 				&:focus-visible {
 					outline: none;
 				}
 
-				@media (width < 451px) {
+				@media (width <= 450px) {
 					width: 100%;
+					height: 35px;
 					font-size: 0.7rem;
+
+					&::placeholder {
+						font-size: 0.8rem;
+					}
 				}
 			}
 
 			& select-filter {
 				display: flex;
 				gap: 1rem;
+				flex-wrap: wrap;
 
-				& select {
+				@media (width <= 450px) {
+					gap: 0.7rem;
+				}
+
+				& select[id='category-filter'],
+				select[id='skill-filter'] {
 					border-radius: 0.3rem;
 					background-color: var(--bgContainer);
 					border: none;
 					border-bottom: 4px solid var(--bgContainer);
-					color: white;
+					color: var(--textAccent);
 					padding-inline: 2rem;
 
-					@media (width < 451px) {
+					@media (width <= 450px) {
 						width: 100%;
+						height: 35px;
 					}
 				}
 			}
@@ -224,8 +241,8 @@
 					display: flex;
 					gap: 10px;
 					overflow: hidden;
-					border-bottom: 1px solid var(--blueAccent);
-					padding: 1.5rem 0;
+					/* border-bottom: 1px solid var(--blueAccent); */
+					padding: 1rem 0;
 
 					@media (width < 769px) {
 						flex-direction: column;

@@ -9,7 +9,7 @@ import { commentSchema } from './ZodSchemas';
 
 export const load: PageServerLoad = async (event) => {
 	const session = await event.locals.getSession();
-
+	
 	async function getLesson(ep: string) {
 		const { error: contactError, data: contact } = await event.locals.supabase
 			.from('lessons')
@@ -27,7 +27,7 @@ export const load: PageServerLoad = async (event) => {
 		return contact;
 	}
 	return {
-		lesson: await getLesson(event.params.ep),
+		lesson: await getLesson(event.params.ep.match(/[0-9]/g).join('')),
 		loginForm: await superValidate(zod(loginSchema)),
 		tier: session && (await getSubscriptionTier(session.user.id)),
 		paymentStatus: session && (await getPaymentStatus(session.user.id)),

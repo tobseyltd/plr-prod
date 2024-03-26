@@ -11,6 +11,8 @@
 	let inputValue: string | null;
 	let loading = false;
 
+	$: console.log(lesson.comments);
+
 	async function handleNewComment() {
 		loading = true;
 
@@ -27,14 +29,19 @@
 				day: '2-digit'
 			})
 		};
+
 		const newCommentsArray = [newComment, ...lesson.comments];
 
-		const { error: newCommentError } = await supabase
+		const { data, error: newCommentError } = await supabase
 			.from('lessons')
 			.update({ comments: newCommentsArray })
 			.eq('id', lesson.id)
 			.select();
-		if (newCommentError) toast.error(newCommentError.message, toastSettings);
+
+		if (newCommentError) {
+			console.log(newCommentError);
+			toast.error(newCommentError.message, toastSettings);
+		}
 
 		toast.success('Kommentar hinzugefügt', toastSettings);
 		inputValue = null;
