@@ -35,6 +35,7 @@ export async function getPaymentStatus(user_id: string) {
 		.maybeSingle();
 
 	if (paymentError) {
+		console.log(paymentError.message)
 		throw paymentError;
 	}
 	return status?.payment_status;

@@ -106,6 +106,7 @@
 			showMemberContent.set(data.tier === 'ABO' || data.paymentStatus === 'paid');
 			memberContentUnsubscribed.set(data.tier === 'Keine' || data.paymentStatus === undefined);
 		}
+		console.log($memberContentUnsubscribed)
 	}
 
 	const channels = data.supabase
