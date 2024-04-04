@@ -80,7 +80,7 @@
 				}
 
 				// Update the questions array with the new question object
-				questions.update((questionsValue) => {
+				questions.update((questionsValue: any[]) => {
 					const updatedQuestions = questionsValue.map((q: any) => {
 						if (q === question) {
 							return updatedQuestion;
@@ -113,7 +113,7 @@
 		.on(
 			'postgres_changes',
 			{ event: 'UPDATE', schema: 'public', table: 'lessons', filter: `id=eq.${data.lesson.id}` },
-			(payload) => {
+			(payload: { new: { comments: any; likes: any; }; }) => {
 				if (payload.new.comments) {
 					data.lesson.comments = payload.new.comments;
 				}
@@ -122,7 +122,7 @@
 		)
 		.subscribe();
 
-	const unsubscribe = page.subscribe((value) => {
+	const unsubscribe = page.subscribe((value: any) => {
 		currentPage = value;
 	});
 
