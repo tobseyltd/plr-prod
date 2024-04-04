@@ -106,7 +106,6 @@
 			showMemberContent.set(data.tier === 'ABO' || data.paymentStatus === 'paid');
 			memberContentUnsubscribed.set(data.tier === 'Keine' || data.paymentStatus === undefined);
 		}
-		console.log($memberContentUnsubscribed)
 	}
 
 	const channels = data.supabase
@@ -114,7 +113,7 @@
 		.on(
 			'postgres_changes',
 			{ event: 'UPDATE', schema: 'public', table: 'lessons', filter: `id=eq.${data.lesson.id}` },
-			(payload: { new: { comments: any; likes: any; }; }) => {
+			(payload: { new: { comments: any; likes: any } }) => {
 				if (payload.new.comments) {
 					data.lesson.comments = payload.new.comments;
 				}
@@ -295,9 +294,7 @@
 
 			<aside>
 				{#if $memberContentUnsubscribed}
-					<no-abo-logged
-						>Du hast kein aktives ABO. <a href="/mitglied-werden"><b>Jetzt kaufen!</b></a>
-					</no-abo-logged>
+					<p></p>
 				{:else if !$showMemberContent}
 					<login-form>
 						<p>Einloggen oder <a href="/mitglied-werden">Mitglied werden</a></p>
