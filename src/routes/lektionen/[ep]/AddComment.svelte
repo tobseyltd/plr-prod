@@ -10,9 +10,6 @@
 
 	let inputValue: string | null;
 	let loading = false;
-
-	$: console.log(lesson.comments);
-
 	async function handleNewComment() {
 		loading = true;
 

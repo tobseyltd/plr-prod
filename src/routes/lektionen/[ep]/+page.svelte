@@ -35,10 +35,9 @@
 	}
 
 	const linkMap: any = {
-		"Github": Github,
-		"Website": ExternalLink
+		Github: Github,
+		Website: ExternalLink
 	};
-
 
 	const links = data.lesson.files?.map((link: Link) => {
 		const iconComponent = linkMap[link.icon];
@@ -49,38 +48,57 @@
 		};
 	});
 
-	function checkAnswer(event: any, question: any) {
-		const choice = event.target.children[0].innerText.toUpperCase();
-		quizBtnDisabled = true;
+	function checkAnswer({ target }: any, question: any) {
+		const handleAnswerClick = () => {
+			let choice = target.children[0];
+			const correctAnswer = question.answer.toUpperCase();
 
-		let updatedQuestion = { ...question };
-		if (choice === question.answer.toUpperCase()) {
-			score++;
-			updatedQuestion.isRight = 'correct';
-			event.target.style.borderColor = 'green';
-		} else {
-			updatedQuestion.isRight = 'incorrect';
-			event.target.style.borderColor = 'red';
-		}
+			// Check if choice and innerText are valid
+			if (choice && choice.innerText) {
+				quizBtnDisabled = true;
 
-		// Update the questions array with the new question object
-		questions.update((questionsValue) => {
-			const updatedQuestions = questionsValue.map((q: any) => {
-				if (q === question) {
-					return updatedQuestion;
+				let updatedQuestion = { ...question };
+				if (choice.innerText.toUpperCase() === correctAnswer) {
+					choice.innerText = `👍 ` + choice.innerText;
+
+					score++;
+					updatedQuestion.isRight = 'correct';
+					target.style.borderColor = 'green';
+				} else {
+					choice.innerText = `👎 ` + choice.innerText;
+					updatedQuestion.isRight = 'incorrect';
+					target.style.borderColor = 'red';
+
+					// Highlight the correct answer
+					const correctButton = [...target.parentElement.children].find(
+						(answerButton: any) => answerButton.firstChild.innerText === correctAnswer
+					);
+
+					if (correctButton) {
+						correctButton.style.borderColor = 'green';
+					}
 				}
-				return q;
-			});
-			return updatedQuestions;
-		});
-	}
 
-	async function finishQuiz() {
-		const { error } = await data.supabase
-			.from('lessons')
-			.update({ quiz: $questions })
-			.eq('id', data.lesson.id)
-			.select();
+				// Update the questions array with the new question object
+				questions.update((questionsValue) => {
+					const updatedQuestions = questionsValue.map((q: any) => {
+						if (q === question) {
+							return updatedQuestion;
+						}
+						return q;
+					});
+					return updatedQuestions;
+				});
+			} else {
+				// Retry after a short delay if choice or innerText are undefined
+				setTimeout(() => {
+					handleAnswerClick();
+				}, 100);
+			}
+		};
+
+		// Call handleAnswerClick initially
+		handleAnswerClick();
 	}
 
 	$: {
@@ -137,7 +155,7 @@
 </script>
 
 <MainLayout
-	title={`${data.lesson.ep} - ${data.lesson.title}`}
+	title={`EP-${data.lesson.ep} - ${data.lesson.title}`}
 	description={`${data.lesson.description}`}
 	imageUrl={`${data.lesson.img}`}
 >
@@ -175,9 +193,14 @@
 						{data.lesson.topic}
 					</skill-box>
 				</skill-topic-box>
+				<video-wrapper>
+					{@html data.lesson.video1}
+				</video-wrapper>
 
-				<img src={`../.${data.lesson.img}`} alt="" />
-				<h1>EP-{data.lesson.ep?.toUpperCase()} | {data.lesson.title}</h1>
+				<!-- <img src={`../.${data.lesson.img}`} alt="" /> -->
+				<h1 style="margin-top: 1.5rem;">
+					EP-{data.lesson.ep?.toUpperCase()} | {data.lesson.title}
+				</h1>
 				<p>{data.lesson.description}</p>
 
 				<section>
@@ -188,6 +211,7 @@
 							<ul>
 								<li>👉 Schaue immer zuerst das Video ein Mal komplett an.</li>
 								<li>👉 Versuche nachzuvollziehen und zu verstehen, was ich in dem Video zeige.</li>
+								<li>👉 Lade dir die Assets aus dem GitHub Repository</li>
 								<li>👉 Beginne dann mit dem Nachbau des Web Projekts aus dem Tutorial.</li>
 								<li>👉 Überprüfe dein Wissen indem du das Quiz absolvierst.</li>
 								<li>
@@ -201,7 +225,7 @@
 						</div>
 					</Accordion>
 				</section>
-				<h3>Part 1 - Free Coding Lektion</h3>
+				<!-- <h3>Part 1 - Free Coding Lektion</h3>
 
 				<video-wrapper>
 					{@html data.lesson.video1}
@@ -211,16 +235,14 @@
 						{#if data.lesson.video1_content}
 							{#each data.lesson.video1_content.split(/(<Gist.*?\/?>)/) as part}
 								{#if part.startsWith('<Gist')}
-									<!-- Extract the gistUrl from the part -->
 									<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)?.[1]} />
 								{:else}
-									<!-- Render non-Gist content -->
 									{@html part}
 								{/if}
 							{/each}
 						{/if}
 					</article>
-				</video-content>
+				</video-content> -->
 				<h3>Part 2 - Members Coding Lektion</h3>
 
 				{#if $showMemberContent}
@@ -228,6 +250,7 @@
 						<video-wrapper>
 							{@html data.lesson.video2}
 						</video-wrapper>
+
 						<video-content>
 							<article>
 								{#each data.lesson.video2_content.split(/(<Gist.*?\/?>)/) as part}
@@ -262,6 +285,10 @@
 					{/if}
 					<!-- <AddComment {data} />
 				<Comments {data} /> -->
+				{:else}
+					<p style="font-size: .8rem;">
+						Sichbar nach Abschluß einer <a href="/mitglied-werden">Mitgliedschaft</a>
+					</p>
 				{/if}
 			</left-side>
 
@@ -306,17 +333,18 @@
 									<button
 										disabled={quizBtnDisabled}
 										on:click={(event) => checkAnswer(event, question)}
-										><strong>{answer.answer.toUpperCase()}</strong>: {answer.value}</button
 									>
+										<strong>{answer.answer.toUpperCase()}</strong>: {answer.value}
+									</button>
 								{/each}
-								<answer-box>
+								<!-- <answer-box>
 									{#if question?.isRight === 'correct'}
 										<b style="color: green">Korrekte Antwort 👍</b>
 									{:else if question?.isRight === 'incorrect'}
 										<b style="color: red;">Leider falsch 👎, korrekte Antwort: {question?.answer}</b
 										>
 									{/if}
-								</answer-box>
+								</answer-box> -->
 								<button
 									type="submit"
 									disabled={!quizBtnDisabled}
@@ -324,10 +352,8 @@
 										actualQuestion++;
 										quizBtnDisabled = false;
 									}}
-									>{actualQuestion === $questions.length
-										? 'Quiz abschließen'
-										: 'Nächste Frage'}</button
-								>
+									>{actualQuestion === $questions.length ? 'Quiz abschließen' : 'Nächste Frage'}
+								</button>
 								<!-- 	{#if actualQuestion === $questions.length}
 									- oder -
 									<br />
@@ -348,16 +374,17 @@
 						{#if actualQuestion > $questions.length}
 							<score-box>
 								<strong
-									>Ergebnis: {score} von {$questions.length} richtig {score > $questions.length - 2
+									>Ergebnis: {score} von {$questions.length} richtig {score / $questions.length >=
+									0.8
 										? '🥳'
-										: '🫨'}</strong
+										: '😒'}</strong
 								>
 							</score-box>
 							<button
 								class="do-it-again"
 								on:click={() => {
 									quizBtnDisabled = false;
-									questions.set([...data.lesson.quiz]);
+									questions.set(data.lesson.quiz);
 									actualQuestion = 1;
 									score = 0;
 								}}
@@ -568,12 +595,18 @@
 
 					& blockquote {
 						margin: 1.5rem 0.4rem;
-						padding: 1rem 3rem;
+						padding: 1rem 2rem;
 						background-color: var(--bgContainer);
 						color: white;
 						border-radius: 10px;
-						white-space: pre-wrap;
+						white-space: wrap;
 						width: auto;
+						font-size: 0.8rem;
+						text-align: center;
+
+						& a {
+							color: white;
+						}
 
 						@media (width < 451px) {
 							padding: 0.7rem 1rem;
@@ -635,6 +668,7 @@
 
 					& div.question {
 						text-align: left !important;
+						font-size: 0.9rem;
 					}
 
 					& button {

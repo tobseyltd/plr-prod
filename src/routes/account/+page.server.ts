@@ -69,7 +69,11 @@ export const actions: Actions = {
 			.update(profileForm.data)
 			.eq('id', session.user.id);
 
-		if (profileError) {
+		const { error: accountError } = await supabaseAdmin.auth.admin.updateUserById(session.user.id, {
+			user_metadata: profileForm.data
+		});
+
+		if (profileError || accountError) {
 			return setError(profileForm, 'Error updating your profile.');
 		}
 

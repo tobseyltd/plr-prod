@@ -33,17 +33,10 @@
 <section aria-label="Share buttons">
 	<share-wrapper>
 		Teilen: <button-box>
-			{#if webShareAPISupported}
-				<button on:click={handleWebShare}>
-					<span class="screen-reader-text">Share</span>
-					<ShareIcon width={48} />
-				</button>
-			{:else}
-				<Twitter {url} {title} />
-				<Facebook {url} />
-				<Telegram {url} {title} />
-				<Whatsapp {url} {title} />
-			{/if}
+			<Twitter {url} {title} />
+			<Facebook {url} />
+			<Telegram {url} {title} />
+			<Whatsapp {url} {title} />
 		</button-box>
 	</share-wrapper>
 </section>

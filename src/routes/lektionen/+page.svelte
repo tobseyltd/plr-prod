@@ -108,7 +108,7 @@
 						</left-side>
 
 						<lesson-info>
-							<h2>{lesson.ep?.toUpperCase()} : {lesson.title}</h2>
+							<h2>EP-{lesson.ep?.toUpperCase()} : {lesson.title}</h2>
 							<info-box>
 								<likes-box>
 									<ThumbsUp size={20} strokeWidth={1.5} class="icon" />
