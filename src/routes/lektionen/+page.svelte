@@ -221,7 +221,7 @@
 					padding-inline: 2rem;
 
 					@media (width <= 450px) {
-						width: 100%;
+						width: 100% !important;
 						height: 35px;
 					}
 				}

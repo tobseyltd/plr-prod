@@ -108,7 +108,6 @@
 		}
 
 		console.log(`https://www.programmieren-lernen.rocks${data.lesson.img?.slice(1)}`);
-
 	}
 
 	const channels = data.supabase
@@ -745,8 +744,8 @@
 					@media (width < 451px) {
 						height: 100%;
 						width: 100%;
-						margin-top: 0.5rem;
-						margin-bottom: 2rem;
+						margin-top: .5rem;
+						margin-bottom: 3rem;
 					}
 
 					& p {
@@ -758,9 +757,9 @@
 							margin: 0;
 						}
 
-						@media (width < 451px) {
+						@media (width <= 450px) {
 							position: relative;
-							margin-bottom: 3rem;
+							margin-bottom: 4rem;
 						}
 
 						& a {
