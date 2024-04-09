@@ -27,7 +27,7 @@
 <MainLayout
 	title="Mitglied werden"
 	description="Entdecke die spannende Welt des Programmierens und tauche ein in eine lebendige Community von Gleichgesinnten! Mit meiner einzigartigen Coding-Membership erhältst du Zugang zu hochwertigem Content und Challenges, die dir helfen, Deine Fähigkeiten im Programmieren zu verbessern. Gerade, wenn du gerade erst angefangen oder bereits Erfahrung hast, meine Plattform bietet maßgeschneiderte Lerninhalte und persönliche Unterstützung, um Dir auf Deinem Weg zum erfolgreichen Entwickler zu helfen. Werde jetzt Teil meiner Community und entdecke die endlosen Möglichkeiten des Programmierens!"
-	imageUrl=""
+	imageUrl="https://www.programmieren-lernen.rocks/images/mitgliedschaft.png"
 >
 	<subscription-page-wrapper>
 		<top-slogan>
@@ -106,20 +106,20 @@
 				<p>Gesicherte AES-256-verschlüsselte Zahlungen mit Stripe:</p>
 			</slogan-box>
 
-			<payment-icons>
+			<payment-icons aria-labelledby="Bezahlmöglichkeiten">
 				<!-- 	<img src="/images/stripe.svg" width="50px" height="50px" alt="stripe payment icon" /> -->
-				<img src="/images/paypal.svg" width="50px" height="50px" alt="paypal payment icon" />
-				<img src="/images/giropay.svg" width="50px" height="50px" alt="giropay payment icon" />
-				<img src="/images/klarna.svg" width="50px" height="50px" alt="klarna payment icon" />
+				<img src="/images/paypal.svg" width="50px" height="50px" alt="PayPal" />
+				<img src="/images/stripe.svg" width="50px" height="50px" alt="Stripe" />
+				<img src="/images/klarna.svg" width="50px" height="50px" alt="Klarna" />
 
 				<img
 					src="/images/mastercard.svg"
 					width="50px"
 					height="50px"
-					alt="mastercard payment icon"
+					alt="Mastercard Kreditkarte"
 				/>
 
-				<img src="/images/visa.svg" width="50px" height="50px" alt="visa payment icon" />
+				<img src="/images/visa.svg" width="50px" height="50px" alt="Visa Kreditkarte" />
 			</payment-icons>
 		</payment-box>
 

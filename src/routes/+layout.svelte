@@ -219,7 +219,7 @@
 					<li><Tooltip tooltip="Bald!">Online Shop</Tooltip></li>
 
 					<li><Tooltip tooltip="Bald!">Coaching</Tooltip></li>
-				<!-- 	<li>
+					<!-- 	<li>
 						<a
 							href="https://bergemann-hoehne.com/wp-content/uploads/2023/10/Flyer-FullStack-w.pdf"
 							target="_blank"
@@ -257,6 +257,10 @@
 
 <style>
 	header {
+		@media (width <= 450px) {
+			padding: .5rem 0;
+		}
+		
 		& header-wrapper {
 			container-type: inline-size;
 			height: 8cqh;

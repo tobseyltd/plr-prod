@@ -106,6 +106,9 @@
 			showMemberContent.set(data.tier === 'ABO' || data.paymentStatus === 'paid');
 			memberContentUnsubscribed.set(data.tier === 'Keine' || data.paymentStatus === undefined);
 		}
+
+		console.log(`https://www.programmieren-lernen.rocks${data.lesson.img?.slice(1)}`);
+
 	}
 
 	const channels = data.supabase
@@ -157,7 +160,7 @@
 <MainLayout
 	title={`EP-${data.lesson.ep} - ${data.lesson.title}`}
 	description={`${data.lesson.description}`}
-	imageUrl={`${data.lesson.img}`}
+	imageUrl={`https://www.programmieren-lernen.rocks/lesson-images/${data.lesson.img?.slice(0)}`}
 >
 	<detail-page-wrapper>
 		<status-bar>
@@ -450,6 +453,11 @@
 			margin-bottom: 1.5rem;
 			padding-bottom: 1rem;
 
+			@media (width <= 450px) {
+				border: none;
+				padding-bottom: 0;
+			}
+
 			& button {
 				width: 100px;
 				background-color: var(--bgContainer);
@@ -526,6 +534,11 @@
 						font-size: 0.6rem;
 						/* border-top: 0.5px solid var(--secondColor); */
 						margin-bottom: 0.5rem;
+
+						@media (width <= 450px) {
+							margin: 0;
+							font-size: 0.8rem;
+						}
 					}
 				}
 
@@ -631,7 +644,7 @@
 
 				@media (width < 769px) {
 					width: 100%;
-					margin: 1rem 0;
+					margin: 2rem 0;
 					padding: 0 1rem;
 				}
 
@@ -730,7 +743,10 @@
 					border-top: 1px solid var(--blueAccent);
 
 					@media (width < 451px) {
+						height: 100%;
 						width: 100%;
+						margin-top: 0.5rem;
+						margin-bottom: 2rem;
 					}
 
 					& p {
@@ -740,6 +756,11 @@
 
 						@media (width < 1441px) {
 							margin: 0;
+						}
+
+						@media (width < 451px) {
+							position: relative;
+							margin-bottom: 3rem;
 						}
 
 						& a {
