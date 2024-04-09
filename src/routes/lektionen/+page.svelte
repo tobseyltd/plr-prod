@@ -211,8 +211,8 @@
 					gap: 0.7rem;
 				}
 
-				& select #category-filter,
-				select #skill-filter {
+				& #category-filter,
+				#skill-filter {
 					border-radius: 0.3rem;
 					background-color: var(--bgContainer);
 					border: none;
