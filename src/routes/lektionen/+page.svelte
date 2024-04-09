@@ -208,6 +208,7 @@
 				flex-wrap: wrap;
 
 				@media (width <= 450px) {
+					width: 100%;
 					gap: 0.7rem;
 				}
 
@@ -221,7 +222,7 @@
 					padding-inline: 2rem;
 
 					@media (width <= 450px) {
-						min-width: 100% !important;
+						width: 100% !important;
 						height: 35px;
 					}
 				}
