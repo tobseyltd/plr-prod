@@ -154,7 +154,7 @@
 <MainLayout
 	title={`EP-${data.lesson.ep} - ${data.lesson.title}`}
 	description={`${data.lesson.description}`}
-	imageUrl={`https://www.programmieren-lernen.rocks/${data.lesson.img?.slice(0, -4)}jpg`}
+	imageUrl={`https://www.programmieren-lernen.rocks/${data.lesson.img}`}
 >
 	<detail-page-wrapper>
 		<status-bar>
