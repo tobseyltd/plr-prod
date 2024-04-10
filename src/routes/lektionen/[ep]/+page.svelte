@@ -16,6 +16,12 @@
 	import { onDestroy } from 'svelte';
 	import type { Page } from '@sveltejs/kit';
 
+	interface Link {
+		icon: string;
+		link: string;
+		title: string;
+	}
+
 	export let data: PageData;
 
 	let showMemberContent = writable<boolean>(false);
@@ -27,12 +33,6 @@
 	let quizBtnDisabled = false;
 	let actualQuestion = 1;
 	let currentPage: Page;
-
-	interface Link {
-		icon: string;
-		link: string;
-		title: string;
-	}
 
 	const linkMap: any = {
 		Github: Github,
@@ -154,7 +154,7 @@
 <MainLayout
 	title={`EP-${data.lesson.ep} - ${data.lesson.title}`}
 	description={`${data.lesson.description}`}
-	imageUrl={`https://www.programmieren-lernen.rocks/lesson-images/${data.lesson.img?.slice(0, -4)}jpg`}
+	imageUrl={`https://www.programmieren-lernen.rocks/${data.lesson.img?.slice(0, -4)}jpg`}
 >
 	<detail-page-wrapper>
 		<status-bar>
