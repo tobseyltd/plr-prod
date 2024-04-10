@@ -42,6 +42,8 @@
 <login-form style={`height: ${height}; border-top: ${borderTop};`}>
 	{#if showHeader}
 		<h1>Login</h1>
+	{:else}
+		<p>Einloggen oder <a href="/mitglied-werden">Mitglied werden</a></p>
 	{/if}
 	<form method="POST" action="/login?/login" use:enhance>
 		<input
@@ -90,6 +92,7 @@
 
 <style>
 	login-form {
+		position: relative;
 		width: 100%;
 		display: flex;
 		justify-content: center;
@@ -97,8 +100,18 @@
 		text-align: center;
 		gap: 1rem;
 
-		@media (width < 451px) {
-			height: 40vh;
+		& p {
+			border: none !important;
+			padding: 0;
+			text-align: center;
+
+			& a {
+				color: var(--secondColor);
+			}
+
+			@media (width < 1441px) {
+				margin: 0;
+			}
 		}
 
 		& form {

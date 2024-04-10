@@ -5,7 +5,7 @@
 <MainLayout
 	title="Programmieren lernen - Dein Coding Mentor"
 	description="Sicherlich interessierst Du dich dafür, wie Du das Programmieren lernen kannst. Ich biete Dir hier die Möglichkeit, das Coden zu erlernen und Deine Fähigkeiten in den Bereichen HTML, CSS und JavaScript zu verbessern. Egal, ob Du ein Anfänger bist oder bereits Erfahrung hast, meine Videos werden Dir helfen, Deine Programmierkenntnisse auf das nächste Level zu bringen. Beginnen noch heute und tauchen ein in die faszinierende Welt des Codens!"
-	imageUrl="https://www.programmieren-lernen.rocks/images/mitgliedschaft.png"
+	imageUrl="https://www.programmieren-lernen.rocks/images/social-share-web-image.jpg"
 >
 	<hero-wrapper>
 		<hero-section>

@@ -49,7 +49,7 @@
 <MainLayout
 	title="Programmier / Coding Aufgaben & Challenges"
 	description="Möchtest du Programmieren lernen oder dein Coding-Wissen erweitern? Tauche ein in die Welt des Codens mit unseren interaktiven Programmier-Challenges & Tutorials und lerne, wie du zum Meister des Codes wirst."
-	imageUrl="../../images/social-share-image.jpg"
+	imageUrl="https://www.programmieren-lernen.rocks/images/social-share-web-image.jpg"
 >
 	<lessons-section>
 		<filter-section>

@@ -48,7 +48,8 @@
 		align-items: center;
 		gap: 1rem;
 		border-top: 1px solid var(--blueAccent);
-		padding-top: 1rem;
+		border-bottom: 1px solid var(--blueAccent);
+		padding: 1rem 0;
 
 		& button-box {
 			width: 100%;

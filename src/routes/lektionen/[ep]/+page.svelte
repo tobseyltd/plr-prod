@@ -90,14 +90,11 @@
 					return updatedQuestions;
 				});
 			} else {
-				// Retry after a short delay if choice or innerText are undefined
 				setTimeout(() => {
 					handleAnswerClick();
 				}, 100);
 			}
 		};
-
-		// Call handleAnswerClick initially
 		handleAnswerClick();
 	}
 
@@ -106,8 +103,6 @@
 			showMemberContent.set(data.tier === 'ABO' || data.paymentStatus === 'paid');
 			memberContentUnsubscribed.set(data.tier === 'Keine' || data.paymentStatus === undefined);
 		}
-
-		console.log(`https://www.programmieren-lernen.rocks${data.lesson.img?.slice(1)}`);
 	}
 
 	const channels = data.supabase
@@ -159,7 +154,7 @@
 <MainLayout
 	title={`EP-${data.lesson.ep} - ${data.lesson.title}`}
 	description={`${data.lesson.description}`}
-	imageUrl={`https://www.programmieren-lernen.rocks/lesson-images/${data.lesson.img?.slice(0)}`}
+	imageUrl={`https://www.programmieren-lernen.rocks/lesson-images/${data.lesson.img?.slice(0, -4)}jpg`}
 >
 	<detail-page-wrapper>
 		<status-bar>
@@ -298,16 +293,15 @@
 				{#if $memberContentUnsubscribed}
 					<p></p>
 				{:else if !$showMemberContent}
-					<login-form>
-						<p>Einloggen oder <a href="/mitglied-werden">Mitglied werden</a></p>
+					<login-section>
 						<LoginForm
 							data={data.loginForm}
 							supabase={data.supabase}
-							height="30vh"
+							height="40vh"
 							showHeader={false}
 							borderTop="none"
 						/>
-					</login-form>
+					</login-section>
 				{/if}
 				<h2>Links</h2>
 				<ul>
@@ -636,6 +630,7 @@
 				display: flex;
 				flex-direction: column;
 				gap: 0.6rem;
+				position: relative;
 
 				@media (width < 1440px) {
 					padding-left: 0px;
@@ -735,43 +730,16 @@
 					margin-top: 2rem;
 				}
 
-				& login-form {
+				& login-section {
 					order: 2;
-					margin-top: 0.5rem;
-					padding-top: 2rem;
-					border-top: 1px solid var(--blueAccent);
 
 					@media (width < 451px) {
+						margin: 4rem 0;
 						height: 100%;
 						width: 100%;
-						margin-top: .5rem;
-						margin-bottom: 3rem;
-					}
-
-					& p {
-						border: none;
-						padding: 0;
-						text-align: center;
-
-						@media (width < 1441px) {
-							margin: 0;
-						}
-
-						@media (width <= 450px) {
-							position: relative;
-							margin-bottom: 4rem;
-						}
-
-						& a {
-							color: var(--secondColor);
-						}
 					}
 				}
 			}
-		}
-
-		& p a {
-			color: var(--secondColor);
 		}
 	}
 </style>
