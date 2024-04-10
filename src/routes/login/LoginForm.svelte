@@ -100,16 +100,16 @@
 		text-align: center;
 		gap: 1rem;
 
+		@media (width <= 450px) {
+			height: 45vh !important;
+		}
+
 		& p {
 			border: none !important;
 			text-align: center;
 
 			& a {
 				color: var(--secondColor);
-			}
-
-			@media (width < 1441px) {
-				margin-top: 1rem;
 			}
 		}
 
