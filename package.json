@@ -17,7 +17,7 @@
 		"seed": "tsx --tsconfig scripts/tsconfig.json scripts/seed.ts",
 		"stripe:webhooks": "stripe listen --forward-to localhost:5173/api/stripe/webhook",
 		"host": "vite dev --host",
-		"postbuild": "npx svelte-sitemap --domain https://www.programmieren-lernen.rocks"
+		"postbuild": "npx svelte-sitemap --out-dir .vercel/output/static --domain https://www.programmieren-lernen.rocks.com"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.4.1",
