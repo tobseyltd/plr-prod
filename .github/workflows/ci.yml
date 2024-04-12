@@ -38,10 +38,10 @@ jobs:
       - name: Pull Dev Env. Vars.
         run: vercel env pull --yes --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Setup Supabase CLI
-        uses: supabase/setup-cli@v1
-        with:
-          version: latest
+      # - name: Setup Supabase CLI
+      #   uses: supabase/setup-cli@v1
+      #   with:
+      #     version: latest
 
       # - name: Start Local Supabase
       #   run: supabase start -x imgproxy,studio,storage-api,realtime,inbucket,edge-runtime
