@@ -38,21 +38,26 @@ jobs:
       - name: Pull Dev Env. Vars.
         run: vercel env pull --yes --token=${{ secrets.VERCEL_TOKEN }}
 
-      # - name: Setup Supabase CLI
-      #   uses: supabase/setup-cli@v1
-      #   with:
-      #     version: latest
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
 
-      # - name: Start Local Supabase
-      #   run: supabase start -x imgproxy,studio,storage-api,realtime,inbucket,edge-runtime
+      - name: Start Local Supabase
+        run: supabase start -x imgproxy,studio,storage-api,realtime,inbucket,edge-runtime
 
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Build Project
-        run: pnpm run build
+      # - name: Install Playwright Browsers
+      #   run: pnpm exec playwright install --with-deps chromium
 
-      # Generate sitemap
+      # - name: Link Supabase CLI to Prod
+      #   run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
+
+      # - name: Push Supabase DB Changes
+      #   run: supabase db push
+
       - name: Generate Sitemap
         run: pnpm run postbuild
 
