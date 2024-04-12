@@ -535,6 +535,10 @@
 					}
 				}
 
+				& p a {
+					color: var(--secondColor);
+				}
+
 				& img {
 					width: 100%;
 					border-radius: 10px;
