@@ -17,7 +17,6 @@
 		"seed": "tsx --tsconfig scripts/tsconfig.json scripts/seed.ts",
 		"stripe:webhooks": "stripe listen --forward-to localhost:5173/api/stripe/webhook",
 		"host": "vite dev --host",
-		"postbuild": "npm generate:sitemap",
     	"generate:sitemap": "svelte-sitemap --domain https://www.programmieren-lernen.rocks; cp build/sitemap.xml static/sitemap.xml"
 	},
 	"devDependencies": {
