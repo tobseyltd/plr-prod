@@ -49,14 +49,12 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      # - name: Install Playwright Browsers
-      #   run: pnpm exec playwright install --with-deps chromium
+      - name: Build Project
+        run: pnpm run build
 
-      # - name: Link Supabase CLI to Prod
-      #   run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
-
-      # - name: Push Supabase DB Changes
-      #   run: supabase db push
+      # Generate sitemap
+      - name: Generate Sitemap
+        run: pnpm run postbuild
 
       - name: Pull Prod Env Variables
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}

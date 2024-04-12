@@ -16,7 +16,8 @@
 		"gen:types": "pnpx supabase gen types typescript --local > src/lib/supabase-types.ts && prettier --write src/lib/supabase-types.ts",
 		"seed": "tsx --tsconfig scripts/tsconfig.json scripts/seed.ts",
 		"stripe:webhooks": "stripe listen --forward-to localhost:5173/api/stripe/webhook",
-		"host": "vite dev --host"
+		"host": "vite dev --host",
+		"postbuild": "npx svelte-sitemap --domain https://myawesomedomain.com"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.4.1",
@@ -58,6 +59,7 @@
 		"pnpm": "^8.15.5",
 		"stripe": "^14.22.0",
 		"supabase": "^1.153.4",
-		"svelte-french-toast": "^1.2.0"
+		"svelte-french-toast": "^1.2.0",
+		"svelte-sitemap": "^2.6.0"
 	}
 }
