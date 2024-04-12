@@ -1,4 +1,5 @@
 name: Deploy 🚀
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -18,6 +19,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,25 +40,8 @@ jobs:
       - name: Pull Dev Env. Vars.
         run: vercel env pull --yes --token=${{ secrets.VERCEL_TOKEN }}
 
-      # - name: Setup Supabase CLI
-      #   uses: supabase/setup-cli@v1
-      #   with:
-      #     version: latest
-
-      # - name: Start Local Supabase
-      #   run: supabase start -x imgproxy,studio,storage-api,realtime,inbucket,edge-runtime
-
       - name: Install Dependencies
         run: pnpm install
-
-      # - name: Install Playwright Browsers
-      #   run: pnpm exec playwright install --with-deps chromium
-
-      # - name: Link Supabase CLI to Prod
-      #   run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
-
-      # - name: Push Supabase DB Changes
-      #   run: supabase db push
 
       - name: Pull Prod Env Variables
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
@@ -65,7 +50,7 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Generate Sitemap
-        run: pnpm run postbuild
+        run: npx svelte-sitemap --out-dir .vercel/output/static --domain https://www.programmieren-lernen.rocks.com
 
       - name: Deploy to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN}}
