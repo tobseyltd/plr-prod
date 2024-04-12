@@ -38,13 +38,13 @@ jobs:
       - name: Pull Dev Env. Vars.
         run: vercel env pull --yes --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Setup Supabase CLI
-        uses: supabase/setup-cli@v1
-        with:
-          version: latest
+      # - name: Setup Supabase CLI
+      #   uses: supabase/setup-cli@v1
+      #   with:
+      #     version: latest
 
-      - name: Start Local Supabase
-        run: supabase start -x imgproxy,studio,storage-api,realtime,inbucket,edge-runtime
+      # - name: Start Local Supabase
+      #   run: supabase start -x imgproxy,studio,storage-api,realtime,inbucket,edge-runtime
 
       - name: Install Dependencies
         run: pnpm install
@@ -58,14 +58,14 @@ jobs:
       # - name: Push Supabase DB Changes
       #   run: supabase db push
 
-      - name: Generate Sitemap
-        run: pnpm run postbuild
-
       - name: Pull Prod Env Variables
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Generate Sitemap
+        run: pnpm run postbuild
 
       - name: Deploy to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN}}
