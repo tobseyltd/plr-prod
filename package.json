@@ -16,8 +16,8 @@
 		"gen:types": "pnpx supabase gen types typescript --local > src/lib/supabase-types.ts && prettier --write src/lib/supabase-types.ts",
 		"seed": "tsx --tsconfig scripts/tsconfig.json scripts/seed.ts",
 		"stripe:webhooks": "stripe listen --forward-to localhost:5173/api/stripe/webhook",
-		"host": "vite dev --host",
-		"postbuild": "npx svelte-sitemap --out-dir .vercel/output/static --domain https://www.programmieren-lernen.rocks"
+		"host": "vite dev --host"
+
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.4.1",

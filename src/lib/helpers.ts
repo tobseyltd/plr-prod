@@ -18,4 +18,14 @@ export async function getUserProfile(event: ServerLoadEvent) {
 	return profile;
 }
 
+export async function getLessonEps() {
+	const { data: eps, error: epError } = await event.locals.supabase.from('lessons').select('ep');
+
+	if (epError) {
+		throw error(500, 'Could not get EPs');
+	}
+
+	return eps;
+}
+
 export const randomString = () => Math.random().toString(36).slice(2);
