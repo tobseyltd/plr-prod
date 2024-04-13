@@ -54,3 +54,12 @@ jobs:
 
       - name: Deploy to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN}}
+
+  ping:
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Send HTTP GET request
+        run: curl http://www.google.com/ping?sitemap=https://www.programmieren-lernen.rocks/sitemap.xml
