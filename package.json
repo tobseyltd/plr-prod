@@ -17,7 +17,6 @@
 		"seed": "tsx --tsconfig scripts/tsconfig.json scripts/seed.ts",
 		"stripe:webhooks": "stripe listen --forward-to localhost:5173/api/stripe/webhook",
 		"host": "vite dev --host"
-
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.4.1",
@@ -42,6 +41,7 @@
 		"svelte": "^4.2.12",
 		"svelte-check": "^3.6.8",
 		"svelte-sitemap": "^2.6.0",
+		"sveltekit-sitemap": "^1.0.21",
 		"sveltekit-superforms": "^2.11.0",
 		"tslib": "^2.6.2",
 		"tsx": "^4.7.1",
