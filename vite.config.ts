@@ -1,6 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
-import sitemapPlugin from 'sveltekit-sitemap';
+import { sitemapPlugin } from 'sveltekit-sitemap';
 
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
