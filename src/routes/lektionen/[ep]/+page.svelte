@@ -242,7 +242,7 @@
 				</video-content> -->
 				<h3>Part 2 - Members Coding Lektion</h3>
 
-				{#if $showMemberContent}
+				{#if $showMemberContent || data.wildcard}
 					{#if data.lesson.video2 && data.lesson.video2_content}
 						<video-wrapper>
 							{@html data.lesson.video2}

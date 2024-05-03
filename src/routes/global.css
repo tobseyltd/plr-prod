@@ -8,7 +8,7 @@
 	--mainBackground: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, #252746 35%, #252746 100%);
 	--wrapperWidth: 60cqi;
 	--mainBorder: 1px solid rgba(128, 128, 128, 0.305);
-	--textAccent: #efeeeeeb;
+	--textAccent: #efeeeeba;
 	--blueAccent: #2d39db57;
 
 	font-synthesis: none;
@@ -27,6 +27,11 @@ body {
 	font-family: 'League Spartan', sans-serif;
 }
 
+h1 {
+	font-size: 2rem;
+	/* text-transform: uppercase; */
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -35,6 +40,7 @@ body {
 
 	& a {
 		line-height: 0;
+		color: var(--secondColor);
 	}
 }
 
@@ -45,17 +51,20 @@ button {
 	border: none;
 	border-radius: 10px;
 	background-color: var(--tertColor);
-	border: var(--mainBorder);
-	font-size: 0.7rem;
+	border-bottom: 4px solid var(--bgContainer);
+	font-size: 0.6rem;
 	font-weight: 700;
 	color: white;
 	cursor: pointer;
 	text-shadow: 0 0 5px black;
 	justify-content: center;
 	z-index: 9999;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
+		Verdana, sans-serif;
 
 	&:hover {
-		background-color: #5171fed2;
+		/* background-color: #5171fed2; */
+		border-color: rgba(102, 100, 100, 0.273);
 	}
 }
 
@@ -122,5 +131,28 @@ background-triangle3 {
 
 	@media (width < 451px) {
 		display: none;
+	}
+}
+
+.gradient-text {
+	background-image: linear-gradient(to top, var(--tw-gradient-stops));
+	--tw-gradient-from: var(--secondColor);
+	--tw-gradient-to: #fff;
+	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+	--tw-gradient-to: var(--tertColor);
+	background-clip: text;
+	color: #0000;
+	-webkit-background-clip: text;
+	/* animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; */
+	line-height: 1;
+}
+
+@keyframes pulse {
+	10% {
+		color: #fff; /* Start color */
+	}
+
+	100% {
+		color: var(--tertColor); /* End color */
 	}
 }

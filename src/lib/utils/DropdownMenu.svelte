@@ -39,6 +39,9 @@
 						>Mitgliedschaft <ArrowUpRightSquare strokeWidth={1.5} size={20} /></a
 					>
 				</li>
+				<li>
+					<a href="/aufbaukurs">Aufbaukurs <ArrowUpRightSquare strokeWidth={1.5} size={20} /></a>
+				</li>
 				<li><a href="/account">Account <ArrowUpRightSquare strokeWidth={1.5} size={20} /></a></li>
 				{#if data}
 					<form action="/logout" method="POST">

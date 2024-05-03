@@ -49,7 +49,7 @@ export const GET: RequestHandler = async (event) => {
 			},
 
 			success_url: `${ENV.PUBLIC_BASE_URL}/account`,
-			cancel_url: `${ENV.PUBLIC_BASE_URL}/mitglied-werden`
+			cancel_url: `${ENV.PUBLIC_BASE_URL}`
 		});
 
 		if (!checkoutSession.url) {

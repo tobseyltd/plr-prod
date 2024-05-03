@@ -31,7 +31,7 @@
 >
 	<subscription-page-wrapper>
 		<top-slogan>
-			<h1>All-Access Mitgliedschaft</h1>
+			<h1>All-Access Mitgliedschaft für <br /> Selbstlerner</h1>
 			<p>
 				Werde ein gefragter Entwickler mit dem Zugriff auf alle Coding Lektionen, Challenges,
 				Experten Blog und Community. Wachse an deinen Aufgaben und bekomme einen
@@ -112,12 +112,7 @@
 				<img src="/images/stripe.svg" width="50px" height="50px" alt="Stripe" />
 				<img src="/images/klarna.svg" width="50px" height="50px" alt="Klarna" />
 
-				<img
-					src="/images/mastercard.svg"
-					width="50px"
-					height="50px"
-					alt="Mastercard Kreditkarte"
-				/>
+				<img src="/images/mastercard.svg" width="50px" height="50px" alt="Mastercard Kreditkarte" />
 
 				<img src="/images/visa.svg" width="50px" height="50px" alt="Visa Kreditkarte" />
 			</payment-icons>

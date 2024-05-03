@@ -150,7 +150,7 @@
 		& filter-section {
 			display: flex;
 			justify-content: space-between;
-			padding-bottom: 0.5rem;
+			padding-bottom: 1rem;
 			border-bottom: 1px solid var(--blueAccent);
 
 			@media (width < 451px) {
@@ -272,7 +272,7 @@
 					}
 
 					& lesson-info {
-						width: 70%;
+						width: 80%;
 						display: flex;
 						height: 100%;
 						flex-direction: column;
@@ -295,6 +295,7 @@
 						& p {
 							color: var(--textAccent);
 							font-weight: 200;
+							text-align: justify;
 
 							@media (width < 1025px) {
 								font-size: 1rem;

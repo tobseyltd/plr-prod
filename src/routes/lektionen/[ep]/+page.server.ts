@@ -9,7 +9,7 @@ import { commentSchema } from './ZodSchemas';
 
 export const load: PageServerLoad = async (event) => {
 	const session = await event.locals.getSession();
-	
+
 	async function getLesson(ep: string) {
 		const { error: contactError, data: contact } = await event.locals.supabase
 			.from('lessons')
@@ -26,11 +26,25 @@ export const load: PageServerLoad = async (event) => {
 		}
 		return contact;
 	}
+
+	async function getWildcard(member: string) {
+		const { data: wildcard, error: wildcardError } = await event.locals.supabase
+			.from('profiles')
+			.select('wildcard')
+			.eq('id', member);
+
+		if (wildcardError) {
+			throw error(500, 'Error getting wildcard status.');
+		}
+
+		return Object.values(wildcard[0])[0];
+	}
 	return {
 		lesson: await getLesson(event.params.ep.match(/[0-9]/g).join('')),
 		loginForm: await superValidate(zod(loginSchema)),
 		tier: session && (await getSubscriptionTier(session.user.id)),
 		paymentStatus: session && (await getPaymentStatus(session.user.id)),
-		commentForm: await superValidate(zod(commentSchema))
+		commentForm: await superValidate(zod(commentSchema)),
+		wildcard: session && (await getWildcard(session.user.id))
 	};
 };

@@ -1,45 +1,55 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import MainLayout from '../layouts/MainLayout.svelte';
+	import type { PageData } from './$types';
+	import './page.css';
+
+	export let data: PageData;
+	let video: HTMLVideoElement;
+
+	function playVideo() {
+		video.controls = true;
+		video.style.borderRadius = '20px';
+	}
 </script>
 
 <MainLayout
 	title="Programmieren lernen - Dein Coding Mentor"
-	description="Sicherlich interessierst Du dich dafür, wie Du das Programmieren lernen kannst. Ich biete Dir hier die Möglichkeit, das Coden zu erlernen und Deine Fähigkeiten in den Bereichen HTML, CSS und JavaScript zu verbessern. Egal, ob Du ein Anfänger bist oder bereits Erfahrung hast, meine Videos werden Dir helfen, Deine Programmierkenntnisse auf das nächste Level zu bringen. Beginnen noch heute und tauchen ein in die faszinierende Welt des Codens!"
+	description="Job wechseln? Du bist Quereinsteiger? Hier lernst Du das Programmieren. Ich biete Dir hier die Möglichkeit, Webentwicklung zu erlernen. HTML, CSS und JavaScript in 3 Monaten? Das ist möglich! Egal, ob Du ein Anfänger bist oder bereits Erfahrung hast, meine Videos werden Dir helfen, Deine Programmierkenntnisse auf das nächste Level zu bringen."
 	imageUrl="https://www.programmieren-lernen.rocks/images/social-share-web-image.jpg"
 >
 	<hero-wrapper>
 		<hero-section>
 			<left-side>
-				<h1>Programmieren lernen mit praxisnahen Aufgaben.</h1>
+				<h1>
+					Programmieren lernen mit <span> praxisnahen Aufgaben.</span>
+				</h1>
 				<p>
-					Erlerne das Programmieren mit wöchentlichen Coding Aufgaben, die ein Programmierer täglich
+					Erlerne Webentwicklung mit wöchentlichen Coding Aufgaben, die ein Programmierer täglich
 					genauso umsetzt. Jede Lektion mit
-					<b class="highlight">kostenlosem Zugang</b>
+					<b class="highlight">KOSTENKOSEM ZUGANG</b>
 					zu den Basis Informationen.
 				</p>
-				<a href="/lektionen"><button>Jetzt Loslegen</button></a>
+				<a href="/lektionen"><button>JETZT LOSLEGEN</button></a>
 			</left-side>
 
 			<right-side>
-				<img
-					src="./images/home-top-img.webp"
-					alt="Programmieren lernen Infobild, Coding Mentor und Programmiersprachen"
-					width="823px"
-					height="666px"
-					srcset="
-   					../../images/home-top-img.webp 823w"
-					sizes="(max-width: 480px) 100vw, 823px"
-				/>
+				<video on:click={playVideo} bind:this={video} poster="/poster.webp" preload="auto">
+					<track kind="captions" />
+					<source src="https://pojiieknawzlfigebtsk.supabase.co/storage/v1/object/public/videos/trailer.mp4?t=2024-05-03T09%3A43%3A14.222Z" type="video/mp4" />
+				</video>
 			</right-side>
 		</hero-section>
 	</hero-wrapper>
 
 	<tech-grid-wrapper>
 		<top-section>
-			<h2>Erlene die essentiellen <span class="highlight">Grundlagen</span> des Web.</h2>
+			<h2>
+				Erlene die essentiellen <span class="highlight">GRUNDLAGEN</span> des Web.
+			</h2>
 		</top-section>
 		<tech-grid>
-			<grid-item-1 class="style">
+			<grid-item>
 				<section>
 					<picture>
 						<img
@@ -57,9 +67,9 @@
 						leicht leserliches sowie verständliches HTML schreiben. Heb dich ab, mit Leichtigkeit!
 					</p>
 				</section>
-			</grid-item-1>
+			</grid-item>
 
-			<grid-item-2 class="style">
+			<grid-item>
 				<section>
 					<picture>
 						<img
@@ -75,11 +85,10 @@
 						CSS hat sich in den letzten Jahren schon fast zu einer Programmier-sprache entwickelt.
 						Auch hier ist es heutzutage ziemlich einfach sich von anderen Entwicklern abzuheben.
 						Nesting, Variablen, Funktionen, das alles macht CSS zu einem sehr mächtigen Werkzeug.
-						Meistere es und du wirst zum gefragten Professional.
 					</p>
 				</section>
-			</grid-item-2>
-			<grid-item-3 class="style">
+			</grid-item>
+			<grid-item>
 				<section>
 					<picture>
 						<img
@@ -92,14 +101,12 @@
 					</picture>
 					<h3>JavaScript</h3>
 					<p>
-						Neben HTML & CSS ist JavaScript <b>DIE</b> Programmiersprache des Web. Hast du diese drei
-						fundamentalen Sprachen verinnerlicht, kannst du alles im Web erstellen, was du dir vorstellen
-						kannst. Vor allem JavaScript wird von vielen Entwicklern stiefmütterlich behandelt. Das ist
-						fatal! Denn Frameworks sind zwar schön und gut, doch in den meisten Fällen wird gar keines
-						benötigt!
+						Neben HTML & CSS ist JavaScript <b>DIE PROGRAMMIERSPRACHE</b> des Web. Hast du diese drei
+						fundamentalen Programmier-Basics verinnerlicht, kannst du von hier aus in alle Richtungen
+						gehen. Egal ob Data-Science, KI-Entwicklung, Games, Mobile Apps usw. usw.
 					</p>
 				</section>
-			</grid-item-3>
+			</grid-item>
 		</tech-grid>
 	</tech-grid-wrapper>
 
@@ -121,27 +128,47 @@
 				/>
 			</left-side>
 			<right-side>
-				<h2>Web Entwicklung <span>einfach</span> gemacht.</h2>
+				<h2>Web Entwicklung einfach gemacht.</h2>
 				<p>
-					Wähle zwischen einer Reihe von einsteigerfreundlichen Lernpfaden, die von mir entwickelt
-					und durch meine Dozententätigkeit gestützt werden. Lerne die Basics der Fronend- und
-					Backend-Entwicklung, erfahre, wie man Benutzeroberflächen (UI's) erstellt, und beherrsche
-					die Programmiersprachen und Frameworks, die das moderne Web antreiben.
+					Wähle zwischen einer Reihe von einsteigerfreundlichen Selbstlerner-Pfaden oder dem
+					<a href="/aufbaukurs">Einsteiger Intensiv-Aufbaukurs</a>, der von mir entwickelt und durch
+					meine Dozententätigkeit gestützt wird.
+					<b> Lerne die Basics der Fronend-Entwicklung in 3 MONATEN</b>, erfahre, wie man
+					Benutzeroberflächen (UI's) erstellt, und beherrsche HTML, CSS & JavaScript wie ein Profi.
+					<span class="highlight">1 x pro Woche persönlicher Unterricht (2h) inklusive!</span>
 				</p>
 				<h3>Persönliches Coaching & Discord Community.</h3>
 				<p>
-					Du kannst außerdem ein Einzelcoaching bzw. Code Review buchen. Zusätzlich hast du die
-					Möglichkeit der Discord Community  beizutreten und dich mit anderen Anfängern auszutauschen. Das Beste: Ich war freiberuflicher Dozent für Frontend Weiterbildungen und stehe Dir immer gerne zur Seite bei Fragen.<br />
-					<b><em>Sprich mich einfach an!</em></b>
+					Im Selbstlernerpfad kannst du zusätzlich ein Einzelcoaching bzw. Code Review buchen.
+					Außerdem hast du die Möglichkeit der Discord Community beizutreten und dich mit anderen
+					Anfängern auszutauschen. Das Beste: Ich war freiberuflicher Dozent für Frontend
+					Weiterbildungen und stehe Dir immer gerne zur Seite bei Fragen.<br />
 				</p>
-				<button>Ich will mehr wissen</button>
+				<button>JETZT AUFBAUKURS BUCHEN</button>
 			</right-side>
 		</info-section>
 	</info-wrapper>
 
+	<latest-eps-wrapper>
+		<h2>Akuelle Lerninhalte für <span class="highlight">DEINEN</span> Fortschritt</h2>
+		<latest-eps-grid>
+			{#await data.latestEpisodes then latestEpisodes}
+				{#each latestEpisodes as episode}
+					<episode-item on:click={() => goto(`/lektionen/ep-${episode.ep}`)}>
+						<img src={episode.img} alt={`Lektionen Bild EP-${episode.ep}`} />
+						<div>
+							<h3>{episode.title}</h3>
+							<p>{episode.description}</p>
+						</div>
+					</episode-item>
+				{/each}
+			{/await}
+		</latest-eps-grid>
+	</latest-eps-wrapper>
+
 	<faq-wrapper>
 		<top-section>
-			<h2>Häufig gestellte Programmier <span class="highlight">Fragen</span> ? ? ?</h2>
+			<h2>Häufig gestellte Programmier <span class="highlight">FRAGEN</span> ? ? ?</h2>
 		</top-section>
 		<faq-section>
 			<section>
@@ -248,555 +275,4 @@
 			</section>
 		</faq-section>
 	</faq-wrapper>
-
-	<action-call-wrapper>
-		<action-call>
-			<left-side>
-				<h2>
-					Starte <span>jetzt</span> dein Coding Abenteuer und werde ein gefragter Fullstack Web Entwickler.
-				</h2>
-				<a href="/lektionen">
-					<button class="button">Jetzt Lernen</button>
-				</a>
-			</left-side>
-
-			<right-side>
-				<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-					<path
-						fill="#FF0066"
-						d="M63.6,-23.1C69.7,-1.8,53.2,24.4,30,41.2C6.8,58,-23.1,65.5,-44.4,52.1C-65.7,38.7,-78.5,4.5,-69.7,-20.5C-60.9,-45.5,-30.4,-61.3,-0.9,-61C28.7,-60.7,57.4,-44.4,63.6,-23.1Z"
-						transform="translate(100 100)"
-					/>
-				</svg>
-				<img
-					src="/images/man-launching-startup-blue.webp"
-					loading="lazy"
-					alt="Illustration eines Mannes, der eine Rakete in der Hand hält, bezeichnend für ein Startup Launch"
-					width="500"
-					height="500"
-					srcset="
-   					../../images/man-launching-startup-blue.webp 500w"
-					sizes="(max-width: 480px) 100vw, 500px"
-				/>
-				<background-triangle1 class="rotate"></background-triangle1>
-				<background-triangle2 class="rotate"></background-triangle2>
-				<background-triangle3 class="rotate"></background-triangle3>
-			</right-side>
-		</action-call>
-	</action-call-wrapper>
 </MainLayout>
-
-<style>
-	hero-wrapper {
-		margin: 3rem 0;
-		padding-bottom: 2rem;
-		width: 100%;
-		display: block;
-
-		@media (width < 769px) {
-			margin: 1rem 0;
-		}
-
-		& hero-section {
-			display: flex;
-			margin: 0 auto;
-
-			@media (width < 769px) {
-				flex-direction: column-reverse;
-				gap: 2rem;
-			}
-
-			& left-side {
-				width: 35%;
-				position: relative;
-				display: flex;
-				flex-wrap: wrap;
-				gap: 1rem;
-				align-self: center;
-				margin-right: 10%;
-
-				@media (width < 769px) {
-					width: 100%;
-					margin: 0 auto;
-					text-align: center;
-					justify-content: center;
-				}
-
-				& h1 {
-					@media (width <451px) {
-						font-size: 1.5rem;
-						line-height: 1.6rem;
-					}
-					@media (width <769px) {
-						width: 25ch;
-					}
-				}
-
-				& p {
-					width: 40ch;
-					line-height: 1.2rem;
-					color: var(--textAccent);
-
-					@media (width <451px) {
-						width: 100%;
-					}
-				}
-
-				& a {
-					text-decoration: none;
-				}
-
-				& button {
-					width: 300px;
-				}
-			}
-
-			& right-side {
-				@media (width < 769px) {
-					width: 100%;
-				}
-
-				& img {
-					width: 100%;
-					height: auto;
-				}
-			}
-		}
-	}
-
-	tech-grid-wrapper {
-		display: block;
-		margin: 0 auto;
-
-		& top-section {
-			display: flex;
-			justify-content: center;
-			margin: 0 auto;
-
-			@media (width < 769px) {
-				width: 90%;
-				text-align: center;
-			}
-		}
-
-		& tech-grid {
-			container-type: inline-size;
-			padding: 2rem 0;
-			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
-			gap: 1rem;
-			margin: 0 auto;
-			position: relative;
-
-			@media (width < 769px) {
-				width: 80%;
-				grid-template-columns: 1fr;
-				padding-bottom: 0;
-			}
-
-			@media (width < 451px) {
-				width: 100%;
-			}
-
-			& .style {
-				border: 3px solid rgba(128, 128, 128, 0.194);
-				padding: 2rem;
-				border-radius: 20px;
-				text-align: center;
-				background-color: #3536508b;
-
-				& p {
-					color: var(--textAccent);
-				}
-
-				& img {
-					width: 20%;
-				}
-			}
-			& background-triangle1 {
-				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-				right: 0;
-				bottom: 0;
-				opacity: 40%;
-			}
-
-			& background-triangle2 {
-				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-				right: 0;
-				bottom: -3.5rem;
-				opacity: 40%;
-			}
-			& background-triangle3 {
-				/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-				right: 0;
-				bottom: -5rem;
-				opacity: 40%;
-			}
-		}
-	}
-
-	info-wrapper {
-		display: block;
-		margin: 0 auto;
-
-		& info-section {
-			padding: 4rem 0;
-			display: flex;
-			margin: 0 auto;
-			position: relative;
-
-			@media (width < 769px) {
-				flex-wrap: wrap;
-				gap: 2rem;
-				padding: 0;
-			}
-
-			& left-side {
-				display: block;
-				width: 50%;
-				padding: 1rem 0;
-				position: relative;
-
-				@media (width < 769px) {
-					margin-top: 2rem;
-					width: 100%;
-					text-align: center;
-				}
-				@media (width < 451px) {
-					margin: 0;
-					height: 500px;
-				}
-
-				& img {
-					width: 100%;
-					transform: translatey(0px);
-					animation: float-item-1 6s ease-in-out infinite;
-				}
-
-				& background-triangle1 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					left: 2rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(34, 193, 195);
-					background: linear-gradient(130deg, rgb(34, 85, 195) 0%, rgb(45, 191, 253) 100%);
-					opacity: 40%;
-				}
-
-				& background-triangle2 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					left: 0;
-					bottom: 1.5rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(62, 100, 132);
-					background: linear-gradient(0deg, rgb(34, 85, 195) 0%, rgb(3, 76, 107) 100%);
-				}
-				& background-triangle3 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					left: 5rem;
-					bottom: -2rem;
-					position: absolute;
-					display: block;
-					width: 40px;
-					height: 40px;
-					background: rgb(62, 100, 132);
-					background: linear-gradient(0deg, rgb(23, 52, 79) 0%, rgb(3, 52, 107) 100%);
-				}
-			}
-
-			& right-side {
-				width: 50%;
-				height: 20%;
-				margin-left: 10%;
-				padding: 3rem 0;
-				position: relative;
-
-				@media (width < 769px) {
-					width: 100%;
-					margin: 0;
-					text-align: center;
-					margin-bottom: 2rem;
-				}
-
-				& h2 {
-					margin-bottom: 1rem;
-					& span {
-						color: var(--secondColor);
-						position: relative;
-
-						&::after {
-							content: '';
-							position: absolute;
-							bottom: -15px;
-							left: 0;
-							height: 7px;
-							width: 100%;
-							border: solid 4px var(--secondColor);
-							border-color: var(--secondColor) transparent transparent transparent;
-							border-radius: 70%;
-						}
-					}
-				}
-
-				& p {
-					color: var(--textAccent);
-				}
-
-				& button {
-					margin-top: 1rem;
-					width: 300px;
-
-					@media (width < 769px) {
-						width: 100%;
-					}
-				}
-
-				& a {
-					text-decoration: none;
-				}
-			}
-		}
-	}
-
-	faq-wrapper {
-		container-type: inline-size;
-		padding: 4rem 0;
-		text-align: center;
-		display: block;
-		position: relative;
-		margin: 0 auto;
-
-		@media (width <451px) {
-			padding: 0;
-		}
-
-		& top-section {
-			width: 100%;
-			display: flex;
-			justify-content: center;
-			margin: 0 auto;
-
-			@media (width < 769px) {
-				margin-bottom: 1rem;
-			}
-		}
-
-		& faq-section {
-			padding: 2rem 0;
-			display: flex;
-			gap: 2rem;
-			margin: 0 auto;
-			position: relative;
-
-			@media (width < 769px) {
-				flex-wrap: wrap;
-				gap: 2.5rem;
-				width: 90%;
-				padding: 0;
-				margin-top: 1rem;
-			}
-
-			& section {
-				width: 33.33%;
-				text-align: center;
-
-				@media (width < 769px) {
-					width: 100%;
-				}
-
-				& p {
-					color: var(--textAccent);
-				}
-
-				& img {
-					width: 15%;
-					height: auto;
-				}
-			}
-		}
-	}
-
-	action-call-wrapper {
-		display: block;
-		margin: 3rem 0;
-
-		@media (width < 1025px) {
-			margin: 0;
-			padding-bottom: 2rem;
-		}
-
-		@media (width < 451px) {
-			margin-top: 2rem;
-			padding-bottom: 2rem;
-		}
-
-		& action-call {
-			width: 50%;
-			margin: 0 auto;
-			display: flex;
-			align-items: center;
-			background: rgb(81, 112, 254);
-			background: linear-gradient(121deg, var(--violetBlue) 50%, rgba(255, 0, 102, 1) 100%);
-			padding: 0 4rem;
-			border-radius: 20px;
-			box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
-			border: 10px solid rgb(73, 66, 66);
-			border-style: double;
-
-			@media (width > 1024px) {
-				width: 90%;
-			}
-
-			@media (width < 1025px) {
-				width: 100%;
-				padding: 0 2rem;
-			}
-
-			@media (width < 451px) {
-				width: 100%;
-				flex-direction: column;
-				padding: 2rem 0;
-			}
-
-			& left-side {
-				width: 70%;
-
-				@media (width < 451px) {
-					width: 90%;
-					flex-direction: column;
-					text-align: center;
-				}
-
-				& h2 {
-					width: 30ch;
-					/* text-align: center; */
-					text-shadow: 2px 2px #252746;
-					line-height: 1.7rem;
-					margin-bottom: 1rem;
-
-					@media (width < 1921px) {
-						width: 100%;
-					}
-
-					@media (width < 769px) {
-						width: 100%;
-						font-size: 1.3rem;
-						line-height: 1.2rem;
-					}
-
-					@media (width < 451px) {
-						width: 100%;
-					}
-
-					& span {
-						color: var(--secondColor);
-						position: relative;
-
-						&::after {
-							content: '';
-							position: absolute;
-							bottom: -15px;
-							left: 0;
-							height: 7px;
-							width: 100%;
-							border: solid 4px var(--secondColor);
-							border-color: var(--secondColor) transparent transparent transparent;
-							border-radius: 70%;
-						}
-					}
-				}
-
-				& a {
-					text-decoration: none;
-				}
-				& .button {
-					width: 40%;
-
-					@media (width < 451px) {
-						width: 100%;
-					}
-				}
-			}
-			& right-side {
-				width: 30%;
-				background-color: var(--violetBlue);
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				position: relative;
-				border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-
-				@media (width < 451px) {
-					display: none;
-				}
-
-				& svg {
-					position: absolute;
-					z-index: 0;
-					opacity: 20%;
-				}
-				& img {
-					z-index: 2;
-					width: 100%;
-					height: auto;
-				}
-				& background-triangle1 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					right: 17rem;
-					top: 5rem;
-					opacity: 20%;
-				}
-
-				& background-triangle2 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					right: 0;
-					top: 2.5rem;
-					opacity: 40%;
-				}
-				& background-triangle3 {
-					/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-					right: 14rem;
-					bottom: 3rem;
-					opacity: 30%;
-				}
-			}
-
-			& button {
-				background-color: var(--secondColor);
-				width: 70%;
-			}
-		}
-	}
-
-	@keyframes float {
-		0% {
-			/* box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6); */
-			transform: translatey(0px);
-		}
-		50% {
-			/* box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2); */
-			transform: translatey(-20px);
-		}
-		100% {
-			/* box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6); */
-			transform: translatey(0px);
-		}
-	}
-
-	@keyframes float-item-1 {
-		0% {
-			transform: translatey(-10px);
-		}
-		50% {
-			transform: translatey(15px);
-		}
-		100% {
-			transform: translatey(-10px);
-		}
-	}
-</style>

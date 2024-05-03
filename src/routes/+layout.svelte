@@ -1,22 +1,21 @@
 <script lang="ts">
 	import './global.css';
-
+	import './layout.css';
 	import { invalidate, goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
-	import { CircleUserRound, LogOut } from 'lucide-svelte';
+	import { LogOut } from 'lucide-svelte';
 	import Tooltip from '$lib/utils/Tooltip.svelte';
 	import { Toaster } from 'svelte-french-toast';
-	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 	import DropdownMenu from '$lib/utils/DropdownMenu.svelte';
 
 	export let data: LayoutData;
 
+	let logo: HTMLImageElement;
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
 
 	onMount(() => {
-		injectSpeedInsights();
 		const {
 			data: { subscription }
 		} = supabase.auth.onAuthStateChange((event, _session) => {
@@ -30,6 +29,20 @@
 	const logOut = async () => {
 		await supabase.auth.signOut();
 	};
+
+	function handleLogoHover() {
+		logo.src = '/rocket.gif';
+		logo.width = 150;
+		logo.srcset = '/rocket.gif 150w';
+		logo.sizes = '(max-width: 480px) 100vw, 150px';
+		logo.className = '';
+	}
+	function handleLogoLeave() {
+		logo.src = '/images/logo-white.png';
+		logo.srcset = '/images/logo-white.png 180w';
+		logo.sizes = '(max-width: 480px) 100vw, 180px';
+		logo.width = 180;
+	}
 </script>
 
 <Toaster />
@@ -38,41 +51,44 @@
 		<left-side>
 			<a href="/">
 				<img
-					src="../../images/logo-white.webp"
+					on:mouseover={handleLogoHover}
+					on:mouseleave={handleLogoLeave}
+					bind:this={logo}
+					src="/images/logo-white.png"
 					loading="lazy"
-					width="240px"
-					height="80px"
+					width="180px"
+					height="auto"
 					alt="Website Logo"
+					title="Zur Startseite"
 					srcset="
-   					../../images/logo-white.webp 240w"
-					sizes="(max-width: 480px) 100vw, 240px"
+				/images/logo-white.png 180w"
+					sizes="(max-width: 480px) 100vw, 180px"
 				/>
 			</a>
 		</left-side>
 		<right-side>
 			<nav>
 				<ul>
-					<li>
-						<a href="/lektionen"> Lektionen </a>
+					<li class="pro">
+						<a href="/mitglied-werden" title="Mitglied werden"> PRO </a>
 					</li>
 					<li>
-						<a href="/mitglied-werden"> Mitgliedschaft </a>
+						<a href="/lektionen" title="Jetzt lernen"> LEKTIONEN </a>
 					</li>
 					<li>
-						<Tooltip tooltip="Konto">
-							<button aria-label="Go to Account" on:click={() => goto('/account')}
-								><CircleUserRound size={30} strokeWidth={1.2} style="cursor: pointer" />
-							</button>
-						</Tooltip>
+						<a href="/aufbaukurs" title="Für Einsteiger"> AUFBAUKURS </a>
 					</li>
+					{#if !session}
+						<li>
+							<a href="/account">LOGIN</a>
+						</li>
+					{/if}
 					{#if session}
 						<li>
 							<form action="/logout" method="POST">
-								<Tooltip tooltip="Logout">
-									<button aria-label="Logout" class="logout" type="submit"
-										><LogOut size={20} /></button
-									>
-								</Tooltip>
+								<button aria-label="Logout" class="logout" type="submit" title="Ausloggen"
+									><LogOut size={20} /></button
+								>
 							</form>
 						</li>
 					{/if}
@@ -254,385 +270,3 @@
 		</bottom-footer>
 	</footer-wrapper>
 </footer>
-
-<style>
-	header {
-		@media (width <= 450px) {
-			padding: .5rem 0;
-		}
-		
-		& header-wrapper {
-			container-type: inline-size;
-			height: 8cqh;
-			margin: 0 auto;
-			display: flex;
-			position: relative;
-
-			& left-side {
-				width: 50%;
-				display: flex;
-				align-items: center;
-				text-align: start;
-
-				& a {
-					& img {
-						width: 35%;
-						height: auto;
-
-						@media (width < 451px) {
-							width: 100%;
-							height: auto;
-						}
-						@media (width > 450px) and (width < 1025px) {
-							width: 50%;
-							height: auto;
-						}
-					}
-				}
-			}
-
-			& right-side {
-				width: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: end;
-
-				& nav {
-					width: 100%;
-					display: flex;
-					align-items: center;
-					justify-content: end;
-					gap: 2rem;
-
-					@media (width < 769px) {
-						display: none;
-					}
-
-					& ul {
-						display: inline-flex;
-						align-items: center;
-						gap: 1.5rem;
-
-						& li {
-							margin: 0;
-
-							& a {
-								text-decoration: none;
-								color: white;
-							}
-
-							& [data-tooltip]:before {
-								bottom: -120%;
-								left: 50%;
-								margin-bottom: 5px;
-							}
-
-							& [data-tooltip]:after {
-								display: none;
-							}
-
-							& span {
-								display: inline-block;
-								margin-top: 7px;
-							}
-
-							& button {
-								padding: 0.3rem 0.5rem;
-								margin-top: -0.1rem;
-
-								&:not(.logout) {
-									background-color: transparent;
-									border: none;
-									padding: 0.3rem 0rem;
-									margin-top: -0.2rem;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	main {
-		margin: 0 auto;
-	}
-
-	footer {
-		& footer-wrapper {
-			display: block;
-			margin: 0 auto;
-
-			& top-footer {
-				border-top: 1px solid var(--blueAccent);
-				padding: 2rem 0;
-				display: flex;
-				margin: 0 auto;
-				position: relative;
-				display: flex;
-				gap: 1rem;
-
-				@media (width < 769px) {
-					flex-direction: column;
-				}
-
-				& left-side {
-					text-align: left;
-					width: 60%;
-
-					@media (width < 769px) {
-						width: 100%;
-					}
-
-					& section {
-						& h4 {
-							margin-bottom: 0.1rem;
-						}
-
-						& p {
-							color: var(--textAccent);
-						}
-					}
-				}
-
-				& right-side {
-					width: 40%;
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-					gap: 1rem;
-					text-align: left;
-
-					@media (width < 769px) {
-						width: 100%;
-					}
-
-					& section {
-						& h4 {
-							margin-bottom: 0.1rem;
-						}
-					}
-
-					& img {
-						position: absolute;
-						width: 3%;
-						right: 1rem;
-
-						@media (width < 769px) {
-							width: 10%;
-						}
-					}
-
-					& ul {
-						list-style: none;
-					}
-
-					& input {
-						background-color: transparent;
-						border: none;
-						border-bottom: 1px solid white;
-						border-radius: 10px;
-						padding: 0.6rem;
-						/* margin-left: -2.5rem; */
-						width: 100%;
-						color: white;
-						font-size: 0.7rem;
-
-						&:focus-visible {
-							outline: none;
-						}
-
-						&::placeholder {
-							color: white;
-							font-size: 0.7rem;
-							font-family: 'League Spartan', sans-serif;
-						}
-					}
-				}
-			}
-			& mid-footer {
-				display: flex;
-				gap: 1rem;
-				justify-content: space-between;
-				margin: 0 auto;
-				text-align: start;
-				padding: 3rem 0;
-				border-top: 1px solid var(--blueAccent);
-				width: 100%;
-
-				@media (width < 769px) {
-					text-align: center;
-					flex-wrap: wrap;
-					gap: 0;
-
-					& :nth-child(3) {
-						order: 4;
-					}
-				}
-
-				& h4 {
-					text-transform: capitalize;
-				}
-
-				& p {
-					margin-bottom: 1rem;
-					text-transform: capitalize;
-					/* text-decoration: underline; */
-				}
-
-				& ul li {
-					font-size: 0.8rem;
-					color: var(--textAccent);
-
-					& a {
-						color: var(--textAccent);
-					}
-
-					& [data-tooltip]:before {
-						bottom: -110%;
-						left: 50%;
-						margin-bottom: 5px;
-					}
-
-					& [data-tooltip]:after {
-						position: absolute;
-						top: 80%;
-						left: 50%;
-					}
-				}
-
-				& left-column-1,
-				left-column-2 {
-					@media (width < 769px) {
-						width: 50%;
-					}
-				}
-
-				& mid-column {
-					position: relative;
-					text-align: center;
-
-					@media (width < 769px) {
-						width: 100%;
-						text-align: center;
-						margin-top: 2rem;
-
-						& p {
-							display: none;
-						}
-					}
-
-					& ul {
-						display: flex;
-						gap: 1rem;
-						justify-content: center;
-					}
-
-					& background-triangle1 {
-						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-						right: 17rem;
-						top: 1rem;
-						opacity: 20%;
-
-						@media (width < 769px) {
-							display: none;
-						}
-					}
-
-					& background-triangle2 {
-						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-						right: 30rem;
-						top: 3.5rem;
-						opacity: 20%;
-
-						@media (width < 769px) {
-							display: none;
-						}
-					}
-					& background-triangle3 {
-						/* border-radius: 30% 70% 70% 30% / 37% 30% 70% 63%; */
-						right: 14rem;
-						top: 3rem;
-						opacity: 30%;
-
-						@media (width < 769px) {
-							display: none;
-						}
-					}
-				}
-				& [alt='codewars banner'] {
-					margin-top: 1rem;
-					width: 100%;
-				}
-
-				& right-column-1,
-				right-column-2 {
-					@media (width < 769px) {
-						margin-top: 2rem;
-						width: 50%;
-					}
-				}
-			}
-
-			& bottom-footer {
-				border-top: 1px solid var(--blueAccent);
-				padding: 1rem 0;
-				margin: 0 auto;
-				display: flex;
-				justify-content: space-between;
-				font-size: 0.7rem;
-
-				@media (width < 769px) {
-					flex-direction: column;
-					justify-content: center;
-					align-items: center;
-				}
-
-				& left-side {
-					display: flex;
-					align-items: center;
-					gap: 0.4rem;
-
-					& span {
-						display: flex;
-						align-items: center;
-					}
-				}
-
-				& right-side {
-					display: flex;
-					align-items: center;
-
-					& span {
-						display: flex;
-						align-items: center;
-					}
-				}
-			}
-		}
-	}
-
-	main,
-	footer-wrapper,
-	header-wrapper {
-		@media (width < 451px) {
-			width: 90%;
-		}
-
-		@media (width > 450px) {
-			width: 80%;
-		}
-
-		@media (width > 768px) {
-			width: 90%;
-		}
-
-		@media (width > 1440px) {
-			width: 70%;
-		}
-
-		@media (width > 1920px) {
-			width: 55%;
-		}
-	}
-</style>
