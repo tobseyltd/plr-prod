@@ -36,7 +36,10 @@
 			<right-side>
 				<video on:click={playVideo} bind:this={video} poster="/poster.webp" preload="auto">
 					<track kind="captions" />
-					<source src="https://pojiieknawzlfigebtsk.supabase.co/storage/v1/object/public/videos/trailer.mp4?t=2024-05-03T09%3A43%3A14.222Z" type="video/mp4" />
+					<source
+						src="https://pojiieknawzlfigebtsk.supabase.co/storage/v1/object/public/videos/trailer.mp4?t=2024-05-03T09%3A43%3A14.222Z"
+						type="video/mp4"
+					/>
 				</video>
 			</right-side>
 		</hero-section>
@@ -144,7 +147,7 @@
 					Anfängern auszutauschen. Das Beste: Ich war freiberuflicher Dozent für Frontend
 					Weiterbildungen und stehe Dir immer gerne zur Seite bei Fragen.<br />
 				</p>
-				<button>JETZT AUFBAUKURS BUCHEN</button>
+				<button on:click={() => goto('/aufbaukurs')}>JETZT AUFBAUKURS BUCHEN</button>
 			</right-side>
 		</info-section>
 	</info-wrapper>
