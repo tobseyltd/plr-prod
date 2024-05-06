@@ -78,11 +78,16 @@
 					<li>
 						<a href="/aufbaukurs" title="Für Einsteiger"> AUFBAUKURS </a>
 					</li>
-					{#if !session}
-						<li>
-							<a href="/account">LOGIN</a>
-						</li>
-					{/if}
+					<li>
+						<a href="/account">
+							{#if !session}
+								LOGIN
+							{:else}
+								Account
+							{/if}
+						</a>
+					</li>
+
 					{#if session}
 						<li>
 							<form action="/logout" method="POST">
