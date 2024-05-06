@@ -83,7 +83,7 @@
 							{#if !session}
 								LOGIN
 							{:else}
-								Account
+								ACCOUNT
 							{/if}
 						</a>
 					</li>

@@ -15,6 +15,9 @@ export const load: PageServerLoad = async (event) => {
 
 	if (!session) redirect(302, '/login');
 
+	console.log(await getPaymentStatus(session.user.id));
+
+
 	return {
 		loginForm: await superValidate(zod(loginSchema)),
 		profileForm: session && (await superValidate(await getUserProfile(event), zod(profileSchema))),

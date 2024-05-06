@@ -41,7 +41,8 @@
 					<p>
 						Aktive Mitgliedschaft: <b>{data.tier}</b>
 						<button on:click={navigateTo}>Mitgliedschaft Verwalten</button>
-					</p>{/if}
+					</p>
+				{/if}
 			</billing-section>
 
 			<ProfileForm data={data.profileForm} />
