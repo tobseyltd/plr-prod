@@ -9,6 +9,7 @@ async function getLatestLessons(locals: App.Locals) {
 	const { data: latestEpisodes, error: dbError } = await locals.supabase
 		.from('lessons')
 		.select('*')
+		.order('created_at', { ascending: false })
 		.range(0, 2);
 
 	if (dbError) throw error(500, 'Error fetching lessons');
