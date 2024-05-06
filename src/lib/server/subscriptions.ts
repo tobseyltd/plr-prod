@@ -44,7 +44,7 @@ export async function updateSubscriptionRecord(stripeSubscription: Stripe.Subscr
 export async function getSubscriptionTier(user_id: string) {
 	const { error: subscriptionError, data: subscription } = await supabaseAdmin
 		.from('billing_subscriptions')
-		.select('product:product_id(name)')
+		.select('product(*, product_id(name))')
 		.eq('user_id', user_id)
 		.in('status', ['active', 'canceled'])
 		.limit(1)

@@ -17,7 +17,6 @@ export const load: PageServerLoad = async (event) => {
 
 	console.log(await getSubscriptionTier(session.user.id));
 
-
 	return {
 		loginForm: await superValidate(zod(loginSchema)),
 		profileForm: session && (await superValidate(await getUserProfile(event), zod(profileSchema))),
