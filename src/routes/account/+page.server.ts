@@ -15,7 +15,7 @@ export const load: PageServerLoad = async (event) => {
 
 	if (!session) redirect(302, '/login');
 
-	console.log(await getPaymentStatus(session.user.id));
+	console.log(await getSubscriptionTier(session.user.id));
 
 
 	return {
