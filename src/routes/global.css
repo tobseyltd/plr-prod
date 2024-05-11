@@ -64,7 +64,7 @@ button {
 
 	&:hover {
 		/* background-color: #5171fed2; */
-		border-color: rgba(102, 100, 100, 0.273);
+		border: 2px solid var(--bgContainer) !important;
 	}
 }
 

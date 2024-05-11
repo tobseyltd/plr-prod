@@ -63,11 +63,11 @@
 
 					score++;
 					updatedQuestion.isRight = 'correct';
-					target.style.borderColor = 'green';
+					target.classList.add('correct-answer');
 				} else {
 					choice.innerText = `👎 ` + choice.innerText;
 					updatedQuestion.isRight = 'incorrect';
-					target.style.borderColor = 'red';
+					target.classList.add('wrong-answer');
 
 					// Highlight the correct answer
 					const correctButton = [...target.parentElement.children].find(
@@ -75,7 +75,7 @@
 					);
 
 					if (correctButton) {
-						correctButton.style.borderColor = 'green';
+						correctButton.classList.add('correct-answer');
 					}
 				}
 
@@ -194,7 +194,6 @@
 					{@html data.lesson.video1}
 				</video-wrapper>
 
-				<!-- <img src={`../.${data.lesson.img}`} alt="" /> -->
 				<h1 style="margin-top: 1.5rem;">
 					EP-{data.lesson.ep?.toUpperCase()} | {data.lesson.title}
 				</h1>
@@ -222,24 +221,7 @@
 						</div>
 					</Accordion>
 				</section>
-				<!-- <h3>Part 1 - Free Coding Lektion</h3>
 
-				<video-wrapper>
-					{@html data.lesson.video1}
-				</video-wrapper>
-				<video-content>
-					<article>
-						{#if data.lesson.video1_content}
-							{#each data.lesson.video1_content.split(/(<Gist.*?\/?>)/) as part}
-								{#if part.startsWith('<Gist')}
-									<svelte:component this={Gist} gistUrl={part.match(/gistUrl="([^"]*)"/)?.[1]} />
-								{:else}
-									{@html part}
-								{/if}
-							{/each}
-						{/if}
-					</article>
-				</video-content> -->
 				<h3>Part 2 - Members Coding Lektion</h3>
 
 				{#if $showMemberContent || data.wildcard}
@@ -280,8 +262,6 @@
 							</article>
 						</video-content>
 					{/if}
-					<!-- <AddComment {data} />
-				<Comments {data} /> -->
 				{:else}
 					<p style="font-size: .8rem;">
 						Sichbar nach Abschluß einer <a href="/mitglied-werden">Mitgliedschaft</a>
@@ -451,7 +431,7 @@
 				padding-bottom: 0;
 			}
 
-			& button {
+			& > button {
 				width: 100px;
 				background-color: var(--bgContainer);
 				padding: 0;
@@ -627,7 +607,7 @@
 				}
 			}
 
-			& aside {
+			& > aside {
 				width: 40%;
 				padding-left: 120px;
 				margin: 1rem 0;
@@ -678,15 +658,31 @@
 					& div.question {
 						text-align: left !important;
 						font-size: 0.9rem;
+
+						& ~ button {
+							width: 100%;
+							margin: 0.5rem 0;
+							background-color: var(--bgContainer);
+
+							&:hover {
+								border: 2px solid var(--bgContainer);
+							}
+						}
 					}
 
-					& button {
-						width: 100%;
-						margin: 0.5rem 0;
-						background-color: var(--bgContainer);
+					& .correct-answer {
+						border: thin solid green;
 
 						&:hover {
-							border-color: var(--mainBorder);
+							border: thin solid green !important;
+						}
+					}
+
+					& .wrong-answer {
+						border: thin solid red;
+
+						&:hover {
+							border: thin solid red !important;
 						}
 					}
 
